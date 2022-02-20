@@ -1,92 +1,116 @@
-# cs373-website
+Canvas / Discord group number (please check this carefully)
+11 am Group 11
 
+names of the team members
+Sabeer Shahzad, Dinesh Balakrishnan, Jay Park, Presley Heikkila, Scarlett Shires
 
+name of the project (alphanumeric, no spaces, max 32 chars, this will also be your URL)
+CS-373 Website
 
-## Getting started
+URL of the GitLab repo
+https://gitlab.com/dinesh.k.balakrishnan/cs373-website
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+the proposed project
+Website designated for low income residents of Austin. The website will feature job listings, child care, and housing variable to user location
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+URLs of at least three disparate data sources that you will programmatically scrape using a RESTful API (be very sure about this)
+https://data.austintexas.gov/Housing-and-Real-Estate/City-of-Austin-Affordable-Housing-Inventory/x5p7-qyuv
+https://data.texas.gov/Social-Services/HHSC-CCL-Daycare-and-Residential-Operations-Data/bc5r-88dy
+Jobs2Career from https://github.com/public-apis/public-apis#events
 
-## Add your files
+https://open-platform.theguardian.com/documentation/search
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+https://developer.nytimes.com/apis
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/dinesh.k.balakrishnan/cs373-website.git
-git branch -M main
-git push -uf origin main
-```
+https://rapidapi.com/veilleio-veilleio-default/api/companies-datas/
 
-## Integrate with your tools
+at least three models
+each model must have many attributes
+describe at least five of those attributes for each model that you could filter by or sort by on the model (table) pages
+describe at least five additional attributes for each model that you could search for on the instance pages
+describe at least two types of media for each model that you could display on the instance pages
 
-- [ ] [Set up project integrations](https://gitlab.com/dinesh.k.balakrishnan/cs373-website/-/settings/integrations)
+1. Housing
 
-## Collaborate with your team
+   - Media:
+     - Image of the house
+     - News articles about nearby location
+     - Data about the house
+     - Google Maps pin of the location
+   - Attributes:
+     - Filter:
+       - Number of Units
+       - Tenure
+       - Zip Code
+       - Unit Type
+       - Ground Lease
+     - Search:
+       - Address
+       - Property Manager Company
+       - Property Manager Company name
+       - Status (where in the building process)
+       - Calculated Fee in Lieu
+     - Address
+     - Number of units
+     - Affordability Period
+     - Property Manager phone number and email
+     - Full list of attributes here: https://data.austintexas.gov/Housing-and-Real-Estate/City-of-Austin-Affordable-Housing-Inventory/x5p7-qyuv#:~:text=Columns%20in%20this%20Dataset
+   - Number of Instances:
+     - 1000+
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+2. Child Care
 
-## Test and Deploy
+   - Media:
+     - Image of the facility
+     - News articles about nearby location
+     - Data about the service
+     - Google Maps pin of the location
+   - Attributes:
+     - Filter:
+       - Days of Operation
+       - Hours of Operation
+       - Location Address
+       - Programs provided at the Operation
+       - County of the Facility / Operation
+       - Subsidized Facility / Operation
+     - Search:
+       - Website Address
+       - Mailing Address
+       - Administrator / Director for the Operation
+       - Phone Number
+       - Email Address
+     - Full list of attributes here: https://data.texas.gov/Social-Services/HHSC-CCL-Daycare-and-Residential-Operations-Data/bc5r-88dy#:~:text=Columns%20in%20this%20Dataset
+   - Number of Instances:
+     - 500+
 
-Use the built-in continuous integration in GitLab.
+3. Job Listings
+   - Media:
+     - Image of the facility
+     - Data about the job
+     - Google Maps pin of the location
+   - Attributes:
+     - Filter:
+       - Zip
+       - Industry
+       - Mobile optimized job
+       - Job type (full time, part time, etc)
+       - Salary
+       - Company's revenue
+       - Company size
+     - Search:
+       - Date
+       - Job Description
+       - Job type
+       - Company's social networks
+       - Company's monthly visitors
+   - Number of Instances:
+     - 200
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+each model must connect to at least two other models
+The three models (Housing, Child Care, Job Listings) are all interconnected through location.
 
-***
+what three questions will you answer due to doing this data synthesis on your site? 1. Where can a family with young children affordably live in Austin?
 
-# Editing this README
+    2. What jobs are available in low income residencial areas?
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+    3. What type of special care services for children is available near affordable housing?
