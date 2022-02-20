@@ -106,7 +106,8 @@ describe at least two types of media for each model that you could display on th
    - Number of Instances:
      - 200
 
-each model must connect to at least two other models
+each model must connect to at least two other models:
+
 The three models (Housing, Child Care, Job Listings) are all interconnected through location.
 
 what three questions will you answer due to doing this data synthesis on your site?
