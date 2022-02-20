@@ -5,7 +5,7 @@ names of the team members:
 Sabeer Shahzad, Dinesh Balakrishnan, Jay Park, Presley Heikkila, Scarlett Shires
 
 name of the project (alphanumeric, no spaces, max 32 chars, this will also be your URL):
-Pearl
+AffordAustin
 
 URL of the GitLab repo:
 https://gitlab.com/dinesh.k.balakrishnan/cs373-website
