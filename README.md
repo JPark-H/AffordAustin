@@ -109,7 +109,9 @@ describe at least two types of media for each model that you could display on th
 each model must connect to at least two other models
 The three models (Housing, Child Care, Job Listings) are all interconnected through location.
 
-what three questions will you answer due to doing this data synthesis on your site? 1. Where can a family with young children affordably live in Austin?
+what three questions will you answer due to doing this data synthesis on your site?
+
+    1. Where can a family with young children affordably live in Austin?
 
     2. What jobs are available in low income residencial areas?
 
