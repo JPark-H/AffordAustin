@@ -1,19 +1,19 @@
 Canvas / Discord group number (please check this carefully)
 11 am Group 11
 
-names of the team members
+names of the team members:
 Sabeer Shahzad, Dinesh Balakrishnan, Jay Park, Presley Heikkila, Scarlett Shires
 
-name of the project (alphanumeric, no spaces, max 32 chars, this will also be your URL)
-CS-373 Website
+name of the project (alphanumeric, no spaces, max 32 chars, this will also be your URL):
+Pearl
 
-URL of the GitLab repo
+URL of the GitLab repo:
 https://gitlab.com/dinesh.k.balakrishnan/cs373-website
 
-the proposed project
+the proposed project:
 Website designated for low income residents of Austin. The website will feature job listings, child care, and housing variable to user location
 
-URLs of at least three disparate data sources that you will programmatically scrape using a RESTful API (be very sure about this)
+URLs of at least three disparate data sources that you will programmatically scrape using a RESTful API (be very sure about this):
 https://data.austintexas.gov/Housing-and-Real-Estate/City-of-Austin-Affordable-Housing-Inventory/x5p7-qyuv
 https://data.texas.gov/Social-Services/HHSC-CCL-Daycare-and-Residential-Operations-Data/bc5r-88dy
 Jobs2Career from https://github.com/public-apis/public-apis#events
@@ -24,7 +24,7 @@ https://developer.nytimes.com/apis
 
 https://rapidapi.com/veilleio-veilleio-default/api/companies-datas/
 
-at least three models
+at least three models:
 each model must have many attributes
 describe at least five of those attributes for each model that you could filter by or sort by on the model (table) pages
 describe at least five additional attributes for each model that you could search for on the instance pages
