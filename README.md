@@ -7,7 +7,7 @@
 * Dinesh Balakrishnan
 * Jay Park
 * Presley Heikkila
-* Scarlett Shires
+* Scarlett Shires!
 
 **Project Name:** AffordAustin
 
