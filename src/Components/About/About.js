@@ -6,6 +6,7 @@ import * as Icon from 'react-bootstrap-icons';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
 import teamInfo from "./TeamData"
 import './About.css'
+
 function MemberCards() {
 	return (
 		<Container>
