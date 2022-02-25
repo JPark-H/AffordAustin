@@ -54,6 +54,30 @@ function HousingPage() {
         <p className="instance_header">
           {housingInfo.project_name}
         </p>
+        <Container className="instance_info">
+          {/* <p className="attribute_head d-inline-block text-truncate" style={{textAlign:"left", width: "50%"}}>Put like back button or ?</p>
+          <hr style={{color:"#8c8a7f"}}/> */}
+
+          <p className="attribute_head">Images</p>
+          
+          <p className="attribute_head">Map</p>
+          <Card className="instance_data mx-auto">
+            <Card.Header>Data</Card.Header>
+            <ListGroup className="attribute_list" style={{textAlign:"left"}} variant="flush">
+              <ListGroup.Item>Address: {housingInfo.address}</ListGroup.Item>
+              <ListGroup.Item>ZIP Code: {housingInfo.zip_code}</ListGroup.Item>
+              <ListGroup.Item>Status: {housingInfo.status.split(".")[1]}</ListGroup.Item>
+              <ListGroup.Item>Developer: {housingInfo.developer}</ListGroup.Item>
+              <ListGroup.Item>Unit Type: {housingInfo.unit_type}</ListGroup.Item>
+              <ListGroup.Item>Ground Lease: {housingInfo.ground_lease}</ListGroup.Item>
+              <ListGroup.Item>Tenure: {housingInfo.tenure}</ListGroup.Item>
+              <ListGroup.Item>Affordability Guarantee: {housingInfo.affordability_expiration_year}</ListGroup.Item>
+              <ListGroup.Item>Phone Number: {housingInfo.property_manager_phone_number}</ListGroup.Item>
+              {/* Maybe eventually add like hover options that explain what each attirbute is */}
+            </ListGroup>
+          </Card>
+
+        </Container>
       </div>
     </div>
 
