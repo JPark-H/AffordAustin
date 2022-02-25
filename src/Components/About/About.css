@@ -17,18 +17,19 @@
   }
   
   .about_card {
-    min-width: 300px;
-    min-height: 300px;
-    width: 9em;
+    min-width: 275px;
+    min-height: 275px;
+    width: 16em;
     height: 9em;
   }
   
   .about_info {
-    min-width: 350px;
+    min-width: 20em;
   }
   
   .about_text {
     /* font-size: max(.6em, 18px); */
+    max-width: 30em;
   }
   
   .card_names {
@@ -43,6 +44,7 @@
     border-right:2px solid gray;
     font-size: max(.7em, 18px);
     height: max(4.2em, 80px);
+    max-width: 300px;
     margin: 0 !important;
   }
   
