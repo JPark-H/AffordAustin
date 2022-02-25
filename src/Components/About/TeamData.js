@@ -1,4 +1,7 @@
-import Koala from "../../imgs/Koallaaaaa.png";
+import Koala from"../../imgs/Koallaaaaa.png";
+import Jay from "../../imgs/Jay.jpg"
+import Presley from "../../imgs/Presley.jpg"
+import Dinesh from "../../imgs/Dinesh.jpg"
 
 const teamInfo = [
 	{
@@ -18,7 +21,7 @@ const teamInfo = [
 		name: "Dinesh Balakrishnan",
 		// username: "Bikini Bottom",
 		// email: "arm's spaghetti",
-		picture: Koala,
+		picture: Dinesh,
 		role: "Phase X Leader",
 		stack: "Something-End",
 		bio:
@@ -31,7 +34,7 @@ const teamInfo = [
 		name: "Jay Park",
 		// username: "Goofy Goobers",
 		// email: "Sakurajima Mai <3",
-		picture: Koala,
+		picture: Jay,
 		role: "Phase X Leader",
 		stack: "Something-End",
 		bio:
@@ -44,7 +47,7 @@ const teamInfo = [
 		name: "Presley Heikkila",
 		// username: "Salty Spitoon",
 		// email: "Lorem Ipsum",
-		picture: Koala,
+		picture: Presley,
 		role: "Phase X Leader",
 		stack: "Something-End",
 		bio:
