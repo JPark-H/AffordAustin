@@ -62,7 +62,6 @@ function About() {
 	return (
 		<div className="App" style={{ backgroundColor: "#282c34", paddingBottom: "3em" }}>
 			<MemberCards />
-			<MemberCards />
 		</div>
 	);
 }
