@@ -1,12 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import './About.css';
 import { Container,Button, Alert, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
 //import * as Icon from 'bootstrap-icons/font/bootstrap-icons.css';
 import * as Icon from 'react-bootstrap-icons';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
-import About from "./AboutPage/About"
 const Koala = "https://res.cloudinary.com/teepublic/image/private/s--xY-2bGLB--/t_Resized%20Artwork/c_fit,g_north_west,h_1054,w_1054/co_ffffff,e_outline:53/co_ffffff,e_outline:inner_fill:53/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1591112325/production/designs/10907156_0.jpg";
 const teamInfo = [
 	{
@@ -97,17 +95,17 @@ function MemberCards() {
 						<Row>
 							<Col className="stats">
 								<p className="stat_text">Commits</p>
-								<Icon.Check2Circle style={{color: "green"}}></Icon.Check2Circle>
+								<Icon.Check2Circle style={{color: "black"}}></Icon.Check2Circle>
 								<p>{commits}</p>
 							</Col>
 							<Col className="stats">
 								<p className="stat_text">Issues</p>
-								<Icon.ListCheck className='fa-2x'></Icon.ListCheck>
+								<Icon.ListCheck></Icon.ListCheck>
 								<p>{issues}</p>
 							</Col>
 							<Col className="tests">
 								<p className="stat_text">Tests</p>
-								<Icon.Wrench style={{color: "gray"}}></Icon.Wrench>
+								<Icon.Wrench style={{color:"black"}}></Icon.Wrench>
 								<p>{tests}</p>
 							</Col>
 						</Row>
@@ -123,15 +121,14 @@ function MemberCards() {
   );
 }
 
-function App() {
+function About() {
   return (
-    <div className="App" style = {{backgroundColor:"#282c34"}}>
+    <div className="App" style = {{backgroundColor:"#282c34", paddingBottom:"3em"}}>
       <header className="App-header">
       </header>
-	  <About />
-	  
+	  <MemberCards />
     </div>
   );
 }
 
-export default App;
+export default About;
