@@ -46,6 +46,7 @@ const housingInfo = {
   Make sure to come back here for Nav Bar, move to own file eventually
 */
 
+housingInfo.img = "https://rentpath-res.cloudinary.com/$img_current/t_3x2_webp_xl/t_unpaid/55754e0fd1c0a9ac53d7f36af593945b";
 
 function HousingPage() {
   return (
@@ -58,8 +59,8 @@ function HousingPage() {
           {/* <p className="attribute_head d-inline-block text-truncate" style={{textAlign:"left", width: "50%"}}>Put like back button or ?</p>
           <hr style={{color:"#8c8a7f"}}/> */}
 
-          <p className="attribute_head">Images</p>
-          
+          <p className="attribute_head">Image</p>
+          <Image className="h_image" rounded src={housingInfo.img}></Image>
           <p className="attribute_head">Map</p>
           <Card className="instance_data mx-auto">
             <Card.Header>Data</Card.Header>
