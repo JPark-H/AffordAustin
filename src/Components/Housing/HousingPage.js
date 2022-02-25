@@ -2,8 +2,7 @@ import './HousingPage.css';
 import { Image, Nav, Navbar, Container, Button, Alert, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
-import * as Icon from 'react-bootstrap-icons';
-import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
+import MainNavBar from '../MainNavBar/MainNavBar';
 
 
 /* grabbed from api*/
@@ -50,7 +49,8 @@ housingInfo.img = "https://rentpath-res.cloudinary.com/$img_current/t_3x2_webp_x
 
 function HousingPage() {
   return (
-    <div className="App" style={{ backgroundColor: "#f0f2f5" }}>
+    <div style={{ backgroundColor: "#f0f2f5" }}>
+      <MainNavBar />
       <div className="info_page mx-auto justify-content-center">
         <p className="instance_header">
           {housingInfo.project_name}
