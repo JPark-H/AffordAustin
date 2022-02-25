@@ -46,6 +46,7 @@ const housingInfo = {
   Make sure to come back here for Nav Bar, move to own file eventually
 */
 
+housingInfo.img = "https://rentpath-res.cloudinary.com/$img_current/t_3x2_webp_xl/t_unpaid/55754e0fd1c0a9ac53d7f36af593945b";
 
 function HousingPage() {
   return (
@@ -58,9 +59,13 @@ function HousingPage() {
           {/* <p className="attribute_head d-inline-block text-truncate" style={{textAlign:"left", width: "50%"}}>Put like back button or ?</p>
           <hr style={{color:"#8c8a7f"}}/> */}
 
-          <p className="attribute_head">Images</p>
-          
+          <p className="attribute_head">Image</p>
+          <Image className="h_image" rounded src={housingInfo.img}></Image>
           <p className="attribute_head">Map</p>
+          <iframe rounded className="h_map mb-4"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1723.2088522797842!2d-97.76489096765725!3d30.253677616812844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b58823b5186b%3A0x5fe831e4bad332ec!2sLegacy%20apartment&#39;s!5e0!3m2!1sen!2sus!4v1645783505711!5m2!1sen!2sus"
+            allowfullscreen loading="lazy">
+          </iframe>
           <Card className="instance_data mx-auto">
             <Card.Header>Data</Card.Header>
             <ListGroup className="attribute_list" style={{textAlign:"left"}} variant="flush">
