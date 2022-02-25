@@ -30,3 +30,25 @@
   font-size: 38px;
 }
 
+.instance_info {
+  max-width: 930px;
+  min-height: 700px;
+  background-color: white;
+  color: black;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+}
+
+.attribute_head {
+  padding-top: .5em;
+  font-size: 28px;
+}
+
+.instance_data {
+  width: 85%;
+  font-size: 28px;
+}
+
+.attribute_list {
+  font-size: max(.7em, 18px);
+}
