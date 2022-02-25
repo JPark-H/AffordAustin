@@ -48,6 +48,11 @@
   width: 95%;
 }
 
+.h_map {
+  width: 95%;
+  height: 18em;
+}
+
 .instance_data {
   width: 85%;
   font-size: 28px;
