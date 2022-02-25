@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
 //import * as Icon from 'bootstrap-icons/font/bootstrap-icons.css';
 import * as Icon from 'react-bootstrap-icons';
-import About from './Components/About/About'
+import About from './Components/About/About';
+import Housing from './Components/Housing/HousingPage';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
+import HousingPage from './Components/Housing/HousingPage';
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
       <header className="App-header">
       </header>
 	  <About />
-	  
+	  <HousingPage />
     </div>
   );
 }
