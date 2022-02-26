@@ -18,7 +18,7 @@ function MemberCards() {
 							<Card style={{ width: '100%', borderRadius:"2rem"}}>
 								<Card.Img variant="top" src={picture}
 									className="about_card circle-rounded mb-0 mt-3 mx-auto" style = {{borderRadius:"2rem"}} />
-								<Card.Body className="about_info" style={{ backgroundColor: "white", color: "black", width: "10em", borderRadius:"3rem" }}>
+								<Card.Body className="about_info" style={{ backgroundColor: "white", color: "black", borderRadius:"3rem" }}>
 									<Card.Title className="mt-1 card_names">
 										<strong>{name}</strong>
 									</Card.Title>
