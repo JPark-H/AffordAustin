@@ -1,9 +1,7 @@
-import './HousingPage.css';
+import './Housing.css';
 import { Image, Nav, Navbar, Container, Button, Alert, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
-import MainNavBar from '../MainNavBar/MainNavBar';
-
 
 /* grabbed from api*/
 const housingInfo = {
@@ -47,10 +45,9 @@ const housingInfo = {
 
 housingInfo.img = "https://rentpath-res.cloudinary.com/$img_current/t_3x2_webp_xl/t_unpaid/55754e0fd1c0a9ac53d7f36af593945b";
 
-function HousingPage() {
+function Housing() {
   return (
     <div style={{ backgroundColor: "#f0f2f5" }}>
-      <MainNavBar />
       <div className="info_page mx-auto justify-content-center">
         <p className="instance_header">
           {housingInfo.project_name}
@@ -89,4 +86,4 @@ function HousingPage() {
   );
 }
 
-export default HousingPage;
+export default Housing;

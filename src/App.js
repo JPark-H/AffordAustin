@@ -5,17 +5,30 @@ import React, { useEffect, useState } from "react";
 //import * as Icon from 'bootstrap-icons/font/bootstrap-icons.css';
 import * as Icon from 'react-bootstrap-icons';
 import About from './Components/About/About';
-import Housing from './Components/Housing/HousingPage';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
-import HousingPage from './Components/Housing/HousingPage';
+import Housing from './Components/Housing/Housing';
+import MainNavBar from './Components/MainNavBar/MainNavBar';
+import {BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 function App() {
   return (
     <div className="App" style = {{backgroundColor:"#282c34"}}>
       <header className="App-header">
       </header>
+	  <Router>
+		<MainNavBar />
+		<Routes>
+			{/* <Route path="/" element={<Home />} /> */}
+			<Route path="/Housing" element={<Housing />} />
+			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
+			{/* <Route path="/Jobs" element={<Jobs />} /> */}
+			<Route path="/About" element={<About />} />
+			{/* <Route path="/Search" element={<Search />} /> */}
+		</Routes>
+	  </Router>
+	  {/* <MainNavBar />
 	  <About />
-	  <HousingPage />
+	  <HousingPage /> */}
     </div>
   );
 }

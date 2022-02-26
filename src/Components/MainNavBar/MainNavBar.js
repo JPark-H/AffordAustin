@@ -14,12 +14,12 @@ function MainNavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto nav_bar_options">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#Housing">Housing</Nav.Link>
-            <Nav.Link href="#ChildCare">Child Care</Nav.Link>
-            <Nav.Link href="#Jobs">Jobs</Nav.Link>
-            <Nav.Link href="#About">About</Nav.Link>
-            <Nav.Link href="#Search">Search?</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/Housing">Housing</Nav.Link>
+            <Nav.Link href="/ChildCare">Child Care</Nav.Link>
+            <Nav.Link href="/Jobs">Jobs</Nav.Link>
+            <Nav.Link href="/About">About</Nav.Link>
+            <Nav.Link href="/Search">Search?</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
