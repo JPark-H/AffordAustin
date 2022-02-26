@@ -25,7 +25,7 @@ const teamInfo = [
 		role: "Phase X Leader",
 		stack: "Something-End",
 		bio:
-			"The fitness gram pacer test is a multi-stage aerobic ",
+			"Testing to make sure commits going through",
 		commits: 0,
 		issues: 0,
 		tests: 271,
