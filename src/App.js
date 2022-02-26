@@ -9,6 +9,7 @@ import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
 import Housing from './Components/Housing/Housing';
 import MainNavBar from './Components/MainNavBar/MainNavBar';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import Home from './Components/Home/Home'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
 	  <Router>
 		<MainNavBar />
 		<Routes>
-			{/* <Route path="/" element={<Home />} /> */}
+			<Route path="/" element={<Home />} />
 			<Route path="/Housing" element={<Housing />} />
 			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
 			{/* <Route path="/Jobs" element={<Jobs />} /> */}
