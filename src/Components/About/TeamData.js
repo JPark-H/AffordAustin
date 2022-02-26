@@ -38,7 +38,10 @@ const teamInfo = [
 		role: "Phase X Leader",
 		stack: "Something-End",
 		bio:
-			"Have ",
+			"I'm a third year CS major at UT Austin. I grew up in Frisco, \
+			Texas. In my free time I like to play video games and hang out \
+			with friends. Right now my particular interests are Valorant, \
+			FFXIV, and Risk of Rain 2",
 		commits: 0,
 		issues: 0,
 		tests: 0,
