@@ -9,10 +9,10 @@ const teamInfo = [
 		name: "Scarlett Shires",
 		picture: Koala,
 		role: "Phase I Leader",
-		stack: "Something-End",
+		stack: "Front-End",
 		bio:
 			"The Krusty Krab Pizza, is the Pizza, for you and me!",
-		commits: 1192,
+		commits: 0,
 		issues: 0,
 		tests: 0,
 	},
@@ -20,14 +20,14 @@ const teamInfo = [
 		name: "Dinesh Balakrishnan",
 		picture: Dinesh,
 		role: "Phase X Leader",
-		stack: "Something-End",
+		stack: "Full-Stack",
 		bio:
 			"A student in his final semester at UT Austin. Loves exploring \
 			the plethora of restaurants in Austin and creating voxel art. \
 			Go Longhorns!",
 		commits: 0,
 		issues: 0,
-		tests: 271,
+		tests: 0,
 	},
 	{
 		name: "Jay Park",
@@ -47,9 +47,11 @@ const teamInfo = [
 		name: "Presley Heikkila",
 		picture: Presley,
 		role: "Phase X Leader",
-		stack: "Something-End",
+		stack: "Full-Stack",
 		bio:
-			"My paws can't even reach the keyboard man",
+			"I'm a senior in CS at UT Austin with a full time web \
+			development position starting this fall. In my free time I \
+			love making music and playing video games with my friends.",
 		commits: 0,
 		issues: 69,
 		tests: 0,
@@ -58,7 +60,7 @@ const teamInfo = [
 		name: "Sabeer Shahzad",
 		picture: Sabeer,
 		role: "Phase X Leader",
-		stack: "Something-End",
+		stack: "Back-End",
 		bio:
 			"Hello, I'm a senior CS major at UT Austin. I’m from Flower Mound\
 			, Texas, but now live in Austin. I’ve recently gotten into \
@@ -66,7 +68,7 @@ const teamInfo = [
 			time playing video games and watching shows.",
 		commits: 0,
 		issues: 0,
-		tests: 123,
+		tests: 0,
 	}
 ]
 

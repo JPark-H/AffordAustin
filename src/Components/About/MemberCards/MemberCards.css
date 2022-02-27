@@ -9,7 +9,7 @@
     max-width: 9em;
   }
   
-  .about_text {
+  .bio_text {
     font-size: max(.6em, 18px);
     height: 12em;
     max-width: 30em;
@@ -40,3 +40,4 @@
     margin-top: .2em;
     font-size: max(.95em, 19px);
   }
+
