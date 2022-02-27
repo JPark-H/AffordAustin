@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import * as Icon from 'react-bootstrap-icons';
 import About from './Components/About/About';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
-import Housing from './Components/Housing/Housing';
+import {Housing1, Housing2, Housing3} from './Components/Housing/Housing';
 import MainNavBar from './Components/MainNavBar/MainNavBar';
 import {HashRouter as Router, Route, Routes } from "react-router-dom"
 import Home from './Components/Home/Home'
@@ -29,7 +29,7 @@ function App() {
 			<Route path='/Jobs/2' element={<Job2 />} />
 			<Route path='/Jobs/3' element={<Job3 />} />
 
-			<Route path="/Housing" element={<Housing />} />
+			<Route path="/Housing" element={<Housing3 />} />
 			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
 			{/* <Route path="/Search" element={<Search />} /> */}
 
