@@ -9,7 +9,9 @@ import Housing from './Components/Housing/Housing';
 import MainNavBar from './Components/MainNavBar/MainNavBar';
 import {BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import Home from './Components/Home/Home'
+
 import {Job1, Job2, Job3 } from './Components/Jobs/Jobs'
+import JobGrid from './Components/Jobs/JobGrid'
 
 function App() {
   return (
@@ -20,15 +22,20 @@ function App() {
 		<MainNavBar />
 		<Routes>
 			<Route path="/" element={<Home />} />
-			<Route path="/Housing" element={<Housing />} />
-			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
-			{/*<Route path="/Jobs" element={<Job1 />} /> 8*/}
 			<Route path="/About" element={<About />} />
-			{/* <Route path="/Search" element={<Search />} /> */}
 
+			<Route path="/Jobs" element={<JobGrid />} />
 			<Route path='/Jobs/1' element={<Job1 />} />
 			<Route path='/Jobs/2' element={<Job2 />} />
 			<Route path='/Jobs/3' element={<Job3 />} />
+
+			<Route path="/Housing" element={<Housing />} />
+			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
+			{/* <Route path="/Search" element={<Search />} /> */}
+
+
+			
+			<Route path='/Jobs' element={ <JobGrid /> } />
 		</Routes>
 	  </Router>
 	  {/* <MainNavBar />
