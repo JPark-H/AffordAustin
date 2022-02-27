@@ -113,4 +113,4 @@ const Job3 = () => {
     )
 };
 
-export default { Job1, Job2, Job3 };
+export { Job1, Job2, Job3 };
