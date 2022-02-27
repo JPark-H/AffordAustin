@@ -43,9 +43,6 @@ function App() {
 			<Route path='/Jobs' element={ <JobGrid /> } />
 		</Routes>
 	  </Router>
-	  {/* <MainNavBar />
-	  <About />
-	  <HousingPage /> */}
     </div>
   );
 }
