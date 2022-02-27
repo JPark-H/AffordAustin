@@ -8,8 +8,10 @@ import "./MemberCards.css"
 function MemberCards() {
 	return (
 		<Container>
-			<><Row className="g-5 m-0 justify-content-center" xs="auto" style={{ width: "100%" }}>
-				{teamInfo.slice(0, 5).map((teamMember) => {
+            {/* Idea using map to create row of cards adopted from Adopt a Pet
+            https://gitlab.com/10am-group-8/adopt-a-pet */}
+			<Row className="g-5 m-0 justify-content-center" xs="auto">
+				{teamInfo.map((teamMember) => {
 					const { name, username, picture, email, role, stack, bio, commits, issues, tests } = teamMember;
 					return (
 						<Col xs="auto" key={teamMember}>
@@ -25,24 +27,24 @@ function MemberCards() {
 										<br />
 										{stack}
 									</Card.Subtitle>
-									<p className="about_text">
+									<p className="bio_text">
 										{bio}
 									</p>
 									<hr className="mb-3 m-2" style={{ height: "2px" }} />
 									<Row>
 										<Col className="stats">
 											<p className="stat_text">Commits</p>
-											<Icon.Check2Circle style={{ color: "black" }}></Icon.Check2Circle>
+											<Icon.Check2Circle style={{ color: "black" }} />
 											<p className="stat_num">{commits}</p>
 										</Col>
 										<Col className="stats">
 											<p className="stat_text">Issues</p>
-											<Icon.ListCheck></Icon.ListCheck>
+											<Icon.ListCheck />
 											<p className="stat_num">{issues}</p>
 										</Col>
 										<Col className="tests">
 											<p className="stat_text">Tests</p>
-											<Icon.Wrench></Icon.Wrench>
+											<Icon.Wrench />
 											<p className="stat_num">{tests}</p>
 										</Col>
 									</Row>
@@ -52,7 +54,7 @@ function MemberCards() {
 						</Col>
 					);
 				})}
-			</Row></>
+			</Row>
 		</Container>
 	);
 }
