@@ -38,10 +38,6 @@
   min-height: 400px;
 }
 
-.about_text {
-  font-size: max(.6em, 18px);
-}
-
 .card_names {
   font-size: max(1em, 30px) !important;
 }
