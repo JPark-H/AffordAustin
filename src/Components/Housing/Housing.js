@@ -49,7 +49,7 @@ const Housing = ({ housing }) => {
           </Card>
           <Row className="mt-3 justify-content-between mx-auto" >
             <Link to={ link_j }>
-              <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
+              <Col className="mx-auto"><Button variant="secondary">Nearby Job</Button>{' '}</Col>
             </Link>
             <Link to={ link_c }>
               <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
