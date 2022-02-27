@@ -7,7 +7,7 @@ import About from './Components/About/About';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
 import Housing from './Components/Housing/Housing';
 import MainNavBar from './Components/MainNavBar/MainNavBar';
-import {BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import {HashRouter as Router, Route, Routes } from "react-router-dom"
 import Home from './Components/Home/Home'
 
 import {Job1, Job2, Job3 } from './Components/Jobs/Jobs'
