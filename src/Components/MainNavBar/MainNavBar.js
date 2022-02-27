@@ -21,6 +21,7 @@ function MainNavBar() {
             <Nav.Link as={Link} to="/Jobs">Jobs</Nav.Link>
             <Nav.Link as={Link} to="/About">About</Nav.Link>
             <Nav.Link as={Link} to="/Search">Search?</Nav.Link>
+            <Nav.Link as={Link} to="/Jobs/1">Job 1</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
