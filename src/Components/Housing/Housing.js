@@ -1,16 +1,13 @@
 import './Housing.css';
-import { Image, Nav, Navbar, Container, Button, Alert, Card, Row, Col, ListGroup } from 'react-bootstrap';
+import { Image, Container, Button, Card, Row, Col, ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
-/* grabbed from api*/
-
-//set image and map urls here.
-/*
-  Make sure to come back here for Nav Bar, move to own file eventually
-*/
 
 const Housing = ({ housing }) => {
+  const link_j = `/Jobs/${ housing.id }`
+  const link_c = `/Childcare/${ housing.id }`
   return (
     <div style={{ backgroundColor: "#f0f2f5" }}>
       <div className="info_page mx-auto justify-content-center">
@@ -50,7 +47,14 @@ const Housing = ({ housing }) => {
               {/* Maybe eventually add like hover options that explain what each attirbute is */}
             </ListGroup>
           </Card>
-
+          <Row className="mt-3 justify-content-between mx-auto" >
+            <Link to={ link_j }>
+              <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
+            </Link>
+            <Link to={ link_c }>
+              <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
+            </Link>
+          </Row>
         </Container>
       </div>
     </div>
@@ -60,6 +64,7 @@ const Housing = ({ housing }) => {
 
 const Housing1 = () => {
   const housing = {
+    id: "1",
     project_name: "Legacy Apartments",
     owner: "Mary Lee Community",
     developer: "Mary Lee Foundation",
@@ -101,6 +106,7 @@ const Housing1 = () => {
 
 const Housing2 = () => {
   const housing = {
+    "id": "2",
     "austin_housing_inventory_id": "30.0",
     "project_id": "3277.0",
     "project_name": "1905 E 9th Street",
@@ -177,6 +183,7 @@ const Housing2 = () => {
 
 const Housing3 = () => {
   const housing = {
+    "id": "3",
     "austin_housing_inventory_id": "33.0",
     "project_id": "3289.0",
     "project_name": "2009 Salina Street",
