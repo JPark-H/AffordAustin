@@ -16,7 +16,7 @@ function MainNavBar() {
           <Nav className="me-auto nav_bar_options">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/Housing">Housing</Nav.Link>
-            <Nav.Link href="/ChildCare">Child Care</Nav.Link>
+            <Nav.Link href="/ChildCare">Childcare</Nav.Link>
             <Nav.Link href="/Jobs">Jobs</Nav.Link>
             <Nav.Link href="/About">About</Nav.Link>
             <Nav.Link href="/Search">Search?</Nav.Link>
