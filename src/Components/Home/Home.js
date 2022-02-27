@@ -1,4 +1,6 @@
 import "./Home.css"
+import ImageSlider from "./Slideshow/ImageSlider";
+import { SliderData } from "./Slideshow/SliderData";
 
 //temp
 const HomeBackground = 'https://res.cloudinary.com/djlo2drow/image/upload/v1645845219/BackgroundImg_teoyu0.jpg'
@@ -6,8 +8,7 @@ const HomeBackground = 'https://res.cloudinary.com/djlo2drow/image/upload/v16458
 function Home () {
     return (
         <div className="background" >
-            <img classname="background" style={{opacity: 0.3}} src={HomeBackground} />
-            
+            <ImageSlider slides={SliderData} />
         </div>
     );
 }
