@@ -1,8 +1,8 @@
 import './JobGrid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Image, Container, Card, Row, Col, Stack } from 'react-bootstrap';
-import Koala from '../About/MemberCards/imgs/Koallaaaaa.png'
+import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const JobGrid = () => {
     return (
@@ -26,7 +26,7 @@ const InstanceCard = ({ job }) => {
     const link = `/Jobs/${ job.id }`;
 
     return (
-        <a href={ link }>
+        <Link to={ link }>
             <Card className='inst_card'>
                 <Card.Img variant='top' src={ job.image_H } />
                 <Card.Body>
@@ -36,7 +36,7 @@ const InstanceCard = ({ job }) => {
                     <Card.Text><b>Schedule:</b> { job.schedule_type }</Card.Text>
                 </Card.Body>
             </Card>
-        </a>
+        </Link>
     )
 };
 
