@@ -10,7 +10,7 @@ function MemberCards() {
 		<Container>
             {/* Idea using map to create row of cards adopted from Adopt a Pet
             https://gitlab.com/10am-group-8/adopt-a-pet */}
-			<Row className="g-5 m-0 justify-content-center" xs="auto">
+			<Row className="g-3 m-0 justify-content-center" xs="auto" >
 				{teamInfo.map((teamMember) => {
 					const { name, username, picture, email, role, stack, bio, commits, issues, tests } = teamMember;
 					return (

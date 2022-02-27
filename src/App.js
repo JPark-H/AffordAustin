@@ -5,10 +5,12 @@ import React, { useEffect, useState } from "react";
 import * as Icon from 'react-bootstrap-icons';
 import About from './Components/About/About';
 import { IconRotate_90DegreesCcw } from '@aws-amplify/ui-react';
-import {Housing1, Housing2, Housing3} from './Components/Housing/Housing';
 import MainNavBar from './Components/MainNavBar/MainNavBar';
 import {HashRouter as Router, Route, Routes } from "react-router-dom"
 import Home from './Components/Home/Home'
+
+import {Housing1, Housing2, Housing3} from './Components/Housing/Housing';
+import HousingGrid from './Components/Housing/HousingGrid';
 
 import {Job1, Job2, Job3 } from './Components/Jobs/Jobs'
 import JobGrid from './Components/Jobs/JobGrid'
@@ -29,7 +31,10 @@ function App() {
 			<Route path='/Jobs/2' element={<Job2 />} />
 			<Route path='/Jobs/3' element={<Job3 />} />
 
-			<Route path="/Housing" element={<Housing3 />} />
+			<Route path="/Housing" element={<HousingGrid />} />
+			<Route path='/Housing/1' element={<Housing1 />} />
+			<Route path='/Housing/2' element={<Housing2 />} />
+			<Route path='/Housing/3' element={<Housing3 />} />
 			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
 			{/* <Route path="/Search" element={<Search />} /> */}
 
