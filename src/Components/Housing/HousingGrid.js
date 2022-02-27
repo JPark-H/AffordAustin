@@ -13,7 +13,7 @@ const HousingGrid = () => {
                     <Col className='header'>Housing</Col>
                 </Row>
                     <h1 style = {{fontSize:"40px", textAlign:"center"}}>3 Results</h1>
-                <Row className="g-3 m-0 justify-content-center" xs="auto">
+                <Row className="g-3 justify-content-center" xs="auto">
                     <Col> <InstanceCard1 /> </Col>
                     <Col> <InstanceCard2 /> </Col>
                     <Col> <InstanceCard3 /> </Col>

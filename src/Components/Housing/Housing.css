@@ -66,3 +66,8 @@
 .attribute_list {
   font-size: max(.7em, 18px);
 }
+
+.instance_connect {
+  width: 100%;
+
+}
