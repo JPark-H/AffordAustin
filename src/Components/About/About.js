@@ -17,12 +17,10 @@ function About() {
 			<Container>
 				<Card border="light" className='about_text mx-auto' style={{ borderRadius: "2rem" }}>
 					<Card.Body className="" style={{ color: "black" }}>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-						Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-						anim id est laborum.
+						The cost of living in Austin has reportedly risen 17.8% since 2010. In the past 
+						year alone, the listing prices for houses spiked 28%. At AffordAustin, we strive
+						to provide fair living situations in Austin amidst harsh inflation by streamlining 
+						the process of finding economic housing, child care, and work. 
 					</Card.Body>
 				</Card>
 			</Container>
