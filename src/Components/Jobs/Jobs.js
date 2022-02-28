@@ -1,7 +1,8 @@
 import './Jobs.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Container, Row, Col, Stack, Image, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Stack, Image, ListGroup, Button, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Jobs = ({ job }) => {
     // TODO: Update REGEX, breaks IOS, seems to break
@@ -35,7 +36,7 @@ const Jobs = ({ job }) => {
 
                         <div class='via'>
                             <h4>Via</h4>
-                            <p>{ job.via }</p>
+                            <Button variant='primary' href={ job.via_link }>{ job.via }</Button>
                         </div>
 
                         <div class='features'>
@@ -49,7 +50,25 @@ const Jobs = ({ job }) => {
 
                         <div class='rating'>
                             <h4>Rating</h4>
-                            <p><b>{ job.rating }</b> / 5 | { job.reviews} Reviews</p>
+                            <p><b>{ job.rating }</b> / 5 | { job.reviews } Reviews</p>
+                        </div>
+
+                        <div class='housing'>
+                            <h4>Nearby Housing</h4>
+                            <Nav>
+                                <Nav.Link as={ Link } to='/Housing/1'>Legacy Apartments</Nav.Link>
+                                <Nav.Link as={ Link } to='/Housing/2'>1905 E 9th Street</Nav.Link>
+                                <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
+                            </Nav>
+                        </div>
+
+                        <div class='childcare'>
+                            <h4>Nearby Childcare Services</h4>
+                            <Nav>
+                                <Nav.Link as={ Link } to='/Childcare/1'>temp</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/2'>temp</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/3'>temp</Nav.Link>
+                            </Nav>
                         </div>
                         </Stack>
                     </Col>
@@ -64,6 +83,7 @@ const Job1 = () => {
         'title': 'Sourcing Analyst',
         'company_name': 'Visa',
         'via': 'LinkedIn',
+        'via_link': 'https://www.linkedin.com/jobs/view/senior-sourcing-analyst-procurement-operations-cep-corporate-employee-and-professional-services-at-visa-2928877775?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic',
         'posted_at': '2 days ago',
         'schedule_type': 'Full-Time',
         'features': [
@@ -85,7 +105,8 @@ const Job2 = () => {
     const job = {
         'title': 'Server - Stella San Jac',
         'company_name': 'White Lodging',
-        'via': 'LinkedIn',
+        'via': 'White Lodging Jobs',
+        'via_link': 'https://careers.whitelodging.com/server-stella-san-jac/job/18644810?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic',
         'posted_at': '3 days ago',
         'schedule_type': 'Full-Time',
         'features': [
@@ -108,9 +129,10 @@ const Job2 = () => {
 
 const Job3 = () => {
     const job = {
-        'title': 'PRN Registered Nurse Weekends Home',
+        'title': 'PRN Registered Nurse Weekends',
         'company_name': 'Brookdale Home Health',
-        'via': 'MedicHire',
+        'via': 'Monster',
+        'via_link': 'https://www.monster.com/job-openings/prn-registered-nurse-home-health-austin-tx--7bd81496-d0e8-41d0-a401-1c754a4944f4?utm_campaign=google_jobs_apply&utm_source=google_jobs_apply&utm_medium=organic',
         'posted_at': '11 days ago',
         'schedule_type': 'Full-Time',
         'features': [
