@@ -11,8 +11,8 @@ const JobGrid = () => {
                 <Row>
                     <Col className='header'>Jobs</Col>
                 </Row>
-
-                <Row>
+                <h1 style = {{fontSize:"40px", textAlign:"center"}}>3 Results</h1>
+                <Row className=" justify-content-center" xs="auto">
                     <Col> <InstanceCard1 /> </Col>
                     <Col> <InstanceCard2 /> </Col>
                     <Col> <InstanceCard3 /> </Col>
@@ -30,7 +30,7 @@ const InstanceCard = ({ job }) => {
             <Card className='inst_card'>
                 <Card.Img variant='top' src={ job.image_H } />
                 <Card.Body>
-                    <Card.Title>{ job.title }</Card.Title>
+                    <Card.Title className="text-truncate">{ job.title }</Card.Title>
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
                     <Card.Text><b>Posted:</b> { job.posted_at }</Card.Text>
                     <Card.Text><b>Schedule:</b> { job.schedule_type }</Card.Text>
