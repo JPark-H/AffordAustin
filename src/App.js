@@ -37,10 +37,6 @@ function App() {
 			<Route path='/Housing/3' element={<Housing3 />} />
 			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
 			{/* <Route path="/Search" element={<Search />} /> */}
-
-
-			
-			<Route path='/Jobs' element={ <JobGrid /> } />
 		</Routes>
 	  </Router>
     </div>

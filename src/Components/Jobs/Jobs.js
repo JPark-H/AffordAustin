@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Stack, Image, ListGroup } from 'react-bootstrap';
 
 const Jobs = ({ job }) => {
-    job.description = job.description.replace(/(?<!\n)\n(?!\n) /g, '')
+    // TODO: Update REGEX, breaks IOS, seems to break
+    // job.description = job.description.replace(/(?<!\n)\n(?!\n) /g, '')
 
     return (
         <div className='jobs'>
