@@ -55,7 +55,7 @@ const teamInfo = [
 			development position starting this fall. In my free time I \
 			love making music and playing video games with my friends.",
 		commits: 0,
-		issues: 69,
+		issues: 0,
 		tests: 0,
 	},
 	{
