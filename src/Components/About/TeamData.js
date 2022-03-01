@@ -3,15 +3,17 @@ import Jay from "./MemberCards/imgs/Jay.jpg"
 import Presley from "./MemberCards/imgs/Presley.jpg"
 import Dinesh from "./MemberCards/imgs/Dinesh.jpg"
 import Sabeer from "./MemberCards/imgs/Sabeer.jpg"
+import Scarlett from "./MemberCards/imgs/Scarlett.jpg"
 
 const teamInfo = [
 	{
 		name: "Scarlett Shires",
-		picture: Koala,
+		picture: Scarlett,
 		role: "Phase I Leader",
 		stack: "Front-End",
 		bio:
-			"The Krusty Krab Pizza, is the Pizza, for you and me!",
+			"I'm a third year CS major at UT Austin from Center, Texas (not in the center of Texas).\
+			I also work part-time at the University's SURE Walk program.",
 		commits: 0,
 		issues: 0,
 		tests: 0,
