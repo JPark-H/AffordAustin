@@ -65,9 +65,9 @@ const Jobs = ({ job }) => {
                         <div class='childcare'>
                             <h4>Nearby Childcare Services</h4>
                             <Nav>
-                                <Nav.Link as={ Link } to='/Childcare/1'>temp</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/2'>temp</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/3'>temp</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/1'>Zilker EAC YMCA</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/2'>Children's Center of Austin</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/3'>A+ Kids Playschool</Nav.Link>
                             </Nav>
                         </div>
                         </Stack>
