@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 function MainNavBar() {
     return (
       <Navbar collapseOnSelect bg="dark" variant="dark" expand="md">
-        <Navbar.Brand href="#home" className="nav_bar_brand">
+        <Navbar.Brand as={Link} to="/" className="nav_bar_brand">
           <p className="m-0"><Icon.House style={{marginTop: "-.2em", fontSize:"30px"}}></Icon.House> AffordAustin</p></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{marginRight:10, fontSize:"60%"}}></Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav" style={{color:"white"}}>

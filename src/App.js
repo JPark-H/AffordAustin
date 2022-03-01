@@ -20,7 +20,7 @@ import ChildCareGrid from './Components/ChildCare/ChildCareGrid'
 
 function App() {
   return (
-    <div className="App" style = {{backgroundColor:"#282c34"}}>
+    <div className="App">
       <header className="App-header">
       </header>
 	  <Router>
