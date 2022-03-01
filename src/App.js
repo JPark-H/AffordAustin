@@ -15,6 +15,9 @@ import HousingGrid from './Components/Housing/HousingGrid';
 import {Job1, Job2, Job3 } from './Components/Jobs/Jobs'
 import JobGrid from './Components/Jobs/JobGrid'
 
+import {ChildCare1, ChildCare2, ChildCare3} from './Components/ChildCare/ChildCare'
+import ChildCareGrid from './Components/ChildCare/ChildCareGrid'
+
 function App() {
   return (
     <div className="App" style = {{backgroundColor:"#282c34"}}>
@@ -35,7 +38,11 @@ function App() {
 			<Route path='/Housing/1' element={<Housing1 />} />
 			<Route path='/Housing/2' element={<Housing2 />} />
 			<Route path='/Housing/3' element={<Housing3 />} />
-			{/* <Route path="/ChildCare" element={<ChildCare />} /> */}
+
+			<Route path="/ChildCare" element={<ChildCareGrid />} />
+			<Route path='/ChildCare/1' element={<ChildCare1 />} />
+			<Route path='/ChildCare/2' element={<ChildCare2 />} />
+			<Route path='/ChildCare/3' element={<ChildCare3 />} />
 			{/* <Route path="/Search" element={<Search />} /> */}
 		</Routes>
 	  </Router>
