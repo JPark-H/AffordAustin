@@ -10,10 +10,10 @@ function MemberCards(props) {
             {/* Idea using map to create row of cards adopted from Adopt a Pet
             https://gitlab.com/10am-group-8/adopt-a-pet */}
 			<Row className="g-3 m-0 justify-content-center" xs="auto" >
-				{props.teamInfo.map((teamMember) => {
+				{props.teamInfo.map((teamMember, index) => {
 					const { name, username, picture, email, role, stack, bio, commits, issues, tests } = teamMember;
 					return (
-						<Col xs="auto" key={teamMember}>
+						<Col xs="auto" key={index}>
 							<Card border="light" style={{ width: '100%', borderRadius:"2rem"}}>
 								<Card.Img variant="top" src={picture}
 									className="about_card circle-rounded mb-0 mt-3 mx-auto" style = {{borderRadius:"2rem"}} />
