@@ -37,7 +37,7 @@ Name                 | Estimated | Actual
 Dinesh Balakrishnan  | 12        | 12
 Presley Heikkila     | 10        | 12  
 Jay Park             | 10        | 15       
-Sabeer Shahzad       | 9         | 10    
+Sabeer Shahzad       | 11        | 12    
 Scarlett Shires      | 12        | 12
 
 ### Comments
