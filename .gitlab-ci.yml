@@ -1,0 +1,10 @@
+image: node:latest
+
+stages:
+  - build
+
+build-code-job:
+  stage: build
+  script:
+    - npm i
+    - CI=false npm run-script build

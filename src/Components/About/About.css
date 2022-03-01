@@ -1,0 +1,32 @@
+.App {
+  text-align: center;
+}
+
+.section_header {
+  color: black;
+  font-size: max(1em, 40px);
+  font-weight: bolder;
+  padding-top: 1em;
+  margin-bottom: .5em;
+}
+
+.temp_interesting {
+  color: black;
+  font-size: max(.9em, 30px);
+  margin-bottom: .5em;
+}
+
+.tools_apis {
+  width: 85%;
+  font-size: 28px;
+}
+
+.instance_data {
+  width: 85%;
+  font-size: 28px;
+}
+
+.about_text {
+  font-size: max(.7em, 24px);
+  width: 95%;
+}

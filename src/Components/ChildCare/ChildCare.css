@@ -1,0 +1,58 @@
+.info_page {
+    align-items: center;
+    justify-content: center;
+    margin-top: .7em;
+    min-width: 350px;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+    width: 80%;
+  }
+  
+  .instance_header {
+    font-weight: 500;
+    color: black;
+    text-align: center;
+    font-size: max(1.4em, 38px);
+  }
+  
+  .instance_info {
+    max-width: 1000px;
+    min-height: 700px;
+    background-color: white;
+    color: black;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .attribute_head {
+    padding-top: .5em;
+    font-size: 28px;
+  }
+  
+  .h_image {
+    width: 75%;
+    margin-bottom: 1em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .h_map iframe {
+    width: 95%;
+    height: 18em;
+    margin-bottom: 1em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
+  .instance_data {
+    width: 85%;
+    font-size: 28px;
+  }
+  
+  .attribute_list {
+    font-size: max(.7em, 18px);
+  }
+  
+  .instance_connect {
+    width: 100%;
+
+  }
