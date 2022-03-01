@@ -30,13 +30,13 @@
     font-size: 28px;
   }
   
-  .h_image {
+  .c_image {
     width: 75%;
     margin-bottom: 1em;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
   
-  .h_map iframe {
+  .c_map iframe {
     width: 95%;
     height: 18em;
     margin-bottom: 1em;
