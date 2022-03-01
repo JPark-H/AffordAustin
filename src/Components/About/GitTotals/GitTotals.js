@@ -4,7 +4,7 @@ import './GitTotals.css'
 import * as Icon from 'react-bootstrap-icons';
 
 
-function GitTotals() {
+function GitTotals(props) {
     return (
 		<>
         <Container>
@@ -18,7 +18,7 @@ function GitTotals() {
                             </Card.Title>
                             <Icon.Check2Circle className="mt-2" style={{ fontSize: "50px", color: "black" }} />
                             <Card.Subtitle className="m-2 card_names">
-                                123
+                                {props.total_commits}
                             </Card.Subtitle>
 
                         </Card.Body>
@@ -33,7 +33,7 @@ function GitTotals() {
                             </Card.Title>
                             <Icon.ListCheck className="mt-2" style={{ fontSize: "50px", color: "black" }} />
                             <Card.Subtitle className="m-2 card_names">
-                                123
+                                {props.total_issues}
                             </Card.Subtitle>
                         </Card.Body>
                     </Card>
