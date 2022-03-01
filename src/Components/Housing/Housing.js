@@ -19,13 +19,13 @@ const Housing = ({ housing }) => {
           <hr style={{color:"#8c8a7f"}}/> */}
 
           <p className="attribute_head">Location Image</p>
-          <Image className="h_image" rounded src={housing.img}></Image>
+          <Image className="hous_image" rounded src={housing.img}></Image>
           <p className="attribute_head">Map</p>
           {/* <iframe rounded className="h_map mb-4"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1723.2088522797842!2d-97.76489096765725!3d30.253677616812844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b58823b5186b%3A0x5fe831e4bad332ec!2sLegacy%20apartment&#39;s!5e0!3m2!1sen!2sus!4v1645783505711!5m2!1sen!2sus"
             allowfullscreen loading="lazy">
           </iframe> */}
-          <div className='h_map' dangerouslySetInnerHTML={{ __html: housing.map }}></div>
+          <div className='hous_map' dangerouslySetInnerHTML={{ __html: housing.map }}></div>
           <Card className="instance_data mx-auto" style={{
             borderTopRightRadius: "2rem",
             borderTopLeftRadius: "2rem"
@@ -49,7 +49,7 @@ const Housing = ({ housing }) => {
           </Card>
           <Row className="mt-3 justify-content-between mx-auto" >
             <Link to={ link_j }>
-              <Col className="mx-auto"><Button variant="secondary">Nearby Job</Button>{' '}</Col>
+              <Col className="mx-auto"><Button id="btn-back-to-top" variant="secondary">Nearby Job</Button>{' '}</Col>
             </Link>
             <Link to={ link_c }>
               <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
