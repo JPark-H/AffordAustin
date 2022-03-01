@@ -34,6 +34,8 @@ const InstanceCard = ({ job }) => {
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
                     <Card.Text><b>Posted:</b> { job.posted_at }</Card.Text>
                     <Card.Text><b>Schedule:</b> { job.schedule_type }</Card.Text>
+                    <Card.Text><b>Rating:</b> { job.rating }</Card.Text>
+                    <Card.Text><b>Reviews:</b> { job.reviews }</Card.Text>
                 </Card.Body>
             </Card>
         </Link>
@@ -43,6 +45,8 @@ const InstanceCard = ({ job }) => {
 const InstanceCard1 = () => {
     const job = {
         'id': 1,
+        'rating': 3.7,
+        'reviews': 802,
         'title': 'Sourcing Analyst',
         'company_name': 'Visa',
         'posted_at': '2 days ago',
@@ -58,6 +62,8 @@ const InstanceCard1 = () => {
 const InstanceCard2 = () => {
     const job = {
         'id': 2,
+        'rating': 4.2,
+        'reviews': 1385,
         'title': 'Server - Stella San Jac',
         'company_name': 'White Lodging',
         'posted_at': '3 days ago',
@@ -73,6 +79,8 @@ const InstanceCard2 = () => {
 const InstanceCard3 = () => {
     const job = {
         'id': 3,
+        'rating': 1.0,
+        'reviews': 1,
         'title': 'PRN Registered Nurse Weekends Home',
         'company_name': 'Brookdale Home Health',
         'posted_at': '11 days ago',
