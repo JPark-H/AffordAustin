@@ -1,13 +1,3 @@
-Group Members (GitLab ID, EID):
-
-Dinesh Balakrishnan: dinesh.k.balakrishnan, db42659
-Presley Heikkila,: presleyh, phh348
-Jay Park: Jay-Logic, jhp2556
-Sabeer Shahzad, shahzadsb31 sms7654
-Scarlett Shires: scarlettshires, svs758
-
-Project Leader: Caitlin Lien
-GitLab Pipelines:
 
 # AffordAustin
 
