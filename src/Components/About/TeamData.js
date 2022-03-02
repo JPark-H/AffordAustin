@@ -17,6 +17,7 @@ const teamInfo = [
 		commits: 0,
 		issues: 0,
 		tests: 0,
+		user: "scarlettshires"
 	},
 	{
 		name: "Dinesh Balakrishnan",
@@ -30,6 +31,7 @@ const teamInfo = [
 		commits: 0,
 		issues: 0,
 		tests: 0,
+		user: "dinesh.k.balakrishnan"
 	},
 	{
 		name: "Jay Park",
@@ -44,6 +46,7 @@ const teamInfo = [
 		commits: 0,
 		issues: 0,
 		tests: 0,
+		user: "Jay-Logic"
 	},
 	{
 		name: "Presley Heikkila",
@@ -57,6 +60,7 @@ const teamInfo = [
 		commits: 0,
 		issues: 0,
 		tests: 0,
+		user: "presleyh"
 	},
 	{
 		name: "Sabeer Shahzad",
@@ -71,6 +75,7 @@ const teamInfo = [
 		commits: 0,
 		issues: 0,
 		tests: 0,
+		user: "shahzadsb31"
 	}
 ]
 

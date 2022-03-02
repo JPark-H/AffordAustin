@@ -30,3 +30,12 @@
   font-size: max(.7em, 24px);
   width: 95%;
 }
+
+.link b {
+  color: blue;
+}
+
+.about_list {
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

@@ -1,12 +1,106 @@
-/* body {
-    width: '100%';
-    height: '100%';
-    background: url('https://res.cloudinary.com/djlo2drow/image/upload/v1645845219/BackgroundImg_teoyu0.jpg');
-    background-size: 'cover';
-    margin: 0;
-  }
+.mainPage {
+  object-fit: cover;
+  display: flex;
+  background-size: cover;
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  font-family: "Lucida Console", monospace;
+}
 
-.center {
-    text-align: center;
-    padding: 150px 0;
-} */
+.leftHalf {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url('https://res.cloudinary.com/djlo2drow/image/upload/v1645997281/shutterstock_1069312334.0_bfhiio.jpg');
+  background-size: cover;
+  width: 40%;
+  height: 100%;
+  color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+
+}
+
+.rightHalf {
+  background-color: black;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.titleLeft {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.housingCard {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("https://res.cloudinary.com/djlo2drow/image/upload/v1645845219/BackgroundImg_teoyu0.jpg");
+  background-size: cover;
+  color: #f8f8f8;
+  margin: auto;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+
+.housingCard:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.childcareCard {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("https://res.cloudinary.com/djlo2drow/image/upload/v1646182552/teacher-and-pupils-using-wooden-shapes-in-montessori-school-picture-id684059604_ojprgm.jpg");
+  background-size: cover;
+  color: #f8f8f8;
+  border-radius: 5px;
+  margin: auto;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+
+.childcareCard:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.jobsCard {
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url("https://res.cloudinary.com/djlo2drow/image/upload/v1646182215/jobs_hero_thygda.jpg");
+  background-size: cover;
+  color: #f8f8f8;
+  border-radius: 5px;
+  margin: auto;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+}
+
+.jobsCard:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.tagline {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 100%;
+  margin: 20px auto;
+
+  font-size: larger;
+  
+}
+
+

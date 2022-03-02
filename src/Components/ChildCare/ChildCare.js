@@ -5,13 +5,15 @@ import { Container, Row, Col, Image, ListGroup, Card, Button } from 'react-boots
 import { Link } from 'react-router-dom';
 
 const ChildCare = ({ child_care }) => {
+    const link_j = `/Jobs/${ child_care.id }`
+    const link_h = `/Housing/${ child_care.id }`
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
             <div className="info_page mx-auto justify-content-center">
                 <p className="instance_header">{child_care.operation_name}</p>
                 <Container className="instance_info">
                     <p className="attribute_head">Location Image</p>
-                    <Image className="h_image" rounded src={child_care.img}></Image>
+                    <Image className="c_image" rounded src={child_care.img}></Image>
                     <Row>
                         <Col>
                             <Card className="instance_data mx-auto" style={{
@@ -54,13 +56,13 @@ const ChildCare = ({ child_care }) => {
                         </Col>
                     </Row>
                     <p className="attribute_head">Map</p>
-                    <div className='h_map' dangerouslySetInnerHTML={{ __html: child_care.map }}></div>
+                    <div className='c_map' dangerouslySetInnerHTML={{ __html: child_care.map }}></div>
                     <Row className="mt-3 justify-content-between mx-auto" >
-                        <Link to='/Jobs'>
-                        <Col className="mx-auto"><Button variant="secondary">Find Nearby Jobs</Button>{' '}</Col>
+                        <Link to={link_j}>
+                            <Col className="mx-auto"><Button variant="secondary">Find Nearby Jobs</Button>{' '}</Col>
                         </Link>
-                        <Link to='/Housing'>
-                        <Col className="mx-auto"><Button variant="secondary">Find Nearby Housing</Button>{' '}</Col>
+                        <Link to={link_h}>
+                            <Col className="mx-auto"><Button variant="secondary">Find Nearby Housing</Button>{' '}</Col>
                         </Link>
                     </Row>
                 </Container>

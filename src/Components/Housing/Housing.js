@@ -19,13 +19,13 @@ const Housing = ({ housing }) => {
           <hr style={{color:"#8c8a7f"}}/> */}
 
           <p className="attribute_head">Location Image</p>
-          <Image className="h_image" rounded src={housing.img}></Image>
+          <Image className="hous_image" rounded src={housing.img}></Image>
           <p className="attribute_head">Map</p>
           {/* <iframe rounded className="h_map mb-4"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1723.2088522797842!2d-97.76489096765725!3d30.253677616812844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b58823b5186b%3A0x5fe831e4bad332ec!2sLegacy%20apartment&#39;s!5e0!3m2!1sen!2sus!4v1645783505711!5m2!1sen!2sus"
             allowfullscreen loading="lazy">
           </iframe> */}
-          <div className='h_map' dangerouslySetInnerHTML={{ __html: housing.map }}></div>
+          <div className='hous_map' dangerouslySetInnerHTML={{ __html: housing.map }}></div>
           <Card className="instance_data mx-auto" style={{
             borderTopRightRadius: "2rem",
             borderTopLeftRadius: "2rem"
@@ -33,7 +33,7 @@ const Housing = ({ housing }) => {
             <Card.Header style={{
               borderTopRightRadius: "2rem",
               borderTopLeftRadius: "2rem"
-            }}>Data</Card.Header>
+            }}>Details</Card.Header>
             <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
               <ListGroup.Item>Address: {housing.address}</ListGroup.Item>
               <ListGroup.Item>ZIP Code: {housing.zip_code}</ListGroup.Item>
@@ -43,13 +43,52 @@ const Housing = ({ housing }) => {
               <ListGroup.Item>Ground Lease: {housing.ground_lease}</ListGroup.Item>
               <ListGroup.Item>Tenure: {housing.tenure}</ListGroup.Item>
               <ListGroup.Item>Affordability Guarantee: {housing.affordability_expiration_year}</ListGroup.Item>
-              <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
               {/* Maybe eventually add like hover options that explain what each attirbute is */}
             </ListGroup>
           </Card>
+
+          <Card className="instance_data mx-auto mt-4" style={{
+            borderTopRightRadius: "2rem",
+            borderTopLeftRadius: "2rem"
+          }}>
+            <Card.Header style={{
+              borderTopRightRadius: "2rem",
+              borderTopLeftRadius: "2rem"
+            }}>Price Points</Card.Header>
+            <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
+              <ListGroup.Item>30% Median Family Income: {housing.units_30_mfi}</ListGroup.Item>
+              <ListGroup.Item>40% Median Family Income: {housing.units_40_mfi}</ListGroup.Item>
+              <ListGroup.Item>50% Median Family Income: {housing.units_50_mfi}</ListGroup.Item>
+              <ListGroup.Item>60% Median Family Income: {housing.units_60_mfi}</ListGroup.Item>
+              <ListGroup.Item>65% Median Family Income: {housing.units_65_mfi}</ListGroup.Item>
+              <ListGroup.Item>80% Median Family Income: {housing.units_80_mfi}</ListGroup.Item>
+              <ListGroup.Item>100% Median Family Income: {housing.units_100_mfi}</ListGroup.Item>
+              
+              {/* Maybe eventually add like hover options that explain what each attirbute is */}
+            </ListGroup>
+            {/* Contact Info */}
+          </Card>
+
+          <Card className="instance_data mx-auto mt-4" style={{
+            borderTopRightRadius: "2rem",
+            borderTopLeftRadius: "2rem"
+          }}>
+            <Card.Header style={{
+              borderTopRightRadius: "2rem",
+              borderTopLeftRadius: "2rem"
+            }}>Contact Info</Card.Header>
+            <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
+              <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
+              <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
+              
+              {/* Maybe eventually add like hover options that explain what each attirbute is */}
+            </ListGroup>
+            {/* Contact Info */}
+          </Card>
+
           <Row className="mt-3 justify-content-between mx-auto" >
             <Link to={ link_j }>
-              <Col className="mx-auto"><Button variant="secondary">Nearby Job</Button>{' '}</Col>
+              <Col className="mx-auto"><Button id="btn-back-to-top" variant="secondary">Nearby Job</Button>{' '}</Col>
             </Link>
             <Link to={ link_c }>
               <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
