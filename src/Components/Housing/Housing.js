@@ -33,7 +33,7 @@ const Housing = ({ housing }) => {
             <Card.Header style={{
               borderTopRightRadius: "2rem",
               borderTopLeftRadius: "2rem"
-            }}>Data</Card.Header>
+            }}>Details</Card.Header>
             <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
               <ListGroup.Item>Address: {housing.address}</ListGroup.Item>
               <ListGroup.Item>ZIP Code: {housing.zip_code}</ListGroup.Item>
@@ -43,10 +43,49 @@ const Housing = ({ housing }) => {
               <ListGroup.Item>Ground Lease: {housing.ground_lease}</ListGroup.Item>
               <ListGroup.Item>Tenure: {housing.tenure}</ListGroup.Item>
               <ListGroup.Item>Affordability Guarantee: {housing.affordability_expiration_year}</ListGroup.Item>
-              <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
               {/* Maybe eventually add like hover options that explain what each attirbute is */}
             </ListGroup>
           </Card>
+
+          <Card className="instance_data mx-auto mt-4" style={{
+            borderTopRightRadius: "2rem",
+            borderTopLeftRadius: "2rem"
+          }}>
+            <Card.Header style={{
+              borderTopRightRadius: "2rem",
+              borderTopLeftRadius: "2rem"
+            }}>Price Points</Card.Header>
+            <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
+              <ListGroup.Item>30% Median Family Income: {housing.units_30_mfi}</ListGroup.Item>
+              <ListGroup.Item>40% Median Family Income: {housing.units_40_mfi}</ListGroup.Item>
+              <ListGroup.Item>50% Median Family Income: {housing.units_50_mfi}</ListGroup.Item>
+              <ListGroup.Item>60% Median Family Income: {housing.units_60_mfi}</ListGroup.Item>
+              <ListGroup.Item>65% Median Family Income: {housing.units_65_mfi}</ListGroup.Item>
+              <ListGroup.Item>80% Median Family Income: {housing.units_80_mfi}</ListGroup.Item>
+              <ListGroup.Item>100% Median Family Income: {housing.units_100_mfi}</ListGroup.Item>
+              
+              {/* Maybe eventually add like hover options that explain what each attirbute is */}
+            </ListGroup>
+            {/* Contact Info */}
+          </Card>
+
+          <Card className="instance_data mx-auto mt-4" style={{
+            borderTopRightRadius: "2rem",
+            borderTopLeftRadius: "2rem"
+          }}>
+            <Card.Header style={{
+              borderTopRightRadius: "2rem",
+              borderTopLeftRadius: "2rem"
+            }}>Contact Info</Card.Header>
+            <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
+              <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
+              <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
+              
+              {/* Maybe eventually add like hover options that explain what each attirbute is */}
+            </ListGroup>
+            {/* Contact Info */}
+          </Card>
+
           <Row className="mt-3 justify-content-between mx-auto" >
             <Link to={ link_j }>
               <Col className="mx-auto"><Button id="btn-back-to-top" variant="secondary">Nearby Job</Button>{' '}</Col>
