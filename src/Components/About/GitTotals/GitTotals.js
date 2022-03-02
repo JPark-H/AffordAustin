@@ -47,7 +47,7 @@ function GitTotals(props) {
                             </Card.Title>
                             <Icon.Wrench className="mt-2" style={{ fontSize: "50px", color: "black" }} />
                             <Card.Subtitle className="m-2 card_names">
-                                123
+                                0
                             </Card.Subtitle>
 
                         </Card.Body>
