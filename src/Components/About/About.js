@@ -97,7 +97,7 @@ function About() {
 			}}>
 				<ListGroup variant="flush" style={{
 				}}>
-					{tools.map((tool, index) => (<ListGroup.Item key={tool}><b>{tool}</b><br></br>{tools_desc[index]}</ListGroup.Item>
+					{tools.map((tool, index) => (<ListGroup.Item className="about_list" key={tool}><b>{tool}</b><br></br>{tools_desc[index]}</ListGroup.Item>
 					))}
 				</ListGroup>
 			</Card>
@@ -110,7 +110,7 @@ function About() {
 				<ListGroup variant="flush" style={{
 					borderRadius: "2rem",
 				}}>
-					{apis.map(api => (<a href={ api[2] } target='_blank'><ListGroup.Item className='link' key={api[0]}><b>{api[0]}</b><br></br>{ api[1] }</ListGroup.Item></a>
+					{apis.map(api => (<a href={ api[2] } target='_blank'><ListGroup.Item className='link about_list' key={api[0]}><b>{api[0]}</b><br></br>{ api[1] }</ListGroup.Item></a>
 					))}
 				</ListGroup>
 			</Card>
