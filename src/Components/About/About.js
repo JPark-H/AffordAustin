@@ -50,17 +50,14 @@ function About() {
 				});
 				setCommits(c);
 			});
-			await axios.get('https://gitlab.com/api/v4/projects/33875511/issues?state=closed').then(resp => {
-				let i = 0;
-				resp.data.forEach((issue) => {
-					i += 1;
-					const { assignees } = issue;
-					assignees.forEach((assignee) => {
-						const { name } = assignee;
-						let team_num = contributor_to_team_num[name.substring(0,3).toLowerCase()];
-						teamInfo[team_num]["issues"] += 1;
-					});
+			let i = 0;
+			Promise.all(teamInfo.map(async (member) => {
+				let issues_api = "https://gitlab.com/api/v4/projects/33875511/issues_statistics?author_username=" + member.user;
+				await axios.get(issues_api).then((resp) => {
+					member["issues"] = resp["data"]["statistics"]["counts"]["closed"];
+					i += resp["data"]["statistics"]["counts"]["closed"];
 				});
+			})).then(() => {
 				setIssues(i);
 			});
 		};
@@ -103,7 +100,7 @@ function About() {
 			</Card>
 
 			{/*API Info*/}
-			<h1 className="section_header">Data Source Links</h1>
+			{/* <h1 className="section_header">Data Source Links</h1>
 			<Card border="light" className="instance_data mx-auto" style={{
 				borderRadius: "2rem", borderTopLeftRadius: "2rem"
 			}}>
@@ -113,14 +110,10 @@ function About() {
 					{apis.map(api => (<a href={ api[2] } target='_blank'><ListGroup.Item className='link about_list' key={api[0]}><b>{api[0]}</b><br></br>{ api[1] }</ListGroup.Item></a>
 					))}
 				</ListGroup>
-			</Card>
+			</Card> */}
 
-			<h1 className="section_header">Interesting Results</h1>
-			<ul>
-				<h2 className="temp_interesting">Most affordable housing instances are available in Travis County.</h2>
-				<h2 className="temp_interesting">Most daycare instances are available in Harris Country.</h2>
-			</ul>
-			
+			<h1 className="section_header">Interesting Data</h1>
+			<h2 className="temp_interesting"></h2>
 
 
 		</div>
