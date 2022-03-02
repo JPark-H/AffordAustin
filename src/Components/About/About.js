@@ -26,11 +26,12 @@ let total_issues = 0;
 let total_commits = 0;
 
 const contributor_to_team_num = {
-	"Sca": 0,
-	"Din": 1,
-	"Jay": 2,
-	"Pre": 3,
-	"Sab": 4,
+	"sca": 0,
+	"din": 1,
+	"jay": 2,
+	"pre": 3,
+	"phe": 3,
+	"sab": 4,
 	"sha": 4
 }
 
@@ -43,7 +44,7 @@ function About() {
 				let c = 0;
 				resp.data.forEach((contributor) => {
 					const { name, email, commits } = contributor;
-					let team_num = contributor_to_team_num[name.substring(0,3)];
+					let team_num = contributor_to_team_num[name.substring(0,3).toLowerCase()];
 					teamInfo[team_num]["commits"] = commits;  
 					c += commits;
 				});
@@ -56,7 +57,7 @@ function About() {
 					const { assignees } = issue;
 					assignees.forEach((assignee) => {
 						const { name } = assignee;
-						let team_num = contributor_to_team_num[name.substring(0,3)];
+						let team_num = contributor_to_team_num[name.substring(0,3).toLowerCase()];
 						teamInfo[team_num]["issues"] += 1;
 					});
 				});
