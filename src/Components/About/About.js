@@ -100,7 +100,7 @@ function About() {
 			</Card>
 
 			{/*API Info*/}
-			{/* <h1 className="section_header">Data Source Links</h1>
+			<h1 className="section_header">Data Source Links</h1>
 			<Card border="light" className="instance_data mx-auto" style={{
 				borderRadius: "2rem", borderTopLeftRadius: "2rem"
 			}}>
@@ -110,7 +110,7 @@ function About() {
 					{apis.map(api => (<a href={ api[2] } target='_blank'><ListGroup.Item className='link about_list' key={api[0]}><b>{api[0]}</b><br></br>{ api[1] }</ListGroup.Item></a>
 					))}
 				</ListGroup>
-			</Card> */}
+			</Card>
 
 			<h1 className="section_header">Interesting Data</h1>
 			<h2 className="temp_interesting"></h2>
