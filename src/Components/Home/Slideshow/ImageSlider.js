@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SliderData } from './SliderData';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-import Fade from 'react-slideshow-image'
+import React, { useEffect, useState } from "react";
+import { SliderData } from "./SliderData";
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
@@ -9,12 +7,8 @@ const ImageSlider = ({ slides }) => {
   const delay = 3000;
 
   useEffect(() => {
-    setTimeout(
-      () =>
-        nextSlide(),
-        delay
-    );
-  })
+    setTimeout(() => nextSlide(), delay);
+  });
 
   const nextSlide = () => {
     setCurrent(current === length - 1 ? 0 : current + 1);
@@ -29,22 +23,18 @@ const ImageSlider = ({ slides }) => {
   }
 
   return (
-    <section className='slider'>
+    <div>
       {SliderData.map((slide, index) => {
         return (
           <div
-            className={index === current ? 'slide active' : 'slide'}
+            className={index === current ? "slide active" : "slide"}
             key={index}
           >
-            
-            {index === current && (
-              <img src={slide.image} alt='travel image' className='image'/>
-            )}
-            
+            {index === current && <img src={slide.image} className="image" />}
           </div>
         );
       })}
-    </section>
+    </div>
   );
 };
 
