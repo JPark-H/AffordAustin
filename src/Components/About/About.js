@@ -115,8 +115,12 @@ function About() {
 				</ListGroup>
 			</Card>
 
-			<h1 className="section_header">Interesting Data</h1>
-			<h2 className="temp_interesting"></h2>
+			<h1 className="section_header">Interesting Results</h1>
+			<ul>
+				<h2 className="temp_interesting">Most affordable housing instances are available in Travis County.</h2>
+				<h2 className="temp_interesting">Most daycare instances are available in Harris Country.</h2>
+			</ul>
+			
 
 
 		</div>
