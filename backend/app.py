@@ -15,6 +15,10 @@ def test():
 def test2():
     return 'Test2'
 
+@app.route("/afterci")
+def test2():
+    return 'manihategitlab'
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
