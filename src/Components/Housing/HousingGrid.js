@@ -1,25 +1,63 @@
 import './HousingGrid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
+import { useState, useEffect } from 'react';
+import Paginate from './../Pagination/Pagination';
+import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const HousingGrid = () => {
+    const [houses, setHouses] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    //Replace when we have working database
+    const numHouses = 2191;
+    const housesPerPage = 20;
+
+    const getHousingData = async (query) => {
+        setLoading(true);
+        const endpoint = 'https://data.austintexas.gov/resource/x5p7-qyuv.json';
+        const data = await axios.get(endpoint + query);
+        setHouses(data.data);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        //Stand in query
+        getHousingData('?$where=project_id<3235');
+    }, []);
+
+    const paginate = (pageNum) => {
+        setCurrentPage(pageNum);
+        //Stand in query
+        const minID = 3225;
+        const begin = minID + ((pageNum - 1) * housesPerPage);
+        console.log("First index" + begin);
+        getHousingData('?$where=project_id between ' + begin + ' and ' + (begin + housesPerPage - 1));
+    }
+
     return (
-        <div className="housing_background">
-            <div class='housingGrid mx-auto'>
-            <Container>
-                <Row>
-                    <Col className='header'>Housing</Col>
-                </Row>
-                    <h1 style = {{fontSize:"40px", textAlign:"center"}}>3 Results</h1>
-                <Row className="g-3 justify-content-center" xs="auto">
-                    <Col> <InstanceCard1 /> </Col>
-                    <Col> <InstanceCard2 /> </Col>
-                    <Col> <InstanceCard3 /> </Col>
-                    
-                </Row>
-            </Container>
+        <div style={{ backgroundColor: "#f0f2f5" }}>
+            <div className='housingGrid mx-auto'>
+                <Container>
+                    <Row>
+                        <Col className='header'>Housing</Col>
+                    </Row>
+                    <Row>
+                        <Paginate totalInstances={numHouses} pageLimit={housesPerPage} paginate={paginate} />
+                    </Row>
+                        <h1 style = {{fontSize:"40px", textAlign:"center"}}>{houses.length} Results</h1>
+                    <Row className="g-3 justify-content-center" xs="auto">
+                        {loading ? <h3>Loading</h3> : houses.map(house => {
+                            return (
+                            <Col key={house.project_id}>
+                                <InstanceCard housing={house} />
+                            </Col>);
+                        })}
+                    </Row>
+                </Container>
             </div>
         </div>
         
@@ -32,13 +70,13 @@ const InstanceCard = ({ housing }) => {
     return (
         <Link to={ link }>
             <Card className='inst_card'>
-                <Card.Img variant='top' src={housing.image} />
+                <Card.Img variant='top' src={Koala} />
                 <Card.Body>
-                    <Card.Title className="text-truncate">{ housing.name }</Card.Title>
+                    <Card.Title className="text-truncate">{ housing.project_name }</Card.Title>
                     <Card.Text><b>Tenure :</b> { housing.tenure }</Card.Text>
                     <Card.Text><b>Unit-Type:</b> { housing.unit_type }</Card.Text>
-                    <Card.Text><b>Num of Units:</b> { housing.num_units }</Card.Text>
-                    <Card.Text><b>Ground Lease:</b> { housing.ground }</Card.Text>
+                    <Card.Text><b>Num of Units:</b> { housing.total_units }</Card.Text>
+                    <Card.Text><b>Ground Lease:</b> { housing.ground_lease }</Card.Text>
                     <Card.Text><b>Zip-Code:</b> { housing.zip_code }</Card.Text>
                     
                 </Card.Body>
@@ -46,58 +84,5 @@ const InstanceCard = ({ housing }) => {
         </Link>
     )
 };
-
-const InstanceCard1 = () => {
-    const housing = {
-        'id': 1,
-        'name': 'Legacy Apartments',
-        'tenure': 'Rental',
-        'unit_type': 'Multifamily',
-        'num_units': '6',
-        'ground': 'No',
-        'zip_code': '78704',
-        'image': 'https://rentpath-res.cloudinary.com/$img_current/t_3x2_webp_xl/t_unpaid/55754e0fd1c0a9ac53d7f36af593945b'
-    };
-
-    return (
-        <InstanceCard housing={ housing } />
-    );
-}
-
-const InstanceCard2 = () => {
-    const housing = {
-        'id': 2,
-        'name': '1905 E 9th Street',
-        'tenure': 'Rental',
-        'unit_type': 'Single Family',
-        'num_units': '1',
-        'ground': 'No',
-        'zip_code': '78702',
-        'image': 'https://maps.googleapis.com/maps/api/streetview?channel=mb-pdp-publicrecord&location=1905+E+9th+St%2C+Austin%2C+TX+78702&size=665x441&source=outdoor&client=gme-redfin&signature=FMmyT_iA5x87udCGAaBpvurJ-F8='
-    };
-
-    return (
-        <InstanceCard housing={ housing } />
-    );
-}
-
-const InstanceCard3 = () => {
-    const housing = {
-        'id': 3,
-        'name': '2009 Salina Street',
-        'tenure': 'Rental',
-        'unit_type': 'Multifamily',
-        'num_units': '2',
-        'ground': 'No',
-        'zip_code': '78722',
-        'image': 'https://maps.googleapis.com/maps/api/streetview?channel=mb-pdp-publicrecord&location=2009+Salina+St%2C+Austin%2C+TX+78722&size=665x441&source=outdoor&client=gme-redfin&signature=JNk1f3_rYdEWevy0acjXxgobz1o='
-    };
-
-    return (
-        <InstanceCard housing={ housing } />
-    )
-}
-
-
 
 export default HousingGrid;

@@ -47,6 +47,12 @@ const Paginate = ({totalInstances, pageLimit, paginate}) => {
             </Pagination>
         </div>
     );
-}
+};
+
+Paginate.propTypes = {
+    totalInstances: PropTypes.number.isRequired,
+    pageLimit: PropTypes.number.isRequired,
+    paginate: PropTypes.func.isRequired
+};
 
 export default Paginate;
