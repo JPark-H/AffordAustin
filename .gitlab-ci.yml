@@ -22,4 +22,5 @@ deploy_development:
     - git checkout development
   script:
     - cd backend
+    - echo ${AWS_ACCESS_KEY_ID}
     - /root/.local/bin/eb deploy affordaustin-api
