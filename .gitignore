@@ -48,5 +48,8 @@ amplifytools.xcconfig
 !.elasticbeanstalk/*.config.yml
 !.elasticbeanstalk/*.global.yml
 
+# Pycache
+__pycache__/
+
 .vscode
 .env
