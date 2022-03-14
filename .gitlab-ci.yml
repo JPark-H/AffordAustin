@@ -1,14 +1,14 @@
 image: node:latest
 
 stages:
-  - build
+  # - build
   - deploy
 
-build-code-job:
-  stage: build
-  script:
-    - npm i
-    - CI=false npm run-script build
+# build-code-job:
+#   stage: build
+#   script:
+#     - npm i
+#     - CI=false npm run-script build
 
 # CHANGE development to main later, discuss using 2 EB Instances for a test api
 deploy_development:
@@ -22,5 +22,4 @@ deploy_development:
     - git checkout development
   script:
     - cd backend
-    - echo ${AWS_ACCESS_KEY_ID}
     - /root/.local/bin/eb deploy affordaustin-api
