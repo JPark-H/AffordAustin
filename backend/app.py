@@ -16,7 +16,7 @@ def test2():
     return 'Test2'
 
 @app.route("/afterci")
-def test2():
+def afterci():
     return 'manihategitlab'
 
 
