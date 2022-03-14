@@ -43,4 +43,9 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.config.yml
+!.elasticbeanstalk/*.global.yml
 .vscode
