@@ -11,8 +11,6 @@ frontend-init:
 	npm i
 	npm start
 
-backend-init:
-	source tutorial-env/bin/activate
-
-backend-build:
-	pip freeze > requirements.txt
+integrate:
+	pip install pipenv
+	pipenv run python ./backend/database_integrations/integration.py
