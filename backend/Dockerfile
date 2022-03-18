@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:bionic
 ENV DEBIAN_FRONTEND=noninteractive
 
 # https://forums.docker.com/t/hash-sum-mismatch-writing-more-data-as-expected/45940/3
@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip python3-dev build-essential vim
-RUN apt-get install -y libmysqlclient-dev libpq-dev postgresql
+RUN apt-get install -m -y libpq-dev postgresql
 RUN apt-get -y install nginx
 
 COPY . usr/src/backend
