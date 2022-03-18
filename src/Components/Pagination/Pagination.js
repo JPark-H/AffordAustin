@@ -1,6 +1,7 @@
 import { Pagination } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import { useState } from 'react'
+import './Pagination.css'
 
 // Looked at code from adoptapet group
 const Paginate = ({totalInstances, pageLimit, paginate}) => {
@@ -15,9 +16,9 @@ const Paginate = ({totalInstances, pageLimit, paginate}) => {
     }
 
     return (
-        <div>
+        <div className="pagination">
             <Pagination>
-                <Pagination.Prev onClick={() => changePage(currentPage - 1)} />
+                <Pagination.Prev onClick={() => changePage(currentPage - 1)}/>
                 {currentPage > 3 &&
                     <Pagination.Item onClick={() => changePage(1)}>1</Pagination.Item>
                 }

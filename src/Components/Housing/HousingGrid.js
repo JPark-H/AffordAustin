@@ -41,7 +41,7 @@ const HousingGrid = () => {
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
             <div className='housingGrid mx-auto'>
-                <Container>
+                <Container fluid>
                     <Row>
                         <Col className='header'>Housing</Col>
                     </Row>
@@ -49,7 +49,7 @@ const HousingGrid = () => {
                         <Paginate totalInstances={numHouses} pageLimit={housesPerPage} paginate={paginate} />
                     </Row>
                         <h1 style = {{fontSize:"40px", textAlign:"center"}}>{houses.length} Results</h1>
-                    <Row className="g-3 justify-content-center" xs="auto">
+                    <Row className="g-3 justify-content-center" xs='auto'>
                         {loading ? <h3>Loading</h3> : houses.map(house => {
                             return (
                             <Col key={house.project_id}>
