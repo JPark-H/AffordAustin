@@ -1,10 +1,25 @@
 image: node:latest
 
 stages:
-  - build
+  # - build
+  - deploy
 
-build-code-job:
-  stage: build
+# build-code-job:
+#   stage: build
+#   script:
+#     - npm i
+#     - CI=false npm run-script build
+
+# CHANGE development to main later, discuss using 2 EB Instances for a test api
+deploy_development:
+  image: python:3.6-stretch
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "development"
+  stage: deploy
+  before_script:
+    - pip install awsebcli --upgrade --user
+    - git checkout development
   script:
-    - npm i
-    - CI=false npm run-script build
+    - cd backend
+    - /root/.local/bin/eb deploy affordaustin-api
