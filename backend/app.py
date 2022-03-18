@@ -92,7 +92,7 @@ childcares_schema = ChildcareSchema(many=True)
 
 @app.route("/")
 def home():
-    return 'hello from app.py'
+    return 'we can fix it!'
 
 @app.route("/Housing")
 def get_housing():
@@ -106,11 +106,11 @@ def get_childcare():
     results = childcares_schema.dump(childcare_pages)
     return jsonify(results)
 
-# @app.route("/Jobs")
-# def get_jobs():
-#     jobs_pages = Job.query.all()
-#     results = jobs_schema.dump(jobs_pages)
-#     return jsonify(results)
+@app.route("/Jobs")
+def get_jobs():
+    jobs_pages = Job.query.all()
+    results = jobs_schema.dump(jobs_pages)
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
