@@ -23,15 +23,15 @@ python_unit_tests:
     - python tests.py
 
 
-deploy_development:
-  image: python:3.6-stretch
-  only:
-    variables:
-      - $CI_COMMIT_BRANCH == "development"
-  stage: deploy
-  before_script:
-    - pip install awsebcli --upgrade --user
-    - git checkout development
-  script:
-    - cd backend
-    - /root/.local/bin/eb deploy affordaustin-api
+# deploy_development:
+#   image: python:3.6-stretch
+#   only:
+#     variables:
+#       - $CI_COMMIT_BRANCH == "development"
+#   stage: deploy
+#   before_script:
+#     - pip install awsebcli --upgrade --user
+#     - git checkout development
+#   script:
+#     - cd backend
+#     - /root/.local/bin/eb deploy affordaustin-api
