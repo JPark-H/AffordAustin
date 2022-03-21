@@ -92,7 +92,7 @@ childcares_schema = ChildcareSchema(many=True)
 
 @app.route("/")
 def home():
-    return 'mmmm cheeese'
+    return 'Sally sells sea shells by the sea shore'
 
 @app.route("/Housing")
 def get_housing():
@@ -113,4 +113,5 @@ def get_jobs():
     return jsonify(results)
 
 if __name__ == "__main__":
+    app.debug= True
     app.run(host="0.0.0.0", port=5000, debug=True)
