@@ -1,6 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, abort, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
+from flask_restless import APIManager
+
+import os, sys
 
 app = Flask(__name__)
 
@@ -15,7 +19,7 @@ db.Model.metadata.reflect(db.engine)
 
 class Housing(db.Model):
     __table__ = db.Model.metadata.tables['housing']
-
+    
 class HousingSchema(marsh.Schema):
     class Meta:
         fields = ('address', 'price', 'zip_code', 'unit_type', 'parcel_id')
@@ -71,7 +75,7 @@ class ChildcareSchema(marsh.Schema):
         '''
 
 # class Job(db.Model):
-#     __table__ = db.Model.metadata.tables['jobs']
+#     __table__ = db.Model.metadata.tables['Jobs']
     
 # class JobSchema(marsh.Schema):
 #     class Meta:
@@ -90,27 +94,47 @@ childcares_schema = ChildcareSchema(many=True)
 # job_schema = JobSchema()
 # jobs_schema = JobSchema(many=True)
 
+manager = APIManager(app, session=db.session)
+
+#search bar doesn't allow for upper-case Housing
+manager.create_api(Housing, page_size=5)
+manager.create_api(Childcare, primary_key="id", collection_name="childcare")
+# manager.create_api(Job, primary_key="id", collection_name="jobs")
+
+# @app.route("/api/<string:model>")
+# def api_models(model):
+#     args = request.args
+#     print(" asdf ::" + args)
+#     return jsonify(args)
+
+# @app.route("/api/housing/<int:id>")
+# def getids(id):
+#     args = request.args
+#     print(args)
+#     return args
+
+
 @app.route("/")
 def home():
     return 'we can fix it!'
 
-@app.route("/Housing")
-def get_housing():
-    housing_pages = Housing.query.all()
-    results = houses_schema.dump(housing_pages)
-    return jsonify(results)
+# @app.route("/Housing")
+# def get_housing():
+#     housing_pages = Housing.query.limit(5).all()
+#     results = houses_schema.dump(housing_pages)
+#     return jsonify(results)
 
-@app.route("/ChildCare")
-def get_childcare():
-    childcare_pages = Childcare.query.all()
-    results = childcares_schema.dump(childcare_pages)
-    return jsonify(results)
+# @app.route("/ChildCare")
+# def get_childcare():
+#     childcare_pages = Childcare.query.all()
+#     results = childcares_schema.dump(childcare_pages)
+#     return jsonify(results)
 
-@app.route("/Jobs")
-def get_jobs():
-    jobs_pages = Job.query.all()
-    results = jobs_schema.dump(jobs_pages)
-    return jsonify(results)
+# @app.route("/Jobs")
+# def get_jobs():
+#     jobs_pages = Job.query.all()
+#     results = jobs_schema.dump(jobs_pages)
+#     return jsonify(results)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
