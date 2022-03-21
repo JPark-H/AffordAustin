@@ -2,8 +2,9 @@ image: node:latest
 
 stages:
   # - build
-  - deploy
   - test
+  # - deploy
+  
 
 # build-code-job:
 #   stage: build
@@ -16,9 +17,9 @@ python_unit_tests:
   image: python:3.6-stretch
   stage: test
   before_script:
-    - pip install -r back-end/requirements.txt
-    - cd back-end
+    - pip install -r backend/requirements.txt
   script:
+    - cd backend
     - python tests.py
 
 
