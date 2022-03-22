@@ -34,6 +34,7 @@ def add_childcare(db):
 if __name__ == '__main__':
     db = Database()
     db.connect(DATABASE, USER, PASSWORD, HOST, PORT)
+
     add_housing(db)
     add_childcare(db)
 

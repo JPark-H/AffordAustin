@@ -30,7 +30,9 @@ class Database:
 
 
     def enter_table(self, name):
-        assert self.__db is not None
+        if self.__db is None:
+            raise NameError('Need to connect to a database first.')
+
         return Table(self, name)
 
 
@@ -46,7 +48,8 @@ class Database:
 
 
     def __execute_query(self, query):
-        assert self.__db is not None
+        if self.__db is None:
+            raise NameError('Need to connect to a database first.')
 
         cur = self.__db.cursor()
         cur.execute(query)
