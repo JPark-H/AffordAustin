@@ -18,7 +18,9 @@ const HousingGrid = () => {
 
     const getHousingData = async (query) => {
         setLoading(true);
-        const endpoint = 'https://api.affordaustin.me';
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        const endpoint = 'http://localhost:5000/api/housing';
         const data = await axios.get(endpoint);
         console.log(data);
         setHouses(data.data);
