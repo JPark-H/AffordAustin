@@ -13,4 +13,4 @@ frontend-init:
 
 integrate:
 	pip install pipenv
-	pipenv run python ./backend/database_integrations/integration.py
+	pipenv run python ./backend/database_integration/integration.py
