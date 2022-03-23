@@ -2,6 +2,10 @@ branch-defaults:
   default:
     environment: affordaustin-api
     group_suffix: null
+environment-defaults:
+  affordaustin-api:
+    branch: null
+    repository: null
 global:
   application_name: aa-backend
   branch: null
