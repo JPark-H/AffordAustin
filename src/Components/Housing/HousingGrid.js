@@ -18,15 +18,16 @@ const HousingGrid = () => {
 
     const getHousingData = async (query) => {
         setLoading(true);
-        const endpoint = 'https://data.austintexas.gov/resource/x5p7-qyuv.json';
-        const data = await axios.get(endpoint + query);
+        const endpoint = 'https://api.affordaustin.me';
+        const data = await axios.get(endpoint);
+        console.log(data);
         setHouses(data.data);
         setLoading(false);
     }
 
     useEffect(() => {
         //Stand in query
-        getHousingData('?$where=project_id<3235');
+        getHousingData();
     }, []);
 
     const paginate = (pageNum) => {
