@@ -16,6 +16,12 @@ marsh = Marshmallow(app)
 
 db.Model.metadata.reflect(db.engine)
 
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
+    return response
+
 class Housing(db.Model):
     __table__ = db.Model.metadata.tables['housing']
 
