@@ -12,14 +12,10 @@ import Home from "./Components/Home/Home";
 import Housing from "./Components/Housing/Housing";
 import HousingGrid from "./Components/Housing/HousingGrid";
 
-import { Job1, Job2, Job3 } from "./Components/Jobs/Jobs";
+import Job from "./Components/Jobs/Jobs";
 import JobGrid from "./Components/Jobs/JobGrid";
 
-import {
-  ChildCare1,
-  ChildCare2,
-  ChildCare3,
-} from "./Components/ChildCare/ChildCare";
+import ChildCare from "./Components/ChildCare/ChildCare";
 import ChildCareGrid from "./Components/ChildCare/ChildCareGrid";
 
 function App() {
@@ -33,17 +29,14 @@ function App() {
           <Route path="/About" element={<About />} />
 
           <Route path="/Jobs" element={<JobGrid />} />
-          <Route path="/Jobs/1" element={<Job1 />} />
-          <Route path="/Jobs/2" element={<Job2 />} />
-          <Route path="/Jobs/3" element={<Job3 />} />
+          {/* <Route path="/Jobs/:id" element={<Job />} /> */}
 
           <Route path="/Housing" element={<HousingGrid />} />
           <Route path="/Housing/:id" element={<Housing />}/>
 
           <Route path="/ChildCare" element={<ChildCareGrid />} />
-          <Route path="/ChildCare/1" element={<ChildCare1 />} />
-          <Route path="/ChildCare/2" element={<ChildCare2 />} />
-          <Route path="/ChildCare/3" element={<ChildCare3 />} />
+          <Route path="/ChildCare/:id" element={<ChildCare />} />
+
           {/* <Route path="/Search" element={<Search />} /> */}
         </Routes>
       </Router>

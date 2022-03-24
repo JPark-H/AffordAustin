@@ -3,20 +3,57 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Paginate from './../Pagination/Pagination';
+import axios from 'axios';
+import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const ChildCareGrid = () => {
+    const [programs, setPrograms] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalNumPrograms, setTotalNumPrograms] = useState(1);
+    const [programsPerPage, setProgramsPerPage] = useState(21);
+
+    const getChildCareData = async (page, query) => {
+        setLoading(true);
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        const endpoint = `http://localhost:5000/api/childcare?page[size]=${programsPerPage}&page[number]=${page}`;
+        // const endpoint = `http://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${page}`;
+        const data = await axios.get(endpoint);
+        setTotalNumPrograms(data.data.meta.total);
+        setPrograms(data.data.data);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getChildCareData(1, '');
+    }, []);
+
+    const paginate = (pageNum) => {
+        setCurrentPage(pageNum);
+        getChildCareData(pageNum, '');
+    }
+
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
-            <div class='child_care_grid mx-auto'>
-                <Container>
+            <div className='child_care_grid mx-auto'>
+                <Container fluid>
                     <Row>
                         <Col className='header'>Child Care</Col>
                     </Row>
-                    <h1 style = {{fontSize:"40px", textAlign:"center"}}>3 Results</h1>
-                    <Row className="g-3 justify-content-center" xs="auto">
-                        <Col> <InstanceCard1 /> </Col>
-                        <Col> <InstanceCard2 /> </Col>
-                        <Col> <InstanceCard3 /> </Col>
+                    <Row>
+                        <Paginate totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} />
+                    </Row>
+                    <h1 style = {{fontSize:"40px", textAlign:"center"}}>Showing {programs.length} Results</h1>
+                    <Row className="g-3 justify-content-center" xs='auto'>
+                        {loading ? <h3>Loading</h3> : programs.map(program => {
+                            return (
+                            <Col key={program.id}>
+                                <InstanceCard child_care={program.attributes} id={program.id}/>
+                            </Col>);
+                        })}
                     </Row>
                 </Container>
             </div>
@@ -24,13 +61,14 @@ const ChildCareGrid = () => {
     );
 }
 
-const InstanceCard = ({ child_care }) => {
-    const link = `/ChildCare/${ child_care.id }`;
+const InstanceCard = ({ child_care, id }) => {
+    const link = `/ChildCare/${ id }`;
 
     return (
         <Link to={ link }>
             <Card className='inst_card'>
-                <Card.Img variant='top' src={child_care.image} />
+                {/* Replace */}
+                <Card.Img variant='top' src={Koala} />
                 <Card.Body>
                     <Card.Title className="text-truncate">{ child_care.operation_name }</Card.Title>
                     <Card.Text><b>Address:</b> { child_care.location_address }</Card.Text>
@@ -43,56 +81,5 @@ const InstanceCard = ({ child_care }) => {
         </Link>
     )
 };
-
-const InstanceCard1 = () => {
-    const child_care = {
-        "id":"1",
-        "operation_name":"Zilker EAC YMCA",
-        "programs_provided":"School Age Care, Children with Special Needs, After School Care, Snacks Provided, Field Trips",
-        "location_address":"1900 BLUEBONNET LN  AUSTIN TX- 78704 3342",
-        "county":"TRAVIS",
-        "hours_of_operation":"02:45 PM-06:30 PM",
-        "days_of_operation":"Mon,Tue,Wed,Thu,Fri",
-        'image': 'https://www.austinymca.org/themes/custom/www_bootstrap/logo.svg'
-    };
-
-    return (
-        <InstanceCard child_care={ child_care } />
-    );
-}
-
-const InstanceCard2 = () => {
-    const child_care = {
-        "id":"2",
-        "operation_name":"Childrens Center of Austin",
-        "programs_provided":"Meals Provided, After School Care, Snacks Provided, Drop-In Care, Skill Classes, Part Time Care, Transportation to/from School, Field Trips",
-        "location_address":"6507 JESTER BLVD BLDG II AUSTIN TX- 78750 8368",
-        "county":"TRAVIS",
-        "hours_of_operation":"06:30 AM-06:00 PM",
-        "days_of_operation":"Mon,Tue,Wed,Thu,Fri",
-        'image': 'https://wp02-media.cdn.ihealthspot.com/wp-content/uploads/sites/567/2019/12/09185356/logo.png'
-    };
-
-    return (
-        <InstanceCard child_care={ child_care } />
-    );
-}
-
-const InstanceCard3 = () => {
-    const child_care = {
-        "id":"3",
-        "operation_name":"A+ Kids Playschool",
-        "programs_provided":"Meals Provided, Snacks Provided",
-        "location_address":"17257 TOBERMORY DR  PFLUGERVILLE TX- 78660 1726",
-        "county":"TRAVIS",
-        "hours_of_operation":"07:00 AM-05:30 PM",
-        "days_of_operation":"Mon,Tue,Wed,Thu,Fri",
-        'image': 'https://static.wixstatic.com/media/c71ae4_5e977ff378404fb5a58ef32a74e1a11b~mv2_d_3024_4032_s_4_2.jpg/v1/fill/w_514,h_685,al_c,q_80,usm_0.66_1.00_0.01/c71ae4_5e977ff378404fb5a58ef32a74e1a11b~mv2_d_3024_4032_s_4_2.webp'
-    };
-
-    return (
-        <InstanceCard child_care={ child_care } />
-    );
-}
 
 export default ChildCareGrid;

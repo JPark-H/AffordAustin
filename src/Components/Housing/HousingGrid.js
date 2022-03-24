@@ -9,7 +9,7 @@ import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const HousingGrid = () => {
     const [houses, setHouses] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalNumHouses, setTotalNumHouses] = useState(1);
     const [housesPerPage, setHousesPerPage] = useState(21);
@@ -45,7 +45,7 @@ const HousingGrid = () => {
                     <Row>
                         <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
                     </Row>
-                        <h1 style = {{fontSize:"40px", textAlign:"center"}}>{houses.length} Results</h1>
+                        <h1 style = {{fontSize:"40px", textAlign:"center"}}>Showing {houses.length} Results</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
                         {loading ? <h3>Loading</h3> : houses.map(house => {
                             return (
