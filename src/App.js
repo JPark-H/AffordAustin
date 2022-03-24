@@ -9,7 +9,7 @@ import MainNavBar from "./Components/MainNavBar/MainNavBar";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 
-import { Housing1, Housing2, Housing3 } from "./Components/Housing/Housing";
+import Housing from "./Components/Housing/Housing";
 import HousingGrid from "./Components/Housing/HousingGrid";
 
 import { Job1, Job2, Job3 } from "./Components/Jobs/Jobs";
@@ -38,9 +38,7 @@ function App() {
           <Route path="/Jobs/3" element={<Job3 />} />
 
           <Route path="/Housing" element={<HousingGrid />} />
-          <Route path="/Housing/1" element={<Housing1 />} />
-          <Route path="/Housing/2" element={<Housing2 />} />
-          <Route path="/Housing/3" element={<Housing3 />} />
+          <Route path="/Housing/:id" element={<Housing />}/>
 
           <Route path="/ChildCare" element={<ChildCareGrid />} />
           <Route path="/ChildCare/1" element={<ChildCare1 />} />

@@ -11,34 +11,28 @@ const HousingGrid = () => {
     const [houses, setHouses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalNumHouses, setTotalNumHouses] = useState(1);
+    const [housesPerPage, setHousesPerPage] = useState(21);
 
-    //Replace when we have working database
-    const numHouses = 2191;
-    const housesPerPage = 20;
-
-    const getHousingData = async (query) => {
+    const getHousingData = async (page, query) => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        const endpoint = 'http://localhost:5000/api/housing';
+        const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${page}`;
+        // const endpoint = `http://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${page}`;
         const data = await axios.get(endpoint);
-        console.log(data);
-        setHouses(data.data);
+        setTotalNumHouses(data.data.meta.total);
+        setHouses(data.data.data);
         setLoading(false);
     }
 
     useEffect(() => {
-        //Stand in query
-        getHousingData();
+        getHousingData(1, '');
     }, []);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
-        //Stand in query
-        const minID = 3225;
-        const begin = minID + ((pageNum - 1) * housesPerPage);
-        console.log("First index" + begin);
-        getHousingData('?$where=project_id between ' + begin + ' and ' + (begin + housesPerPage - 1));
+        getHousingData(pageNum, '');
     }
 
     return (
@@ -49,14 +43,14 @@ const HousingGrid = () => {
                         <Col className='header'>Housing</Col>
                     </Row>
                     <Row>
-                        <Paginate totalInstances={numHouses} pageLimit={housesPerPage} paginate={paginate} />
+                        <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
                     </Row>
                         <h1 style = {{fontSize:"40px", textAlign:"center"}}>{houses.length} Results</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
                         {loading ? <h3>Loading</h3> : houses.map(house => {
                             return (
-                            <Col key={house.project_id}>
-                                <InstanceCard housing={house} />
+                            <Col key={house.id}>
+                                <InstanceCard housing={house.attributes} housing_id={house.id}/>
                             </Col>);
                         })}
                     </Row>
@@ -67,8 +61,8 @@ const HousingGrid = () => {
     )
 };
 
-const InstanceCard = ({ housing }) => {
-    const link = `/Housing/${ housing.id }`;
+const InstanceCard = ({ housing, housing_id}) => {
+    const link = `/Housing/${ housing_id }`;
 
     return (
         <Link to={ link }>
