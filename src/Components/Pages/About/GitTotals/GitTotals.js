@@ -1,4 +1,4 @@
-import { Row, Container, Button, Card, Col } from 'react-bootstrap';
+import { Row, Container, Card, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './GitTotals.css'
 import * as Icon from 'react-bootstrap-icons';
