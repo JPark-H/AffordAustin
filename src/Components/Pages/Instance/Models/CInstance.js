@@ -1,39 +1,10 @@
-import './ChildCare.css';
+import './CInstance.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import { Container, Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import React, { useEffect, useState } from "react";
-import { Link,  useParams } from 'react-router-dom';
-import axios from 'axios';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
+import { Link } from 'react-router-dom';
+import Koala from './../../About/MemberCards/imgs/Koallaaaaa.png';
 
-const ChildCare = () => {
-    const { id } = useParams();
-    const [loading, setLoading] = useState(true);
-    const [instanceData, setInstanceData] = useState([]);
-
-    const getInstanceData = async () => {
-        setLoading(true);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        const data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
-        // const data = await axios.get(`http://api.affordaustin.me/api/childcare/${id}`);
-        setInstanceData(data.data.data.attributes);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        getInstanceData();
-    }, [id])
-    
-    return (
-        <div style={{ backgroundColor: "#f0f2f5" }}>
-            {loading ? <h3 style={{color: "black"}}>Loading</h3> : <ChildCareData child_care={instanceData} id={id}/>}
-        </div>
-    );
-};
-
-const ChildCareData = ({child_care, id}) => {
+const CInstance = ({child_care, id}) => {
     const link_j = `/Jobs/${ id }`
     const link_h = `/Housing/${ id }`
     return (
@@ -99,7 +70,6 @@ const ChildCareData = ({child_care, id}) => {
             </Container>
         </div>
     )
-
 }
 
-export default ChildCare;
+export default CInstance;

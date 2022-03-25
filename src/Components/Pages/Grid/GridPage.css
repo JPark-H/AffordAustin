@@ -1,4 +1,4 @@
-.housingGrid {
+.grid_page {
     align-items: center;
     justify-content: center;
     text-align: left;
@@ -16,16 +16,4 @@
     color: black;
     text-align: center;
     margin: 0;
-  }
-
-.inst_card {
-    font-size: 15px;
-    width: 350px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-
-a {
-    color: black;
-    text-decoration: none;
 }

@@ -1,0 +1,21 @@
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.c_inst_card {
+    font-size: 15px;
+    width: 350px;
+    height: 530px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.inst_card {
+    font-size: 15px;
+    width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.inst_card img {
+    height: 250px;
+}
