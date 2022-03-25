@@ -63,10 +63,10 @@ const ChildCareGrid = () => {
 
 const InstanceCard = ({ child_care, id }) => {
     const link = `/ChildCare/${ id }`;
-
+    let ages = child_care.licensed_to_serve_ages.replaceAll(",", ", ");
     return (
         <Link to={ link }>
-            <Card className='inst_card'>
+            <Card className='c_inst_card'>
                 {/* Replace */}
                 <Card.Img variant='top' src={Koala} />
                 <Card.Body>
@@ -75,7 +75,7 @@ const InstanceCard = ({ child_care, id }) => {
                     <Card.Text><b>County:</b> { child_care.county }</Card.Text>
                     <Card.Text><b>Days of Operation:</b> { child_care.days_of_operation }</Card.Text>
                     <Card.Text><b>Hours of Operation:</b> { child_care.hours_of_operation }</Card.Text>
-                    <Card.Text><b>Programs Provided:</b> { child_care.programs_provided}</Card.Text>
+                    <Card.Text><b>Ages Served:</b> { ages }</Card.Text>
                 </Card.Body>
             </Card>
         </Link>
