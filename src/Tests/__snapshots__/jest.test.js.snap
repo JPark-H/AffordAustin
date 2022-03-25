@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render components renders the About page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the ChildCare page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the Housing page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the Jobs page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the about page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the childcare page 1`] = `ShallowWrapper {}`;
+
+exports[`Render components renders the jobs page 1`] = `ShallowWrapper {}`;
