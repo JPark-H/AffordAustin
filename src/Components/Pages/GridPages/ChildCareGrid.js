@@ -1,10 +1,10 @@
-import './ChildCareGrid.css'
+import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Paginate from './../Pagination/Pagination';
+import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
@@ -46,9 +46,9 @@ const ChildCareGrid = () => {
                     <Row>
                         <Paginate totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} />
                     </Row>
-                    <h1 style = {{fontSize:"40px", textAlign:"center"}}>Showing {programs.length} Results</h1>
+                    <h1 className="results">Showing {programs.length} Results</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
-                        {loading ? <h3>Loading</h3> : programs.map(program => {
+                        {loading ? <h3 className="results">Loading</h3> : programs.map(program => {
                             return (
                             <Col key={program.id}>
                                 <InstanceCard child_care={program.attributes} id={program.id}/>

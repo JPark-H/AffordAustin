@@ -1,9 +1,9 @@
-import './JobGrid.css'
+import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import Paginate from './../Pagination/Pagination';
+import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
@@ -45,9 +45,9 @@ const JobGrid = () => {
                 <Row>
                      <Paginate totalInstances={totalNumJobs} pageLimit={jobsPerPage} paginate={paginate} />
                 </Row>
-                <h1 style = {{fontSize:"40px", textAlign:"center"}}>Showing {jobs.length} Results</h1>
+                <h1 className="results">Showing {jobs.length} Results</h1>
                 <Row className="g-3 justify-content-center" xs='auto'>
-                    {loading ? <h3>Loading</h3> : jobs.map(job => {
+                    {loading ? <h3 className="results">Loading</h3> : jobs.map(job => {
                         return (
                         <Col key={job.id}>
                             <InstanceCard job={job.attributes} id={job.id}/>

@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import MemberCards from "./MemberCards/MemberCards"
 import GitTotals from "./GitTotals/GitTotals"
 import './About.css'
-import * as Icon from 'react-bootstrap-icons';
 import axios from "axios";
 import { useEffect, useState } from 'react';
 import teamInfo from './TeamData'
@@ -115,7 +114,7 @@ function About() {
 			<h1 className="section_header">Interesting Results</h1>
 			<ul>
 				<li><h2 className="temp_interesting">The most affordable housing instances are located in Travis County.</h2></li>
-				<li><h2 classNmae="temp_interesting">The most daycare intances are located in Harris Country.</h2></li>
+				<li><h2 className="temp_interesting">The most daycare intances are located in Harris Country.</h2></li>
 			</ul>
 			
 

@@ -1,22 +1,16 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useEffect, useState } from "react";
-//import * as Icon from 'bootstrap-icons/font/bootstrap-icons.css';
-import * as Icon from "react-bootstrap-icons";
-import About from "./Components/About/About";
-import { IconRotate_90DegreesCcw } from "@aws-amplify/ui-react";
-import MainNavBar from "./Components/MainNavBar/MainNavBar";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Components/Home/Home";
+import MainNavBar from "./Components/MainNavBar/MainNavBar";
 
-import Housing from "./Components/Housing/Housing";
-import HousingGrid from "./Components/Housing/HousingGrid";
-
-import Job from "./Components/Jobs/Jobs";
-import JobGrid from "./Components/Jobs/JobGrid";
-
-import ChildCare from "./Components/ChildCare/ChildCare";
-import ChildCareGrid from "./Components/ChildCare/ChildCareGrid";
+import Home from "./Components/Pages/Home/Home";
+import Housing from "./Components/Pages/InstancePages/Housing"
+import HousingGrid from "./Components/Pages/GridPages/HousingGrid"
+import ChildCare from "./Components/Pages/InstancePages/ChildCare";
+import ChildCareGrid from "./Components/Pages/GridPages/ChildCareGrid";
+import Job from "./Components/Pages/InstancePages/Jobs"
+import JobGrid from "./Components/Pages/GridPages/JobGrid"
+import About from "./Components/Pages/About/About";
 
 function App() {
   return (

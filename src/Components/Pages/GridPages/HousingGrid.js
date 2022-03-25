@@ -1,7 +1,7 @@
-import './HousingGrid.css'
+import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState, useEffect } from 'react';
-import Paginate from './../Pagination/Pagination';
+import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -45,9 +45,9 @@ const HousingGrid = () => {
                     <Row>
                         <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
                     </Row>
-                        <h1 style = {{fontSize:"40px", textAlign:"center"}}>Showing {houses.length} Results</h1>
+                        <h1 className="results">Showing {houses.length} Results</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
-                        {loading ? <h3>Loading</h3> : houses.map(house => {
+                        {loading ? <h3 className="results">Loading</h3> : houses.map(house => {
                             return (
                             <Col key={house.id}>
                                 <InstanceCard housing={house.attributes} housing_id={house.id}/>

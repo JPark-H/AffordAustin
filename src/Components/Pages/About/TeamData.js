@@ -1,4 +1,3 @@
-import Koala from"./MemberCards/imgs/Koallaaaaa.png"
 import Jay from "./MemberCards/imgs/Jay.jpg"
 import Presley from "./MemberCards/imgs/Presley.jpg"
 import Dinesh from "./MemberCards/imgs/Dinesh.jpg"
