@@ -1,12 +1,22 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
-import About from "./Components/Pages/About/About";
+//import * as Icon from 'bootstrap-icons/font/bootstrap-icons.css';
+import * as Icon from "react-bootstrap-icons";
+import About from "./Components/About/About";
+import { IconRotate_90DegreesCcw } from "@aws-amplify/ui-react";
 import MainNavBar from "./Components/MainNavBar/MainNavBar";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./Components/Pages/Home/Home";
-import GridPage from "./Components/Pages/Grid/GridPage";
-import InstancePage from "./Components/Pages/Instance/InstancePage";
+import Home from "./Components/Home/Home";
+
+import Housing from "./Components/Housing/Housing";
+import HousingGrid from "./Components/Housing/HousingGrid";
+
+import Job from "./Components/Jobs/Jobs";
+import JobGrid from "./Components/Jobs/JobGrid";
+
+import ChildCare from "./Components/ChildCare/ChildCare";
+import ChildCareGrid from "./Components/ChildCare/ChildCareGrid";
 
 function App() {
   return (
@@ -18,15 +28,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
 
-          <Route path="/Jobs" element={<GridPage model="Jobs" />} />
-          <Route path="/Jobs/:id" element={<InstancePage model="Jobs"/>} />
+          <Route path="/Jobs" element={<JobGrid />} />
+          <Route path="/Jobs/:id" element={<Job />} />
 
-          <Route path="/Housing" element={<GridPage model="Housing" />} />
-          <Route path="/Housing/:id" element={<InstancePage model="Housing"/>}/>
+          <Route path="/Housing" element={<HousingGrid />} />
+          <Route path="/Housing/:id" element={<Housing />}/>
 
-          <Route path="/ChildCare" element={<GridPage model="Childcare" />} />
-          <Route path="/ChildCare/:id" element={<InstancePage model="Childcare"/>} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="/ChildCare" element={<ChildCareGrid />} />
+          <Route path="/ChildCare/:id" element={<ChildCare />} />
 
           {/* <Route path="/Search" element={<Search />} /> */}
         </Routes>

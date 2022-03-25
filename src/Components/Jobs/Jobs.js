@@ -1,10 +1,39 @@
-import './JInstance.css';
+import './Jobs.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, Stack, Image, ListGroup, Button, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Koala from './../../About/MemberCards/imgs/Koallaaaaa.png';
 
-const JInstance = ({job, id}) => {
+import { Container, Row, Col, Stack, Image, ListGroup, Button, Nav } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Link,  useParams } from 'react-router-dom';
+import axios from 'axios';
+import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
+
+const Jobs = ({ job }) => {
+    const { id } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [instanceData, setInstanceData] = useState([]);
+
+    const getInstanceData = async () => {
+        setLoading(true);
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        const data = await axios.get(`http://localhost:5000/api/jobs/${id}`);
+        // const data = await axios.get(`http://api.affordaustin.me/api/jobs/${id}`);
+        setInstanceData(data.data.data.attributes);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        getInstanceData();
+    }, [id])
+
+    return (
+        <div style={{ backgroundColor: "#f0f2f5" }}>
+            {loading ? <h3 style={{color: "black"}}>Loading</h3> : <JobData job={instanceData} id={id}/>}
+        </div>
+    );
+};
+
+const JobData = ({job, id}) => {
     let features = job.extensions.slice(1, (job.extensions.length - 1)).split(", ").slice(1);
     features = features.map(x => x.slice(1, (x.length - 1)));
     return (
@@ -77,6 +106,7 @@ const JInstance = ({job, id}) => {
             </Container>
         </div>
     );
+
 }
 
-export default JInstance;
+export default Jobs;
