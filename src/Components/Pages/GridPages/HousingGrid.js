@@ -1,6 +1,6 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
@@ -14,26 +14,25 @@ const HousingGrid = () => {
     const [totalNumHouses, setTotalNumHouses] = useState(1);
     const [housesPerPage, setHousesPerPage] = useState(21);
 
-    const getHousingData = async (page, query) => {
+    const getHousingData = useCallback (async (query) => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${page}`;
-        // const endpoint = `http://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${page}`;
+        const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        // const endpoint = `http://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumHouses(data.data.meta.total);
         setHouses(data.data.data);
         setLoading(false);
-    }
+    }, [currentPage, housesPerPage]);
 
     useEffect(() => {
-        getHousingData(1, '');
-    }, []);
+        getHousingData('');
+    }, [currentPage, getHousingData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
-        getHousingData(pageNum, '');
-    }
+    };
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>

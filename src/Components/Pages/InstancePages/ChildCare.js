@@ -2,7 +2,7 @@ import './ChildCare.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png';
@@ -14,7 +14,7 @@ const ChildCare = () => {
     const [instanceData, setInstanceData] = useState([]);
     const [isValidId, setIsValidId] = useState(true);
 
-    const getInstanceData = async () => {
+    const getInstanceData = useCallback (async () => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
@@ -27,11 +27,11 @@ const ChildCare = () => {
             setIsValidId(false);
         }
         setLoading(false);
-    };
+    }, [id]);
 
     useEffect(() => {
         getInstanceData();
-    }, [id])
+    }, [id, getInstanceData]);
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>

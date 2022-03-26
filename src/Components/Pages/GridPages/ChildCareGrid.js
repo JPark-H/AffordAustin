@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
@@ -15,26 +15,25 @@ const ChildCareGrid = () => {
     const [totalNumPrograms, setTotalNumPrograms] = useState(1);
     const [programsPerPage, setProgramsPerPage] = useState(21);
 
-    const getChildCareData = async (page, query) => {
+    const getChildCareData = useCallback (async (query) => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        const endpoint = `http://localhost:5000/api/childcare?page[size]=${programsPerPage}&page[number]=${page}`;
-        // const endpoint = `http://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${page}`;
+        const endpoint = `http://localhost:5000/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
+        // const endpoint = `http://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumPrograms(data.data.meta.total);
         setPrograms(data.data.data);
         setLoading(false);
-    }
+    }, [currentPage, programsPerPage]);
 
     useEffect(() => {
-        getChildCareData(1, '');
-    }, []);
+        getChildCareData('');
+    }, [currentPage, getChildCareData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
-        getChildCareData(pageNum, '');
-    }
+    };
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
