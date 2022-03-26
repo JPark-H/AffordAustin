@@ -37,10 +37,10 @@ const JobGrid = () => {
     }
 
     return (
-        <div className='jobGrid'>
+        <div className='grid mx-auto'>
             <Container fluid>
                 <Row>
-                    <Col className='header'>Jobs</Col>
+                    <h1 className='grid_header'>Jobs</h1>
                 </Row>
                 <Row>
                      <Paginate totalInstances={totalNumJobs} pageLimit={jobsPerPage} paginate={paginate} />

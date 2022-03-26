@@ -38,10 +38,10 @@ const ChildCareGrid = () => {
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
-            <div className='child_care_grid mx-auto'>
+            <div className='grid mx-auto'>
                 <Container fluid>
                     <Row>
-                        <Col className='header'>Child Care</Col>
+                        <h1 className='grid_header'>Child Care</h1>
                     </Row>
                     <Row>
                         <Paginate totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} />

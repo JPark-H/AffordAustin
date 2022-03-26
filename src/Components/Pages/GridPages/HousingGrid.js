@@ -37,10 +37,10 @@ const HousingGrid = () => {
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
-            <div className='housingGrid mx-auto'>
+            <div className='grid mx-auto'>
                 <Container fluid>
                     <Row>
-                        <Col className='header'>Housing</Col>
+                        <h1 className="grid_header">Housing</h1>
                     </Row>
                     <Row>
                         <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
@@ -75,7 +75,6 @@ const InstanceCard = ({ housing, housing_id}) => {
                     <Card.Text><b>Num of Units:</b> { housing.total_units }</Card.Text>
                     <Card.Text><b>Ground Lease:</b> { housing.ground_lease }</Card.Text>
                     <Card.Text><b>Zip-Code:</b> { housing.zip_code }</Card.Text>
-                    
                 </Card.Body>
             </Card>
         </Link>
