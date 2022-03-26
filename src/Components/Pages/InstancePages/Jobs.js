@@ -6,19 +6,26 @@ import React, { useEffect, useState } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
+import PageNotFound from './../../PageNotFound';
 
 const Jobs = ({ job }) => {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [instanceData, setInstanceData] = useState([]);
+    const [isValidId, setIsValidId] = useState(true);
 
     const getInstanceData = async () => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        const data = await axios.get(`http://localhost:5000/api/jobs/${id}`);
-        // const data = await axios.get(`http://api.affordaustin.me/api/jobs/${id}`);
-        setInstanceData(data.data.data.attributes);
+        let data;
+        try {
+            data = await axios.get(`http://localhost:5000/api/jobs/${id}`);
+            // const data = await axios.get(`http://api.affordaustin.me/api/jobs/${id}`);
+            setInstanceData(data.data.data.attributes);  
+        } catch (error) {
+            setIsValidId(false);
+        }
         setLoading(false);
     };
 
@@ -28,7 +35,9 @@ const Jobs = ({ job }) => {
 
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
-            {loading ? <h3 style={{color: "black"}}>Loading</h3> : <JobData job={instanceData} id={id}/>}
+            {!isValidId ? <PageNotFound /> :
+                (loading ? <h3 style={{color: "black"}}>Loading</h3> : 
+                    <JobData job={instanceData} id={id}/>)}
         </div>
     );
 };
@@ -66,7 +75,7 @@ const JobData = ({job, id}) => {
 
                         <div className='via'>
                             <h4>Via</h4>
-                            <Button variant='primary' href={ job.via_link }>{ job.via }</Button>
+                            <Button variant='primary' href={ job.apply_link }>{ job.via }</Button>
                         </div>
 
                         <div className='features'>
