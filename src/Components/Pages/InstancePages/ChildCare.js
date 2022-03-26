@@ -20,8 +20,8 @@ const ChildCare = () => {
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         let data;
         try {
-            data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
-            // const data = await axios.get(`http://api.affordaustin.me/api/childcare/${id}`); 
+            // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
+            data = await axios.get(`http://api.affordaustin.me/api/childcare/${id}`); 
             setInstanceData(data.data.data.attributes);
         } catch (error) {
             setIsValidId(false);
