@@ -21,7 +21,7 @@ const Jobs = () => {
         let data;
         try {
             // data = await axios.get(`http://localhost:5000/api/jobs/${id}`);
-            data = await axios.get(`http://api.affordaustin.me/api/jobs/${id}`);
+            data = await axios.get(`https://api.affordaustin.me/api/jobs/${id}`);
             setInstanceData(data.data.data.attributes);  
         } catch (error) {
             setIsValidId(false);
