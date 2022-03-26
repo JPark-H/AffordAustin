@@ -75,7 +75,7 @@ const ChildCareData = ({child_care, id}) => {
                             }}>Contact Information</Card.Header>
                             <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
                                 <ListGroup.Item><b>Phone Number:</b> {child_care.phone_number}</ListGroup.Item>
-                                <ListGroup.Item><b>Website:</b> <a href={child_care.website_address}>{child_care.website_address}</a></ListGroup.Item>
+                                <ListGroup.Item><b>Website:</b> <a href={"https://" + child_care.website_address}>{child_care.website_address}</a></ListGroup.Item>
                                 <ListGroup.Item><b>Address:</b> {child_care.location_address}</ListGroup.Item>
                                 <ListGroup.Item><b>Mailing Address:</b> {child_care.mailing_address}</ListGroup.Item>
                                 <ListGroup.Item><b>County:</b> {child_care.county}</ListGroup.Item>
