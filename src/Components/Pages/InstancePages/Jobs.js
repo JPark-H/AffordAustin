@@ -1,7 +1,7 @@
-import './Jobs.css';
+import './Instance.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { Container, Row, Col, Stack, Image, ListGroup, Button, Nav } from 'react-bootstrap';
+import { Container, Row, Col, Image, ListGroup, Button, Nav } from 'react-bootstrap';
 import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -37,12 +37,12 @@ const Jobs = () => {
         <div style={{ backgroundColor: "#f0f2f5" }}>
             {!isValidId ? <PageNotFound /> :
                 (loading ? <h3 style={{color: "black"}}>Loading</h3> : 
-                    <JobData job={instanceData} id={id}/>)}
+                    <JobData job={instanceData}/>)}
         </div>
     );
 };
 
-const JobData = ({job, id}) => {
+const JobData = ({job}) => {
     let features = job.extensions.slice(1, (job.extensions.length - 1)).split(", ").slice(1);
     features = features.map(x => x.slice(1, (x.length - 1)));
     return (
