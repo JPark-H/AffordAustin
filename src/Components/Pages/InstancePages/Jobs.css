@@ -1,46 +1,38 @@
-.jobs {
-  align-items: center;
-  justify-content: center;
+.inst_page {
   text-align: left;
   white-space: pre-wrap;
-  background-color: #f0f2f5;
-  
-  min-height: 100vh;
-  width: 100vw;
-}
-
-.header {
-  font-weight: 500;
-  font-size: 38px;
-  color: black;
-
-  margin-left: 4vw;
-  padding: 2vh 0;
-}
-
-.info {
-  font-size: 18px;
   background-color: white;
   color: black;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  flex-wrap: column wrap;
-  
-  min-height: 700px;
-  max-width: 100%;
-
-  padding: 4vh 2vw;
-
-}
-
-.image {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
-  width: 80%;
-  margin-bottom: 10px;
-}
-
-.map iframe {
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
+  font-size: 18px;
+  min-height: 100vh;
   width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.inst_header h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.8rem;
+  font-weight: 600;
+}
+
+.inst_info {
+  margin-top: 10px;
+}
+
+.inst_side_bar {
+  padding: 10px 25px;
+  outline: auto;
+  outline-color: lightgray;
+  height: fit-content;
+}
+
+.side_bar_info {
+  margin-bottom: 25px;
+}
+
+.side_bar_info p {
+  margin-bottom: 0;
 }

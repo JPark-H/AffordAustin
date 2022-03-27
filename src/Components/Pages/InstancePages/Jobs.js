@@ -46,70 +46,58 @@ const JobData = ({job, id}) => {
     let features = job.extensions.slice(1, (job.extensions.length - 1)).split(", ").slice(1);
     features = features.map(x => x.slice(1, (x.length - 1)));
     return (
-        <div className='jobs'>
-            <Container className='instance'>
-                <Row>
-                    <Col className='header'>{ job.title }</Col>
-                </Row>
-
-                <Row className='align-items-center'>
-                    {/* Replace */}
-                    <Col><Image className='image' src={ Koala }></Image></Col>
-                    {/* <Col><div className='map' dangerouslySetInnerHTML={{ __html: job.map_H }}></div></Col> */}
-                    <Col><div className='map'><Image className='image' src={Koala}></Image></div></Col>
-                </Row>
-
-                <Row className='info'>
-                    <Col xs={8}>
-                        <Stack>
+        <div>
+            <Container className="inst_page">
+                <Row className="inst_header"><h1>{job.title}</h1></Row>
+                <Row style={{paddingLeft:"10px", paddingRight:"10px"}}>
+                    <Col className="inst_info" md={8}>
+                        <Row><Image className="inst_img" src={Koala}></Image></Row>
+                        <Row className="info_section">
                             <h3>Description</h3>
                             <p>{ job.description }</p>
-                        </Stack>
+                        </Row>
                     </Col>
-                    <Col xs={3}>
-                        <Stack gap={3}>
-                        <div className='company'>
+                    <Col className="inst_side_bar">
+                        <Row className='side_bar_info'>
+                            <h4>Location:</h4>
+                            <Image className="inst_map" src={Koala}></Image>
+                        </Row>
+                        <Row className='side_bar_info'>
                             <h4>Company</h4>
                             <p>{ job.company_name }</p>
-                        </div>
-
-                        <div className='via'>
+                        </Row>
+                        <Row className="side_bar_info">
                             <h4>Via</h4>
                             <Button variant='primary' href={ job.apply_link }>{ job.via }</Button>
-                        </div>
-
-                        <div className='features'>
+                        </Row>
+                        <Row className="side_bar_info">
                             <h4>Features</h4>
                             <ListGroup>
                                 {features.map(feature => (
                                     <ListGroup.Item key={feature}>{feature}</ListGroup.Item>
                                 ))}
                             </ListGroup>
-                        </div>
-
-                        <div className='rating'>
+                        </Row>
+                        <Row className="side_bar_info">
                             <h4>Rating</h4>
                             <p><b>{ job.rating }</b> / 5 | { job.reviews } Reviews</p>
-                        </div>
-
-                        <div className='housing'>
+                        </Row>
+                        <Row className="side_bar_info">
                             <h4>Nearby Housing</h4>
                             <Nav>
                                 <Nav.Link as={ Link } to='/Housing/1'>Legacy Apartments</Nav.Link>
                                 <Nav.Link as={ Link } to='/Housing/2'>1905 E 9th Street</Nav.Link>
                                 <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
                             </Nav>
-                        </div>
-
-                        <div className='childcare'>
+                        </Row>
+                        <Row className="side_bar_info">
                             <h4>Nearby Childcare Services</h4>
                             <Nav>
                                 <Nav.Link as={ Link } to='/Childcare/1'>Zilker EAC YMCA</Nav.Link>
                                 <Nav.Link as={ Link } to='/Childcare/2'>Children's Center of Austin</Nav.Link>
                                 <Nav.Link as={ Link } to='/Childcare/3'>A+ Kids Playschool</Nav.Link>
                             </Nav>
-                        </div>
-                        </Stack>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
