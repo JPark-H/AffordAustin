@@ -1,6 +1,6 @@
 import { Pagination } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './Pagination.css'
 
 // Looked at code from adoptapet group

@@ -1,6 +1,6 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';

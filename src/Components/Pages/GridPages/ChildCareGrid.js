@@ -1,9 +1,8 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
