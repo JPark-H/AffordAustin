@@ -1,15 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render components renders the About page 1`] = `ShallowWrapper {}`;
+exports[`Render components 1. render About page 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the ChildCare page 1`] = `ShallowWrapper {}`;
+exports[`Render components 3. Housing matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the Housing page 1`] = `ShallowWrapper {}`;
+exports[`Render components 5. ChildCare matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the Jobs page 1`] = `ShallowWrapper {}`;
+exports[`Render components 7. Jobs matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the about page 1`] = `ShallowWrapper {}`;
+exports[`Render components 8. Navbar exists and matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the childcare page 1`] = `ShallowWrapper {}`;
+exports[`Render components 9. ChildCareGrid matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components renders the jobs page 1`] = `ShallowWrapper {}`;
+exports[`Render components 10. HousingGrid matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 11. JobGrid matches snapshot 1`] = `ShallowWrapper {}`;
