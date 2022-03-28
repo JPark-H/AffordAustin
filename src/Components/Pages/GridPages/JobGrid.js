@@ -1,8 +1,7 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import { Container, Card, Row, Col } from 'react-bootstrap';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -19,8 +18,8 @@ const JobGrid = () => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        // const endpoint = `http://localhost:5000/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
-        const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
+        const endpoint = `http://localhost:5000/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
+        // const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumJobs(data.data.meta.total);
         setJobs(data.data.data);

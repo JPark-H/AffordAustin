@@ -20,8 +20,8 @@ const Housing = () => {
     axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
     let data;
     try {
-      // data = await axios.get(`http://localhost:5000/api/housing/${id}`);
-      data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
+      data = await axios.get(`http://localhost:5000/api/housing/${id}`);
+      // data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
       setInstanceData(data.data.data.attributes);
     } catch (error) {
       setIsValidId(false);
@@ -36,7 +36,7 @@ const Housing = () => {
   return (
     <div style={{ backgroundColor: "#f0f2f5" }}>
       {!isValidId ? <PageNotFound /> :
-        (loading ? <h3 style={{color: "black"}}>Loading</h3> :
+        (loading ? <div></div> :
           <HousingData housing={instanceData}/>)}
     </div>
 
@@ -97,26 +97,26 @@ const HousingData = ({housing}) => {
                       <Image className="inst_map" src={Koala}></Image>
                   </Row>
                   <Row className='side_bar_info'>
-                    <h4>Contact Info</h4>
+                    <h4>Contact Information</h4>
                     <ListGroup>
                       <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
                       <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
                     </ListGroup>
                   </Row>
                   <Row className="side_bar_info">
-                      <h4>Nearby Jobs</h4>
+                    <h4>Nearby Jobs</h4>
                       <Nav>
-                          <Nav.Link as={ Link } to='/Housing/1'>Legacy Apartments</Nav.Link>
-                          <Nav.Link as={ Link } to='/Housing/2'>1905 E 9th Street</Nav.Link>
-                          <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
+                        <Nav.Link as={ Link } to='/Jobs/1'>Flood Reporting Coordinator</Nav.Link>
+                        <Nav.Link as={ Link } to='/Jobs/42'>Front Office Medical Receptionist</Nav.Link>
+                        <Nav.Link as={ Link } to='/Jobs/181'>Human Resources (HR) Assistant</Nav.Link>
                       </Nav>
                   </Row>
                   <Row className="side_bar_info">
                       <h4>Nearby Childcare Services</h4>
                       <Nav>
-                          <Nav.Link as={ Link } to='/Childcare/1'>Zilker EAC YMCA</Nav.Link>
-                          <Nav.Link as={ Link } to='/Childcare/2'>Children's Center of Austin</Nav.Link>
-                          <Nav.Link as={ Link } to='/Childcare/3'>A+ Kids Playschool</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/1'>Laura Bush YMCA</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Art-es-Inc</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/4'>Stepping Stone School VIII</Nav.Link>
                       </Nav>
                   </Row>
               </Col>

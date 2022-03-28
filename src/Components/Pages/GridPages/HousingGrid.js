@@ -1,6 +1,6 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
@@ -18,8 +18,8 @@ const HousingGrid = () => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        // const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
-        const endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        // const endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumHouses(data.data.meta.total);
         setHouses(data.data.data);
