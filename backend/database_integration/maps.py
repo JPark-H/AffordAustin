@@ -1,9 +1,8 @@
 from urllib.parse import quote
 
-
 def maps(query, include_location=True):
     if include_location:
-        query += " Austin, TX"
+        query += ' Austin, TX'
 
     query = quote(query)
 
@@ -17,7 +16,6 @@ def maps(query, include_location=True):
         referrerpolicy="no-referrer-when-downgrade"
     ></iframe>"""
 
-
-if __name__ == "__main__":
-    query = "Visa"
+if __name__=="__main__":
+    query = 'Visa'
     print(maps(query))
