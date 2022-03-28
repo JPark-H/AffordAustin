@@ -81,7 +81,8 @@ const JobData = ({job}) => {
                         </Row>
                         <Row className="side_bar_info">
                             <h4>Rating</h4>
-                            <p><b>{ job.rating }</b> / 5 | { job.reviews } Reviews</p>
+                            {job.reviews === "-1" ? <div><p>No Reviews</p></div> : 
+                            <p><b>{ job.rating }</b> / 5 | <a href={job.rating_link} style={{color:"blue"}}>{ job.reviews } Reviews</a></p>}
                         </Row>
                         <Row className="side_bar_info">
                             <h4>Nearby Housing</h4>

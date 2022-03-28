@@ -71,8 +71,8 @@ const InstanceCard = ({ job, id }) => {
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
                     <Card.Text><b>Posted:</b> { posted_at }</Card.Text>
                     <Card.Text><b>Schedule:</b> { schedule_type }</Card.Text>
-                    <Card.Text><b>Rating:</b> { job.rating }</Card.Text>
-                    <Card.Text><b>Reviews:</b> { job.reviews }</Card.Text>
+                    <Card.Text><b>Rating:</b> {job.reviews === "-1" ? "N/A" : job.rating }</Card.Text>
+                    <Card.Text><b>Reviews:</b> {job.reviews === "-1" ? "0" : job.reviews }</Card.Text>
                 </Card.Body>
             </Card>
         </Link>
