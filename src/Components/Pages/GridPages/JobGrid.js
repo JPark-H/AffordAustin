@@ -5,7 +5,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const JobGrid = () => {
     const [jobs, setJobs] = useState([]);
@@ -66,8 +65,7 @@ const InstanceCard = ({ job, id }) => {
     return (
         <Link to={ link }>
             <Card className='inst_card'>
-                {/* Replace */}
-                <Card.Img variant='top' src={ Koala } />
+                <Card.Img variant='top' src={job._image}/>
                 <Card.Body>
                     <Card.Title className="text-truncate">{ job.title }</Card.Title>
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>

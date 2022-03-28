@@ -20,6 +20,12 @@
   margin-top: 20px;
 }
 
+.inst_img {
+  height: 100%;
+  width: auto;
+  margin: auto;
+}
+
 .inst_side_bar {
   padding: 10px 25px;
   outline: auto;

@@ -44,13 +44,15 @@ const Jobs = () => {
 const JobData = ({job}) => {
     let features = job.extensions.slice(1, (job.extensions.length - 1)).split(", ").slice(1);
     features = features.map(x => x.slice(1, (x.length - 1)));
+    let map1 = job._map.split("\n")[1].trim();
+    map1 = map1.slice(5, map1.length -1);
     return (
         <div>
             <Container className="inst_page">
                 <Row className="inst_header"><h1>{job.title}</h1></Row>
                 <Row style={{paddingLeft:"10px", paddingRight:"10px"}}>
                     <Col className="inst_info" md={8}>
-                        <Row><Image className="inst_img" src={Koala}></Image></Row>
+                        <Row><Image className="inst_img" src={job._image}></Image></Row>
                         <Row className="info_section">
                             <h3>Description</h3>
                             <p>{ job.description }</p>
@@ -59,7 +61,7 @@ const JobData = ({job}) => {
                     <Col className="inst_side_bar">
                         <Row className='side_bar_info'>
                             <h4>Location:</h4>
-                            <Image className="inst_map" src={Koala}></Image>
+                            <iframe src={map1}></iframe>
                         </Row>
                         <Row className='side_bar_info'>
                             <h4>Company</h4>
