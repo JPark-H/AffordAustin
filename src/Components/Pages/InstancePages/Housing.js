@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 import PageNotFound from './../../PageNotFound';
 
 
@@ -44,13 +43,15 @@ const Housing = () => {
 }
 
 const HousingData = ({housing}) => {
+  let map = housing._map.split("\n")[1].trim();
+  map = map.slice(5, map.length -1);
   return (
     <div>
       <Container className="inst_page">
           <Row className="inst_header"><h1>{housing.project_name}</h1></Row>
           <Row style={{paddingLeft:"10px", paddingRight:"10px"}}>
               <Col className="inst_info" md={8}>
-                  <Row><Image className="inst_img" src={Koala}></Image></Row>
+                  <Row><Image className="inst_img" src={housing._image}></Image></Row>
                   <Row className="info_section">
                     <h4>Details</h4>
                     <p>Address: {housing.address}</p>
@@ -94,7 +95,7 @@ const HousingData = ({housing}) => {
               <Col className="inst_side_bar">
                   <Row className='side_bar_info'>
                       <h4>Location:</h4>
-                      <Image className="inst_map" src={Koala}></Image>
+                      <iframe className="inst_map" src={map}></iframe>
                   </Row>
                   <Row className='side_bar_info'>
                     <h4>Contact Information</h4>

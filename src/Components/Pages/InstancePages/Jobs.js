@@ -4,7 +4,6 @@ import { Container, Row, Col, Image, ListGroup, Button, Nav } from 'react-bootst
 import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 import PageNotFound from './../../PageNotFound';
 
 const Jobs = () => {
