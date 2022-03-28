@@ -23,5 +23,4 @@ EXPOSE 80
 
 COPY nginx.conf /etc/nginx
 RUN chmod +x ./start.sh
-# CMD ["python3", "test.py"]
-CMD ["./start.sh"]
+# CMD ["./start.sh"]
