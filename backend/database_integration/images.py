@@ -8,10 +8,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from urllib.parse import quote
 import validators
 
-THUMBNAIL_SELECTOR = 'img.Q4LuWd'
-IMAGE_SELECTOR = 'img.n3VNCb'
+THUMBNAIL_SELECTOR = "img.Q4LuWd"
+IMAGE_SELECTOR = "img.n3VNCb"
 
 SERVICE = Service(ChromeDriverManager().install())
+
 
 class has_src:
     def __init__(self, selector):
@@ -19,19 +20,19 @@ class has_src:
 
     def __call__(self, driver):
         element = driver.find_element(by=By.CSS_SELECTOR, value=self.selector)
-        src = element.get_attribute('src')
+        src = element.get_attribute("src")
         return src if validators.url(src) else False
 
 
+query = "HEB Austin,TX"
 
-query = 'HEB Austin,TX'
 
 def images(query, include_location=True):
     if include_location:
-        query += ' Austin, TX'
+        query += " Austin, TX"
 
     query = quote(query)
-    url = f'https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&gs_l=img&q={query}&oq={query}'
+    url = f"https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&gs_l=img&q={query}&oq={query}"
 
     driver = webdriver.Chrome(service=SERVICE)
     driver.get(url)
@@ -46,10 +47,7 @@ def images(query, include_location=True):
 
     return element
 
-def map_images(df, read, write, include_location=True):
-    
 
-
-if __name__=='__main__':
-    query = 'HEB'
+if __name__ == "__main__":
+    query = "HEB"
     print(images(query))
