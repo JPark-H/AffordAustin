@@ -12,7 +12,7 @@ build-code-job:
     - npm i
     - CI=false npm run-script build
 
-CHANGE development to main later, discuss using 2 EB Instances for a test api
+# CHANGE development to main later, discuss using 2 EB Instances for a test api
 python_unit_tests:
   image: python:3.6-stretch
   stage: test
