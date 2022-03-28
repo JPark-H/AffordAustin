@@ -7,118 +7,92 @@ from numpy.random import default_rng
 from images import images
 from maps import maps
 
-DATABASE = "affordaustin"
-USER = "affordaustin"
-PASSWORD = "ky7dQwWt4B5ZVhPFnbZ6"
-HOST = "affordaustin-db.cj68zosziuyy.us-east-2.rds.amazonaws.com"
-PORT = "5432"
-
+DATABASE = 'affordaustin'
+USER = 'affordaustin'
+PASSWORD = 'ky7dQwWt4B5ZVhPFnbZ6'
+HOST = 'affordaustin-db.cj68zosziuyy.us-east-2.rds.amazonaws.com'
+PORT = '5432'
 
 def retrieve_data(endpoint, limit=1000):
-    client = Socrata("data.texas.gov", None)
+    client = Socrata('data.texas.gov', None)
     data = client.get(endpoint, limit=limit)
     print(data)
     data = pd.DataFrame.from_records(data)
     return data
 
-
 def add_housing(db):
-    data = retrieve_data("x5p7-qyuv", limit=3_000)
-    table = db.create_table("housing", data.keys())
+    data = retrieve_data('x5p7-qyuv', limit=3_000)
+    table = db.create_table('housing', data.keys())
     table.add_data_bulk(data)
-
 
 def add_childcare(db):
-    DROP_LABEL = ":@computed_region_fd5q_j34z"
-    COUNTIES = ["BASTROP", "CALDWELL", "HAYS", "TRAVIS", "WILLIAMSON"]
+    DROP_LABEL = ':@computed_region_fd5q_j34z'
+    COUNTIES = ['BASTROP', 'CALDWELL', 'HAYS', 'TRAVIS', 'WILLIAMSON']
 
-    data = retrieve_data("bc5r-88dy", limit=16_000)
+    data = retrieve_data('bc5r-88dy', limit=16_000)
 
     data = data.drop(DROP_LABEL, axis=1)
-    data = data.loc[data["county"].isin(COUNTIES)]
+    data = data.loc[data['county'].isin(COUNTIES)]
 
-    table = db.create_table("childcare", data.keys())
+    table = db.create_table('childcare', data.keys())
     table.add_data_bulk(data)
-
 
 def add_jobs(db):
     data = pd.read_pickle("l.pkl")
     table = db.create_table("jobs", data.keys())
     table.add_data_bulk(data)
 
-
 def collect_misc_attributes(job_listings):
-    job_listings["salary_link"] = "none"
-    job_listings["rating_link"] = "none"
-    job_listings["apply_link"] = "none"
-    job_listings["apply_title"] = "none"
-    job_listings["salary_source"] = "none"
-    job_listings["rating_source"] = "none"
-    job_listings["salary_from"] = -1
-    job_listings["salary_to"] = -1
-    job_listings["salary_currency"] = "none"
-    job_listings["salary_periodicity"] = "none"
-    job_listings["based_on"] = "none"
-    job_listings["rating"] = -1
-    job_listings["reviews"] = -1
+    job_listings['salary_link'] = "none"
+    job_listings['rating_link'] = "none"
+    job_listings['apply_link'] = "none"
+    job_listings['apply_title'] = "none"
+    job_listings['salary_source'] = "none"
+    job_listings['rating_source'] = "none"
+    job_listings['salary_from'] = -1
+    job_listings['salary_to'] = -1
+    job_listings['salary_currency'] = "none"
+    job_listings['salary_periodicity'] = "none"
+    job_listings['based_on'] = "none"
+    job_listings['rating'] = -1
+    job_listings['reviews'] = -1
 
     for i in range(210, 223):
-        job_id = job_listings.iloc[i]["job_id"]
-        response = requests.get(
-            "https://serpapi.com/search.json?engine=google_jobs_listing&q={}&api_key={}".format(
-                job_id, api_key
-            )
-        ).json()
-        for k in response.keys():
-            if k == "ratings":
-                job_listings.at[i, "rating"] = response["ratings"][0]["rating"]
-                job_listings.at[i, "reviews"] = response["ratings"][0]["reviews"]
-                job_listings.at[i, "rating_link"] = response["ratings"][0]["link"]
-                job_listings.at[i, "rating_source"] = response["ratings"][0]["source"]
-            elif k == "apply_options":
-                job_listings.at[i, "apply_link"] = response["apply_options"][0]["link"]
-                job_listings.at[i, "apply_title"] = response["apply_options"][0][
-                    "title"
-                ]
-            elif k == "salary":
-                job_listings.at[i, "salary_link"] = response["salaries"][0]["link"]
-                job_listings.at[i, "salary_source"] = response["salaries"][0]["source"]
-                job_listings.at[i, "salary_from"] = response["salaries"][0][
-                    "salary_from"
-                ]
-                job_listings.at[i, "salary_to"] = response["salaries"][0]["salary_to"]
-                job_listings.at[i, "salary_currency"] = response["salaries"][0][
-                    "salary_currency"
-                ]
-                job_listings.at[i, "salary_periodicity"] = response["salaries"][0][
-                    "salary_periodicity"
-                ]
-                job_listings.at[i, "based_on"] = response["salaries"][0]["based_on"]
-
+            job_id = job_listings.iloc[i]['job_id']
+            response = requests.get("https://serpapi.com/search.json?engine=google_jobs_listing&q={}&api_key={}".format(job_id, api_key)).json()
+            for k in response.keys():
+                if k == 'ratings':
+                    job_listings.at[i, 'rating'] = response['ratings'][0]['rating']
+                    job_listings.at[i, 'reviews'] = response['ratings'][0]['reviews']
+                    job_listings.at[i, 'rating_link'] = response['ratings'][0]['link']
+                    job_listings.at[i, 'rating_source'] = response['ratings'][0]['source']
+                elif k == 'apply_options':
+                    job_listings.at[i, 'apply_link'] = response['apply_options'][0]['link']
+                    job_listings.at[i, 'apply_title'] = response['apply_options'][0]['title']
+                elif k == 'salary':
+                    job_listings.at[i, 'salary_link'] = response['salaries'][0]['link']
+                    job_listings.at[i, 'salary_source'] = response['salaries'][0]['source']
+                    job_listings.at[i, 'salary_from'] = response['salaries'][0]['salary_from']
+                    job_listings.at[i, 'salary_to'] = response['salaries'][0]['salary_to']
+                    job_listings.at[i, 'salary_currency'] = response['salaries'][0]['salary_currency']
+                    job_listings.at[i, 'salary_periodicity'] = response['salaries'][0]['salary_periodicity']
+                    job_listings.at[i, 'based_on'] = response['salaries'][0]['based_on']
 
 def collect_job_listings():
     job_title = "bartender"
     job_listings = pd.DataFrame()
 
-    # ADDED:
+    # ADDED: 
     # data analyst, accountant, medical receptionist, content strategist, executive assistant
     # HR assistant, job, bartender
 
     for zip_code in uules_2:
         uule = uules_2[zip_code]
-        response = requests.get(
-            "https://serpapi.com/search.json?engine=google_jobs&q={}&hl=en&api_key={}{}&lrad=16".format(
-                job_title, api_key, uule
-            )
-        )
-        jobs = [
-            j
-            for j in response.json()["jobs_results"]
-            if j["description"] not in pd.unique(job_listings["description"])
-        ]
+        response = requests.get("https://serpapi.com/search.json?engine=google_jobs&q={}&hl=en&api_key={}{}&lrad=16".format(job_title, api_key, uule))
+        jobs = [j for j in response.json()['jobs_results'] if j['description'] not in pd.unique(job_listings['description'])]
         jobs_results = pd.DataFrame.from_records(jobs)
         # jobs_results = pd.DataFrame.from_records(response.json()['jobs_results'])
-        jobs_results["zip_code"] = zip_code
+        jobs_results['zip_code'] = zip_code
         job_listings = pd.concat([job_listings, jobs_results])
 
 def collect_images_and_maps():
@@ -157,6 +131,7 @@ uules_1 = {
     # South Austin
     78745: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODc0NQ==&cr=countryUS",
     78748: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODc0OA==&cr=countryUS",
+    
 }
 
 uules_2 = {
@@ -176,12 +151,12 @@ uules_2 = {
     # Northeast Austin
     78721: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODcyMQ==&cr=countryUS",
     78723: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODcyMw==&cr=countryUS",
-    78724: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODcyNA==&cr=countryUS",
+    78724: "&uule=w+CAIQICITQXVzdGluLCBUZXhhcyA3ODcyNA==&cr=countryUS"
 }
 
 api_key = "e44d953313148da076ace99377f26f931448ba14c070febfbe39dd5a07a60730"
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     db = Database()
     db.connect(DATABASE, USER, PASSWORD, HOST, PORT)
     add_housing(db)
@@ -189,8 +164,8 @@ if __name__ == "__main__":
     add_jobs(db)
 
     print(db.list_tables())
-    print(len(db.enter_table("jobs").get_data_bulk()))
-    print(len(db.enter_table("housing").get_data_bulk()))
-    print(len(db.enter_table("childcare").get_data_bulk()))
+    print(len(db.enter_table('jobs').get_data_bulk()))
+    print(len(db.enter_table('housing').get_data_bulk()))
+    print(len(db.enter_table('childcare').get_data_bulk()))
 
     db.disconnect()
