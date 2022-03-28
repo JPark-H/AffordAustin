@@ -4,7 +4,6 @@ import { Container, Row, Col, Image, ListGroup, Nav } from 'react-bootstrap';
 import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png';
 import PageNotFound from './../../PageNotFound';
 
 const ChildCare = () => {
@@ -43,13 +42,15 @@ const ChildCare = () => {
 };
 
 const ChildCareData = ({child_care}) => {
+  let map = child_care._map.split("\n")[1].trim();
+  map = map.slice(5, map.length -1);
     return (
-        <div>
-      <Container className="inst_page">
+      <div>
+        <Container className="inst_page">
           <Row className="inst_header"><h1>{child_care.operation_name}</h1></Row>
           <Row style={{paddingLeft:"10px", paddingRight:"10px"}}>
               <Col className="inst_info" md={8}>
-                  <Row><Image className="inst_img" src={Koala}></Image></Row>
+                  <Row><Image className="inst_img" src={child_care._image}></Image></Row>
                   <Row className="info_section">
                     <h4>Data</h4>
                     <p><b>Operation Type:</b> {child_care.operation_type}</p>
@@ -93,7 +94,7 @@ const ChildCareData = ({child_care}) => {
               <Col className="inst_side_bar">
                   <Row className='side_bar_info'>
                       <h4>Location:</h4>
-                      <Image className="inst_map" src={Koala}></Image>
+                      <iframe className="inst_map" src={map}></iframe>
                   </Row>
                   <Row className='side_bar_info'>
                     <h4>Contact Information</h4>
