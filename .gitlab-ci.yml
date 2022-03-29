@@ -25,12 +25,14 @@ test_jest:
     - npm test
 
 acceptance_testing:
-  image: python:latest
+  image: python:3.7.9-alpine
   stage: acceptance
-  script:
+  services:
+   - selenium/standalone-chrome
+  before_script:
    - pip install selenium
-   - pip install webdriver-manager
-   - python src/Tests/acceptance.py
+  script:
+   - python src/Tests/gitlab-acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
