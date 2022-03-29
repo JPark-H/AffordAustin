@@ -27,8 +27,15 @@ stages:
 e2e:remote:chrome:
   stage: acceptance
   image: python:latest
+  artifacts:
+    when: always
+    paths:
+      - selenium/
+  variables:
+    SELENIUM_REMOTE_URL: http://gitlab-selenium-server:4545/wd/hub
   services:
-    - selenium/standalone-chrome
+    - name: registry.gitlab.com/gitlab-org/gitlab-selenium-server:latest
+      alias: gitlab-selenium-server
   before_script:
     - pip install selenium
   script:
