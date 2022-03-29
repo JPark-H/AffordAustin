@@ -44,7 +44,7 @@ def housing_pages():
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
-        driver.get(f'{URL}{'#/Housing/'}{id}')
+        driver.get(f'{URL}#/Housing/{id}')
         driver.close()
 
 def job_pages():
@@ -52,7 +52,7 @@ def job_pages():
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
-        driver.get(f'{URL}{'#/Jobs/'}{id}')
+        driver.get(f'{URL}#/Jobs/{id}')
         driver.close()
 
 def childcare_pages():
@@ -60,7 +60,7 @@ def childcare_pages():
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
-        driver.get(f'{URL}{'#/Childcare/'}{id}')
+        driver.get(f'{URL}#/Childcare/{id}')
         driver.close()
 
 if __name__ == '__main__':
