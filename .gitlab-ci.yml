@@ -6,23 +6,23 @@ stages:
   - acceptance
   - deploy
 
-python_unit_tests:
-  image: python:3.6-stretch
-  stage: test
-  before_script:
-    - pip install -r backend/requirements.txt
-  script:
-    - cd backend
-    - python3 tests.py
+# python_unit_tests:
+#   image: python:3.6-stretch
+#   stage: test
+#   before_script:
+#     - pip install -r backend/requirements.txt
+#   script:
+#     - cd backend
+#     - python3 tests.py
 
-test_jest:
-  image:
-    name: mcgenius/pp_mocha
-    entrypoint: [""]
-  stage: jstest
-  script:
-    - npm i
-    - npm test
+# test_jest:
+#   image:
+#     name: mcgenius/pp_mocha
+#     entrypoint: [""]
+#   stage: jstest
+#   script:
+#     - npm i
+#     - npm test
 
 acceptance_testing:
   image: python:latest
