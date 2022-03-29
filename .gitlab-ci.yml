@@ -28,9 +28,9 @@ acceptance_testing:
   image: python:latest
   stage: acceptance
   script:
-   - pip install pipenv
-   - pipenv install
-   - pipenv run python src/Tests/acceptance.py
+   - pip install selenium
+   - pip install webdriver-manager
+   - python src/Tests/acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
