@@ -25,12 +25,11 @@ test_jest:
     - npm test
 
 acceptance_testing:
-  image: python:3.7.9-alpine
+  image: python:latest
   stage: acceptance
   services:
    - selenium/standalone-chrome
   before_script:
-   - sudo apt-get install gcc
    - pip install selenium
   script:
    - python src/Tests/gitlab-acceptance.py
