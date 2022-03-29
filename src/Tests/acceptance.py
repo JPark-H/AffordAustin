@@ -32,7 +32,7 @@ def navigation():
     for link in links:
         href = link.get_attribute('href')
         link_driver = webdriver.Remote(
-            command_executor='http://selenium__standalone-chrome:4444/wd/hub',
+            command_executor='http://127.0.0.1:4444/wd/hub',
             options=Options())
         link_driver.get(f'{URL}{href}')
         link_driver.close()
@@ -42,7 +42,7 @@ def navigation():
 def grids():
     for model in MODELS:
         driver = webdriver.Remote(
-            command_executor='http://selenium__standalone-chrome:4444/wd/hub',
+            command_executor='http://127.0.0.1:4444/wd/hub',
             options=Options())
         driver.get(f'{URL}{model}')
 
