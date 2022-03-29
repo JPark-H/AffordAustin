@@ -1,28 +1,28 @@
 image: node:latest
 
 stages:
-  #- test
-  #- jstest
+  - test
+  - jstest
   - acceptance
   - deploy
 
-# python_unit_tests:
-#   image: python:3.6-stretch
-#   stage: test
-#   before_script:
-#     - pip install -r backend/requirements.txt
-#   script:
-#     - cd backend
-#     - python3 tests.py
+python_unit_tests:
+  image: python:3.6-stretch
+  stage: test
+  before_script:
+    - pip install -r backend/requirements.txt
+  script:
+    - cd backend
+    - python3 tests.py
 
-# test_jest:
-#   image:
-#     name: mcgenius/pp_mocha
-#     entrypoint: [""]
-#   stage: jstest
-#   script:
-#     - npm i
-#     - npm test
+test_jest:
+  image:
+    name: mcgenius/pp_mocha
+    entrypoint: [""]
+  stage: jstest
+  script:
+    - npm i
+    - npm test
 
 e2e:remote:chrome:
   stage: acceptance
@@ -40,21 +40,6 @@ e2e:remote:chrome:
     - pip install selenium
   script:
     - python src/Tests/acceptance.py
-
-# acceptance_testing:
-#   image: python:latest
-#   stage: acceptance
-#   services:
-#    - selenium/standalone-chrome:latest
-#   before_script:
-#    - pip install selenium
-#    - pip install webdriver-manager
-#    - apt-get install -y libglib2.0-0=2.50.3-2 \
-#      libnss3=2:3.26.2-1.1+deb9u1 \
-#      libgconf-2-4=3.2.6-4+b1 \
-#      libfontconfig1=2.11.0-6.7+b1
-#   script:
-#    - python src/Tests/acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
