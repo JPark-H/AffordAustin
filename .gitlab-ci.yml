@@ -3,6 +3,7 @@ image: node:latest
 stages:
   # - build
   - test
+  - jstest
   - deploy
   
 
@@ -20,6 +21,15 @@ python_unit_tests:
   script:
     - cd backend
     - python3 tests.py
+
+test_jest:
+  image:
+    name: mcgenius/pp_mocha
+    entrypoint: [""]
+  stage: jstest
+  script:
+    - npm i
+    - npm test
 
 
 deploy_development:
