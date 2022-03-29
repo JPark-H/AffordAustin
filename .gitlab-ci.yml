@@ -25,6 +25,7 @@ test_jest:
     - npm test
 
 acceptance_testing:
+  image: python:3.6-stretch
   stage: acceptance
   script:
    - pip install pipenv
