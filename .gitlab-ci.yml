@@ -1,8 +1,8 @@
 image: node:latest
 
 stages:
-  - test
-  - jstest
+  #- test
+  #- jstest
   - acceptance
   - deploy
 
