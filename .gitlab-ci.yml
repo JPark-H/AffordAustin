@@ -2,7 +2,8 @@ image: node:latest
 
 stages:
   # - build
-  # - test
+  - test
+  - jstest
   - deploy
   
 
@@ -12,15 +13,23 @@ stages:
 #     - npm i
 #     - CI=false npm run-script build
 
-# CHANGE development to main later, discuss using 2 EB Instances for a test api
-# python_unit_tests:
-#   image: python:3.6-stretch
-#   stage: test
-#   before_script:
-#     - pip install -r backend/requirements.txt
-#   script:
-#     - cd backend
-#     - python tests.py
+python_unit_tests:
+  image: python:3.6-stretch
+  stage: test
+  before_script:
+    - pip install -r backend/requirements.txt
+  script:
+    - cd backend
+    - python3 tests.py
+
+test_jest:
+  image:
+    name: mcgenius/pp_mocha
+    entrypoint: [""]
+  stage: jstest
+  script:
+    - npm i
+    - npm test
 
 
 deploy_development:

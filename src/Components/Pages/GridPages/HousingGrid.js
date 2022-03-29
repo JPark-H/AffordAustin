@@ -1,11 +1,10 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const HousingGrid = () => {
     const [houses, setHouses] = useState([]);
@@ -66,7 +65,7 @@ const InstanceCard = ({ housing, housing_id}) => {
     return (
         <Link to={ link }>
             <Card className='inst_card'>
-                <Card.Img variant='top' src={Koala} />
+                <Card.Img variant='top' src={housing._image} />
                 <Card.Body>
                     <Card.Title className="text-truncate">{ housing.project_name }</Card.Title>
                     <Card.Text><b>Tenure :</b> { housing.tenure }</Card.Text>

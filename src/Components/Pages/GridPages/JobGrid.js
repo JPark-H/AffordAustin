@@ -1,12 +1,10 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
 import { Container, Card, Row, Col } from 'react-bootstrap';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 
 const JobGrid = () => {
     const [jobs, setJobs] = useState([]);
@@ -67,15 +65,14 @@ const InstanceCard = ({ job, id }) => {
     return (
         <Link to={ link }>
             <Card className='inst_card'>
-                {/* Replace */}
-                <Card.Img variant='top' src={ Koala } />
+                <Card.Img variant='top' src={job._image}/>
                 <Card.Body>
                     <Card.Title className="text-truncate">{ job.title }</Card.Title>
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
                     <Card.Text><b>Posted:</b> { posted_at }</Card.Text>
                     <Card.Text><b>Schedule:</b> { schedule_type }</Card.Text>
-                    <Card.Text><b>Rating:</b> { job.rating }</Card.Text>
-                    <Card.Text><b>Reviews:</b> { job.reviews }</Card.Text>
+                    <Card.Text><b>Rating:</b> {job.reviews === "-1" ? "N/A" : job.rating }</Card.Text>
+                    <Card.Text><b>Reviews:</b> {job.reviews === "-1" ? "0" : job.reviews }</Card.Text>
                 </Card.Body>
             </Card>
         </Link>

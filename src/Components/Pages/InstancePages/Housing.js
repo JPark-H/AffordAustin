@@ -1,10 +1,9 @@
-import './Housing.css';
-import { Image, Container, Button, Card, Row, Col, ListGroup } from 'react-bootstrap';
+import './Instance.css';
+import { Image, Container, Row, Col, ListGroup, Nav, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState, useCallback } from "react";
 import { Link,  useParams } from 'react-router-dom';
 import axios from 'axios';
-import Koala from './../About/MemberCards/imgs/Koallaaaaa.png'
 import PageNotFound from './../../PageNotFound';
 
 
@@ -36,90 +35,93 @@ const Housing = () => {
   return (
     <div style={{ backgroundColor: "#f0f2f5" }}>
       {!isValidId ? <PageNotFound /> :
-        (loading ? <h3 style={{color: "black"}}>Loading</h3> :
-          <HousingData housing={instanceData} id={id}/>)}
+        (loading ? <div></div> :
+          <HousingData housing={instanceData}/>)}
     </div>
 
   );
 }
 
-const HousingData = ({housing, id}) => {
-  const link_j = `/Jobs/${ id }`
-  const link_c = `/Childcare/${ id }`
+const HousingData = ({housing}) => {
+  let map = housing._map.split("\n")[1].trim();
+  map = map.slice(5, map.length -1);
   return (
-    <div className="info_page mx-auto justify-content-center">
-      <p className="instance_header">
-        {housing.project_name}
-      </p>
-      <Container className="instance_info">
-        <p className="attribute_head">Location Image</p>
-        {/* Replace */}
-        <Image className="hous_image" rounded src={Koala}></Image>
-        <p className="attribute_head">Map</p>
-        {/* Replace */}
-        {/* <div className='hous_map' dangerouslySetInnerHTML={{ __html: housing.map }}></div> */}
-        <div className='hous_map'><Image src={Koala}></Image></div>
-        <Card className="instance_data mx-auto" style={{
-          borderTopRightRadius: "2rem",
-          borderTopLeftRadius: "2rem"
-        }}>
-          <Card.Header style={{
-            borderTopRightRadius: "2rem",
-            borderTopLeftRadius: "2rem"
-          }}>Details</Card.Header>
-          <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
-            <ListGroup.Item>Address: {housing.address}</ListGroup.Item>
-            <ListGroup.Item>ZIP Code: {housing.zip_code}</ListGroup.Item>
-            <ListGroup.Item>Status: {housing.status.split(".")[1]}</ListGroup.Item>
-            <ListGroup.Item>Developer: {housing.developer}</ListGroup.Item>
-            <ListGroup.Item>Unit Type: {housing.unit_type}</ListGroup.Item>
-            <ListGroup.Item>Ground Lease: {housing.ground_lease}</ListGroup.Item>
-            <ListGroup.Item>Tenure: {housing.tenure}</ListGroup.Item>
-            <ListGroup.Item>Affordability Guarantee: {housing.affordability_expiration_year}</ListGroup.Item>
-          </ListGroup>
-        </Card>
-
-        <Card className="instance_data mx-auto mt-4" style={{
-          borderTopRightRadius: "2rem",
-          borderTopLeftRadius: "2rem"
-        }}>
-          <Card.Header style={{
-            borderTopRightRadius: "2rem",
-            borderTopLeftRadius: "2rem"
-          }}>Price Points</Card.Header>
-          <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
-            <ListGroup.Item>30% Median Family Income: {housing.units_30_mfi}</ListGroup.Item>
-            <ListGroup.Item>40% Median Family Income: {housing.units_40_mfi}</ListGroup.Item>
-            <ListGroup.Item>50% Median Family Income: {housing.units_50_mfi}</ListGroup.Item>
-            <ListGroup.Item>60% Median Family Income: {housing.units_60_mfi}</ListGroup.Item>
-            <ListGroup.Item>65% Median Family Income: {housing.units_65_mfi}</ListGroup.Item>
-            <ListGroup.Item>80% Median Family Income: {housing.units_80_mfi}</ListGroup.Item>
-            <ListGroup.Item>100% Median Family Income: {housing.units_100_mfi}</ListGroup.Item>
-          </ListGroup>
-        </Card>
-
-        <Card className="instance_data mx-auto mt-4" style={{
-          borderTopRightRadius: "2rem",
-          borderTopLeftRadius: "2rem"
-        }}>
-          <Card.Header style={{
-            borderTopRightRadius: "2rem",
-            borderTopLeftRadius: "2rem"
-          }}>Contact Info</Card.Header>
-          <ListGroup className="attribute_list" style={{ textAlign: "left" }} variant="flush">
-            <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
-            <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
-          </ListGroup>
-        </Card>
-
-        <Row className="mt-3 justify-content-between mx-auto" >
-          <Link to={ link_j }>
-            <Col className="mx-auto"><Button id="btn-back-to-top" variant="secondary">Nearby Job</Button>{' '}</Col>
-          </Link>
-          <Link to={ link_c }>
-            <Col className="mx-auto"><Button variant="secondary">Child Care</Button>{' '}</Col>
-          </Link>
-        </Row>
+    <div>
+      <Container className="inst_page">
+          <Row className="inst_header"><h1>{housing.project_name}</h1></Row>
+          <Row style={{paddingLeft:"10px", paddingRight:"10px"}}>
+              <Col className="inst_info" md={8}>
+                  <Row><Image className="inst_img" src={housing._image}></Image></Row>
+                  <Row className="info_section">
+                    <h4>Details</h4>
+                    <p>Address: {housing.address}</p>
+                    <p>ZIP Code: {housing.zip_code}</p>
+                    <p>Status: {housing.status.split(".")[1]}</p>
+                    <p>Developer: {housing.developer}</p>
+                    <p>Unit Type: {housing.unit_type}</p>
+                    <p>Ground Lease: {housing.ground_lease}</p>
+                    <p>Tenure: {housing.tenure}</p>
+                    <p>Affordability Guarantee: {housing.affordability_expiration_year}</p>
+                  </Row>
+                  <Row className="info_section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
+                    <h4>Price Points</h4>
+                    <Table striped bordered style={{textAlign:"center"}}>
+                      <thead>
+                        <tr><th colSpan={7}>% Family Income</th></tr>
+                      </thead>
+                        <tbody>
+                        <tr>
+                          <td>30%</td>
+                          <td>40%</td>
+                          <td>50%</td>
+                          <td>60%</td>
+                          <td>65%</td>
+                          <td>80%</td>
+                          <td>100%</td>
+                          </tr>
+                        <tr>
+                          <td>{housing.units_30_mfi}</td>
+                          <td>{housing.units_40_mfi}</td>
+                          <td>{housing.units_50_mfi}</td>
+                          <td>{housing.units_60_mfi}</td>
+                          <td>{housing.units_65_mfi}</td>
+                          <td>{housing.units_80_mfi}</td>
+                          <td>{housing.units_100_mfi}</td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Row>
+              </Col>
+              <Col className="inst_side_bar">
+                  <Row className='side_bar_info'>
+                      <h4>Location:</h4>
+                      <iframe className="inst_map" src={map}></iframe>
+                  </Row>
+                  <Row className='side_bar_info'>
+                    <h4>Contact Information</h4>
+                    <ListGroup>
+                      <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
+                      <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
+                    </ListGroup>
+                  </Row>
+                  <Row className="side_bar_info">
+                    <h4>Nearby Jobs</h4>
+                      <Nav>
+                        <Nav.Link as={ Link } to='/Jobs/1'>Flood Reporting Coordinator</Nav.Link>
+                        <Nav.Link as={ Link } to='/Jobs/42'>Front Office Medical Receptionist</Nav.Link>
+                        <Nav.Link as={ Link } to='/Jobs/181'>Human Resources (HR) Assistant</Nav.Link>
+                      </Nav>
+                  </Row>
+                  <Row className="side_bar_info">
+                      <h4>Nearby Childcare Services</h4>
+                      <Nav>
+                        <Nav.Link as={ Link } to='/Childcare/1'>Laura Bush YMCA</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Art-es-Inc</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/4'>Stepping Stone School VIII</Nav.Link>
+                      </Nav>
+                  </Row>
+              </Col>
+          </Row>
       </Container>
     </div>
   );
