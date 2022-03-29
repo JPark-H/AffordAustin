@@ -30,7 +30,7 @@ def images(query, include_location=True):
     if include_location:
         query += ' Austin, TX'
 
-    query = quote(query)
+    query = quote(str(query))
     url = f'https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&gs_l=img&q={query}&oq={query}'
 
     driver = webdriver.Chrome(service=SERVICE)
@@ -39,15 +39,15 @@ def images(query, include_location=True):
     thumbnail = driver.find_element(by=By.CSS_SELECTOR, value=THUMBNAIL_SELECTOR)
     thumbnail.click()
 
-    wait = WebDriverWait(driver, 10)
-    element = wait.until(has_src(IMAGE_SELECTOR))
+    try:
+        wait = WebDriverWait(driver, 5)
+        element = wait.until(has_src(IMAGE_SELECTOR))
+    except:
+        element = driver.find_element(by=By.CSS_SELECTOR, value=IMAGE_SELECTOR)
 
     driver.close()
 
-    return element
-
-def map_images(df, read, write, include_location=True):
-    
+    return element    
 
 
 if __name__=='__main__':

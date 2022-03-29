@@ -4,6 +4,8 @@ import pandas as pd
 import requests
 import numpy as np
 from numpy.random import default_rng
+from maps import maps
+from images import images
 
 
 DATABASE = 'affordaustin'
@@ -15,23 +17,31 @@ PORT = '5432'
 def retrieve_data(endpoint, limit=1000):
     client = Socrata('data.texas.gov', None)
     data = client.get(endpoint, limit=limit)
-    print(data)
     data = pd.DataFrame.from_records(data)
     return data
 
-def add_housing(db):
-    data = retrieve_data('x5p7-qyuv', limit=3_000)
+def add_housing(db, limit=3_000):
+    data = retrieve_data('x5p7-qyuv', limit=limit)
+
+    data = data.loc[data['address'] != 'Undisclosed']
+
+    data['_map'] = data['address'].apply(lambda x: maps(x, include_location=False))
+    data['_image'] = data['address'].apply(lambda x: images(x, include_location=False))
+
     table = db.create_table('housing', data.keys())
     table.add_data_bulk(data)
 
-def add_childcare(db):
+def add_childcare(db, limit=16_000):
     DROP_LABEL = ':@computed_region_fd5q_j34z'
     COUNTIES = ['BASTROP', 'CALDWELL', 'HAYS', 'TRAVIS', 'WILLIAMSON']
 
-    data = retrieve_data('bc5r-88dy', limit=16_000)
+    data = retrieve_data('bc5r-88dy', limit=limit)
 
     data = data.drop(DROP_LABEL, axis=1)
     data = data.loc[data['county'].isin(COUNTIES)]
+
+    data['_map'] = data['location_address'].apply(lambda x: maps(x, include_location=False))
+    data['_image'] = data['location_address'].apply(lambda x: images(x, include_location=False))
 
     table = db.create_table('childcare', data.keys())
     table.add_data_bulk(data)
@@ -141,12 +151,54 @@ uules_2 = {
 
 api_key = "e44d953313148da076ace99377f26f931448ba14c070febfbe39dd5a07a60730"
 
+#-----
+def append_housing(db, limit=3_000):
+    data = retrieve_data('x5p7-qyuv', limit=limit)
+
+    data = data.loc[data['address'] != 'Undisclosed']
+
+    data = data.iloc[140:160]
+
+    data['_map'] = data['address'].apply(lambda x: maps(x, include_location=False))
+    data['_image'] = data['address'].apply(lambda x: images(x, include_location=False))
+
+    table = db.enter_table('housing')
+    table.add_data_bulk(data)
+
+def append_childcare(db, limit=16_000):
+    DROP_LABEL = ':@computed_region_fd5q_j34z'
+    COUNTIES = ['BASTROP', 'CALDWELL', 'HAYS', 'TRAVIS', 'WILLIAMSON']
+
+    data = retrieve_data('bc5r-88dy', limit=limit)
+
+    data = data.drop(DROP_LABEL, axis=1)
+    data = data.loc[data['county'].isin(COUNTIES)]
+
+    data = data.iloc[120:160]
+
+    data['_map'] = data['location_address'].apply(lambda x: maps(x, include_location=False))
+    data['_image'] = data['location_address'].apply(lambda x: images(x, include_location=False))
+
+    table = db.enter_table('childcare')
+    table.add_data_bulk(data)
+#-----
+
+
 if __name__ == '__main__':
     db = Database()
     db.connect(DATABASE, USER, PASSWORD, HOST, PORT)
-    add_housing(db)
-    add_childcare(db)
-    add_jobs(db)
+    # add_housing(db)
+    # add_childcare(db)
+    # add_jobs(db)
+
+    housing = db.enter_table('housing')
+    housing.change_attribute(13, '_image', 'https://photos.zillowstatic.com/fp/ed75ce2daed1a7789b51f686075cd499-cc_ft_1536.jpg')
+    housing.change_attribute(8, '_image', 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=H5aXgjzDcLmjLL-szWXxcA&cb_client=search.gws-prod.gps&w=408&h=240&yaw=116.80512&pitch=0&thumbfov=100')
+    housing.change_attribute(88, '_image', 'https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=CuTie_GchUIknaTabNS46g&cb_client=search.gws-prod.gps&w=408&h=240&yaw=137.47609&pitch=0&thumbfov=100')
+    housing.change_attribute(143, '_image', 'https://lh5.googleusercontent.com/p/AF1QipMzT-28dTr7_iJVsWjetf7j4TjgIb-NmyEmH28w=w408-h305-k-no')
+
+    childcare = db.enter_table('childcare')
+    
 
     print(db.list_tables())
     print(len(db.enter_table('jobs').get_data_bulk()))
