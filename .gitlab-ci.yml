@@ -28,11 +28,12 @@ acceptance_testing:
   image: python:latest
   stage: acceptance
   services:
-   - selenium/standalone-chrome
+   - selenium/standalone-chrome:latest
   before_script:
    - pip install selenium
+   - pip install webdriver-manager
   script:
-   - python src/Tests/gitlab-acceptance.py
+   - python src/Tests/acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
