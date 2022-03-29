@@ -39,6 +39,34 @@ def navigation():
 
     driver.close()
 
+def housing_pages():
+    for id in range(1, 101):
+        driver = webdriver.Remote(
+            command_executor='http://gitlab-selenium-server:4545/wd/hub',
+            options=options)
+        driver.get(f'{URL}{'#/Housing/'}{id}')
+        driver.close()
+
+def job_pages():
+    for id in range(1, 101):
+        driver = webdriver.Remote(
+            command_executor='http://gitlab-selenium-server:4545/wd/hub',
+            options=options)
+        driver.get(f'{URL}{'#/Jobs/'}{id}')
+        driver.close()
+
+def childcare_pages():
+    for id in range(1, 101):
+        driver = webdriver.Remote(
+            command_executor='http://gitlab-selenium-server:4545/wd/hub',
+            options=options)
+        driver.get(f'{URL}{'#/Childcare/'}{id}')
+        driver.close()
+
+if __name__ == '__main__':
+    navigation()
+    pages()
+        
 def grids():
     for model in MODELS:
         driver = webdriver.Remote(
@@ -54,18 +82,3 @@ def grids():
         assert len(links) >= 9
 
         driver.close()
-
-def pages():
-    for model in MODELS:
-        for id in range(1, 101):
-            driver = webdriver.Remote(
-                command_executor='http://gitlab-selenium-server:4545/wd/hub',
-                options=options)
-            driver.get(f'{URL}{model}{id}')
-            driver.close()
-
-if __name__ == '__main__':
-    navigation()
-    grids()
-    pages()
-        
