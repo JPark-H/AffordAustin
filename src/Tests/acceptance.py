@@ -22,7 +22,7 @@ def navigation():
         command_executor='http://gitlab-selenium-server:4545/wd/hub',
         options=options)
     driver.get(URL)
-    WebDriverWait(driver, 10).until(
+    WebDriverWait(driver, 100).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '[class="nav-link"]'))
     )
     
@@ -46,7 +46,7 @@ def grids():
             options=options)
         driver.get(f'{URL}{model}')
 
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 100).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'card'))
         )
 
