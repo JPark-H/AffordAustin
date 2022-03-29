@@ -65,7 +65,9 @@ def childcare_pages():
 
 if __name__ == '__main__':
     navigation()
-    pages()
+    housing_pages()
+    job_pages()
+    childcare_pages()
         
 def grids():
     for model in MODELS:
