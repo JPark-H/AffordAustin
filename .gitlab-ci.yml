@@ -1,17 +1,10 @@
 image: node:latest
 
 stages:
-  # - build
   - test
   - jstest
+  - acceptance
   - deploy
-  
-
-# build-code-job:
-#   stage: build
-#   script:
-#     - npm i
-#     - CI=false npm run-script build
 
 python_unit_tests:
   image: python:3.6-stretch
@@ -31,6 +24,11 @@ test_jest:
     - npm i
     - npm test
 
+acceptance_testing:
+  stage: acceptance
+  script:
+   - pip install pipenv
+   - pipenv run python src/Tests/acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
