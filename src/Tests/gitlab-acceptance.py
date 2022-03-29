@@ -8,8 +8,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-SERVICE = Service(ChromeDriverManager().install())
-
 #URL = 'https://www.affordaustin.me/'
 URL = 'https://development.d4sk31j15mtaj.amplifyapp.com/'
 MODELS = ['#/Housing/', '#/Childcare/', '#/Jobs/']
