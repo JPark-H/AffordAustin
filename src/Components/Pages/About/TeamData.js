@@ -29,7 +29,7 @@ const teamInfo = [
 			Go Longhorns!",
 		commits: 0,
 		issues: 0,
-		tests: 0,
+		tests: 35,
 		user: "dinesh.k.balakrishnan"
 	},
 	{
@@ -44,7 +44,7 @@ const teamInfo = [
 			FFXIV, and Risk of Rain 2",
 		commits: 0,
 		issues: 0,
-		tests: 0,
+		tests: 13,
 		user: "Jay-Logic"
 	},
 	{
@@ -58,7 +58,7 @@ const teamInfo = [
 			love making music and playing video games with my friends.",
 		commits: 0,
 		issues: 0,
-		tests: 0,
+		tests: 10,
 		user: "presleyh"
 	},
 	{
@@ -73,7 +73,7 @@ const teamInfo = [
 			time playing video games and watching shows.",
 		commits: 0,
 		issues: 0,
-		tests: 0,
+		tests: 8,
 		user: "shahzadsb31"
 	}
 ]
