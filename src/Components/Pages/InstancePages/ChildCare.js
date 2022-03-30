@@ -110,8 +110,8 @@ const ChildCareData = ({child_care}) => {
                   <Row className="side_bar_info">
                     <h4>Nearby Housing</h4>
                         <Nav>
-                            <Nav.Link as={ Link } to='/Housing/1'>Legacy Apartments</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/2'>Sol</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/1'>Allandale Condos</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/2'>110 Chicon Street</Nav.Link>
                             <Nav.Link as={ Link } to='/Housing/3'>1905 E 9th Street</Nav.Link>
                         </Nav>
                   </Row>
