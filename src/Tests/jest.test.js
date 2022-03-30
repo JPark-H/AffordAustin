@@ -3,6 +3,8 @@ import { shallow, configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 
 import About from "../Components/Pages/About/About";
+import GitTotals from "../Components/Pages/About/GitTotals/GitTotals";
+import Home from "../Components/Pages/Home/Home";
 import Housing from "../Components/Pages/InstancePages/Housing";
 import ChildCare from "../Components/Pages/InstancePages/ChildCare";
 import Jobs from "../Components/Pages/InstancePages/Jobs";
@@ -21,17 +23,19 @@ describe("Render components", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("2. Housing should exist", () => {
-    expect(Housing).toBeDefined();
+  it("2. Home match snapshot", () => {
+    const home = shallow(<Home />);
+    expect(home).toBeDefined();
   });
 
-  it("3. Housing matches snapshot", () => {
+  it("3. GitTotals match snapshot", () => {
+    const gittotals = shallow(<GitTotals />);
+    expect(gittotals).toBeDefined();
+  });
+
+  it("4. Housing matches snapshot", () => {
     const tree = shallow(<Housing />);
     expect(tree).toMatchSnapshot();
-  });
-
-  it("4. ChildCare should exist", () => {
-    expect(ChildCare).toBeDefined();
   });
 
   it("5. ChildCare matches snapshot", () => {
@@ -39,32 +43,27 @@ describe("Render components", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("6. Jobs should exist", () => {
-    expect(Jobs).toBeDefined();
-  });
-
-  it("7. Jobs matches snapshot", () => {
+  it("6. Jobs matches snapshot", () => {
     const tree = shallow(<Jobs />);
     expect(tree).toMatchSnapshot();
   });
 
-  it("8. Navbar exists and matches snapshot", () => {
+  it("7. Navbar matches snapshot", () => {
     const navbar = shallow(<Navbar />);
-    expect(navbar).toBeDefined;
     expect(navbar).toMatchSnapshot();
   });
 
-  it("9. ChildCareGrid matches snapshot", () => {
+  it("8. ChildCareGrid matches snapshot", () => {
     const ccgrid = shallow(<ChildCareGrid />);
     expect(ccgrid).toMatchSnapshot();
   });
 
-  it("10. HousingGrid matches snapshot", () => {
+  it("9. HousingGrid matches snapshot", () => {
     const ccgrid = shallow(<HousingGrid />);
     expect(ccgrid).toMatchSnapshot();
   });
 
-  it("11. JobGrid matches snapshot", () => {
+  it("10. JobGrid matches snapshot", () => {
     const ccgrid = shallow(<JobGrid />);
     expect(ccgrid).toMatchSnapshot();
   });

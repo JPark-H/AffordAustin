@@ -13,12 +13,12 @@ Scarlett Shires      | svs758  | @scarlettshires
 
 ## Git SHA
 
-6b7904b519bfa461815f9ccb1406f5ff2b2b7027
+e905c8d7c8701c4f7696e0f3ca02d6f9ebbdaf25
 
 ## Phase Leaders
 
-Phase 1: Scarlett Shires
-
+Phase 1: Scarlett Shires\
+Phase 2: Sabeer Shahzad
 
 ## Gitlab Pipelines
 
@@ -27,6 +27,10 @@ https://gitlab.com/dinesh.k.balakrishnan/cs373-website/-/pipelines/
 ## Website Link
 
 https://www.affordaustin.me/
+
+## Postman Documentation
+
+https://documenter.getpostman.com/view/19702236/UVksLu2r 
 
 ## Completion Times
 
@@ -39,6 +43,16 @@ Presley Heikkila     | 10        | 12
 Jay Park             | 10        | 15       
 Sabeer Shahzad       | 11        | 12    
 Scarlett Shires      | 12        | 12
+
+### Phase 2
+
+Name                 | Estimated | Actual             
+---------------------|-----------| -------
+Dinesh Balakrishnan  | 10        | 20
+Presley Heikkila     | 25        | 18  
+Jay Park             | 20        | 18       
+Sabeer Shahzad       | 20        | 18    
+Scarlett Shires      | 15        | 20
 
 ### Comments
 

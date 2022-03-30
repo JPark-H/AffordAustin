@@ -92,6 +92,12 @@ class Table:
         values_query = 'VALUES' + ','.join(values_query)
         self.__execute_query(f'{insert_query} {values_query}')
 
+    def delete_data(self, id):
+        self.__execute_query(f'DELETE FROM {self.name} WHERE id = {id};')
+
+    def change_attribute(self, id, attribute, value):
+        self.__execute_query(f"UPDATE {self.name} SET {attribute} = '{value}' WHERE id = {id};")
+
 
     def __execute_query(self, query):
         try:

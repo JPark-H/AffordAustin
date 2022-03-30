@@ -1,26 +1,42 @@
 image: node:latest
 
 stages:
-  # - build
-  - test
+  - unittest
+  - jstest
+  - acceptance
   - deploy
-  
-
-# build-code-job:
-#   stage: build
-#   script:
-#     - npm i
-#     - CI=false npm run-script build
 
 python_unit_tests:
   image: python:3.6-stretch
-  stage: test
+  stage: unittest
   before_script:
     - pip install -r backend/requirements.txt
   script:
     - cd backend
     - python3 tests.py
 
+test_jest:
+  stage: jstest
+  script:
+    - npm i
+    - npm test
+
+e2e:remote:chrome:
+  stage: acceptance
+  image: python:latest
+  artifacts:
+    when: always
+    paths:
+      - selenium/
+  variables:
+    SELENIUM_REMOTE_URL: http://gitlab-selenium-server:4545/wd/hub
+  services:
+    - name: registry.gitlab.com/gitlab-org/gitlab-selenium-server:latest
+      alias: gitlab-selenium-server
+  before_script:
+    - pip install selenium
+  script:
+    - python src/Tests/acceptance.py
 
 deploy_development:
   image: python:3.6-stretch
