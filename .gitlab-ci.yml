@@ -8,7 +8,7 @@ stages:
 
 python_unit_tests:
   image: python:3.6-stretch
-  stage: test
+  stage: unittest
   before_script:
     - pip install -r backend/requirements.txt
   script:
