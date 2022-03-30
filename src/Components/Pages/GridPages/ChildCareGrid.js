@@ -43,7 +43,7 @@ const ChildCareGrid = () => {
                     <Row>
                         <Paginate totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} />
                     </Row>
-                    <h1 className="results">Showing {programs.length} Results</h1>
+                    <h1 className="results">Showing {programs.length} Results Out Of {totalNumPrograms}</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
                         {loading ? <h3 className="results">Loading</h3> : programs.map(program => {
                             return (
