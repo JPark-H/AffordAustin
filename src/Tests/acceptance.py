@@ -40,27 +40,27 @@ def navigation():
 
     driver.close()
 
-# 100 TESTS
+# 10 TESTS
 def housing_pages():
-    for id in range(1, 101):
+    for id in range(1, 11):
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
         driver.get(f'{URL}#/Housing/{id}')
         driver.close()
 
-# 100 TESTS
+# 10 TESTS
 def job_pages():
-    for id in range(1, 101):
+    for id in range(1, 11):
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
         driver.get(f'{URL}#/Jobs/{id}')
         driver.close()
 
-# 100 TESTS
+# 10 TESTS
 def childcare_pages():
-    for id in range(1, 101):
+    for id in range(1, 11):
         driver = webdriver.Remote(
             command_executor='http://gitlab-selenium-server:4545/wd/hub',
             options=options)
