@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Container, Button, Card, Col, ListGroup } from "react-bootstrap";
+import { Row, Container, Button, Card, Col, ListGroup, Image } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MemberCards from "./MemberCards/MemberCards";
 import GitTotals from "./GitTotals/GitTotals";
@@ -8,7 +8,15 @@ import * as Icon from "react-bootstrap-icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import teamInfo from "./TeamData";
+import AWSAmplifyLogo from "./ToolLogos/AWSAmplifyLogo.png"
+import GitlabLogo from "./ToolLogos/GitlabLogo.png"
+import NameCheapLogo from "./ToolLogos/NameCheapLogo.jpg"
+import PostmanLogo from "./ToolLogos/PostmanLogo.png"
+import ReactLogo from "./ToolLogos/ReactLogo.png"
+
 const tools = ["React", "Amplify", "GitLab", "NameCheap", "Postman"];
+const tool_link = ["https://reactjs.org/", "https://aws.amazon.com/amplify/", "https://about.gitlab.com/", "https://www.namecheap.com/", "https://www.postman.com/"];
+const tool_logo = [ReactLogo, AWSAmplifyLogo, GitlabLogo, NameCheapLogo, PostmanLogo];
 
 const tools_desc = [
   "Used to develop the frontend using UI components.",
@@ -131,17 +139,24 @@ function About() {
         style={{
           borderRadius: "2rem",
           borderTopLeftRadius: "2rem",
+          backgroundColor: "#f0f2f5"
         }}
       >
-        <ListGroup variant="flush" style={{}}>
-          {tools.map((tool, index) => (
-            <ListGroup.Item className="about_list" key={tool}>
-              <b>{tool}</b>
-              <br></br>
-              {tools_desc[index]}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+        <Container>
+          <Row xs='auto'>
+            {tools.map((tool, index) => (
+              <Col className="tool_about_list mx-auto">
+                <Row className="justify-content-center"><Image src={tool_logo[index]} className="tool_logo"></Image></Row>
+                <a href={tool_link[index]}><b>{tool}</b></a>
+                <br></br>
+                {tools_desc[index]}
+                <br></br>
+                {(index === 2) ? <a style={{color:"blue"}} href="https://gitlab.com/dinesh.k.balakrishnan/cs373-website">Our Repo</a> 
+                  : ((index === 4) ? <a style={{color:"blue"}} href="https://documenter.getpostman.com/view/19702236/UVksLu2r">Our Documentation</a> : <></>)}
+              </Col>
+            ))}
+          </Row>
+        </Container>
       </Card>
 
       {/*API Info*/}
