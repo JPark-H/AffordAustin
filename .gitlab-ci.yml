@@ -1,14 +1,14 @@
 image: node:latest
 
 stages:
-  - test
+  - unittest
   - jstest
   - acceptance
   - deploy
 
 python_unit_tests:
   image: python:3.6-stretch
-  stage: test
+  stage: unittest
   before_script:
     - pip install -r backend/requirements.txt
   script:
@@ -16,9 +16,6 @@ python_unit_tests:
     - python3 tests.py
 
 test_jest:
-  image:
-    name: mcgenius/pp_mocha
-    entrypoint: [""]
   stage: jstest
   script:
     - npm i
