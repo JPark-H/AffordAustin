@@ -42,7 +42,7 @@ const JobGrid = () => {
                 <Row>
                      <Paginate totalInstances={totalNumJobs} pageLimit={jobsPerPage} paginate={paginate} />
                 </Row>
-                <h1 className="results">Showing {jobs.length} Results</h1>
+                <h1 className="results">Showing {jobs.length} Results Out Of {totalNumJobs}</h1>
                 <Row className="g-3 justify-content-center" xs='auto'>
                     {loading ? <h3 className="results">Loading</h3> : jobs.map(job => {
                         return (

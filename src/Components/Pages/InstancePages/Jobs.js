@@ -86,17 +86,17 @@ const JobData = ({job}) => {
                         <Row className="side_bar_info">
                             <h4>Nearby Housing</h4>
                             <Nav>
-                                <Nav.Link as={ Link } to='/Housing/1'>Legacy Apartments</Nav.Link>
-                                <Nav.Link as={ Link } to='/Housing/2'>Sol</Nav.Link>
+                                <Nav.Link as={ Link } to='/Housing/1'>Allandale Condos</Nav.Link>
+                                <Nav.Link as={ Link } to='/Housing/2'>110 Chicon Street</Nav.Link>
                                 <Nav.Link as={ Link } to='/Housing/3'>1905 E 9th Street</Nav.Link>
                             </Nav>
                         </Row>
                         <Row className="side_bar_info">
                             <h4>Nearby Childcare Services</h4>
                             <Nav>
-                                <Nav.Link as={ Link } to='/Childcare/1'>Laura Bush YMCA</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Art-es-Inc</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/4'>Stepping Stone School VIII</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/1'>Lil Lions Learning Center</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Del Alma</Nav.Link>
+                                <Nav.Link as={ Link } to='/Childcare/4'>Perez EAC YMCA</Nav.Link>
                             </Nav>
                         </Row>
                     </Col>

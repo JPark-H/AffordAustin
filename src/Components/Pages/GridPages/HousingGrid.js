@@ -43,7 +43,7 @@ const HousingGrid = () => {
                     <Row>
                         <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
                     </Row>
-                        <h1 className="results">Showing {houses.length} Results</h1>
+                        <h1 className="results">Showing {houses.length} Results Out Of {totalNumHouses}</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
                         {loading ? <h3 className="results">Loading</h3> : houses.map(house => {
                             return (

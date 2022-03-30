@@ -115,9 +115,9 @@ const HousingData = ({housing}) => {
                   <Row className="side_bar_info">
                       <h4>Nearby Childcare Services</h4>
                       <Nav>
-                        <Nav.Link as={ Link } to='/Childcare/1'>Laura Bush YMCA</Nav.Link>
-                        <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Art-es-Inc</Nav.Link>
-                        <Nav.Link as={ Link } to='/Childcare/4'>Stepping Stone School VIII</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/1'>Lil Lions Learning Center</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Del Alma</Nav.Link>
+                        <Nav.Link as={ Link } to='/Childcare/4'>Perez EAC YMCA</Nav.Link>
                       </Nav>
                   </Row>
               </Col>

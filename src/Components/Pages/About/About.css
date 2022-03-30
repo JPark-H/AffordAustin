@@ -39,3 +39,16 @@
   margin-bottom: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.tool_about_list {
+  margin-bottom: 10px;
+  min-width: 280px;
+  max-width: 250px;
+  height: 420px;
+  background-color: white;
+}
+
+.tool_logo {
+  width: 150px;
+  height:auto;
+}
