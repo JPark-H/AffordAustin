@@ -50,3 +50,16 @@ deploy_development:
   script:
     - cd backend
     - /root/.local/bin/eb deploy affordaustin-api
+
+deploy_production:
+  image: python:3.6-stretch
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "main"
+  stage: deploy
+  before_script:
+    - pip install awsebcli --upgrade --user
+    - git checkout main
+  script:
+    - cd back-end
+    - /root/.local/bin/eb deploy test-api-prod
