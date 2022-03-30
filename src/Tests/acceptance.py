@@ -63,12 +63,6 @@ def childcare_pages():
         driver.get(f'{URL}#/Childcare/{id}')
         driver.close()
 
-if __name__ == '__main__':
-    navigation()
-    housing_pages()
-    job_pages()
-    childcare_pages()
-        
 def grids():
     for model in MODELS:
         driver = webdriver.Remote(
@@ -84,3 +78,9 @@ def grids():
         assert len(links) >= 9
 
         driver.close()
+
+if __name__ == '__main__':
+    navigation()
+    housing_pages()
+    job_pages()
+    childcare_pages()
