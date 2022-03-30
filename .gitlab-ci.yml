@@ -16,9 +16,6 @@ python_unit_tests:
     - python3 tests.py
 
 test_jest:
-  image:
-    name: mcgenius/pp_mocha
-    entrypoint: [""]
   stage: jstest
   script:
     - npm i
