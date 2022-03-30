@@ -17,6 +17,7 @@ options.add_argument('--disable-gpu')
 URL = 'https://development.d4sk31j15mtaj.amplifyapp.com/'
 MODELS = ['#/Housing/', '#/Childcare/', '#/Jobs/']
 
+# 5 TESTS
 def navigation():
     driver = webdriver.Remote(
         command_executor='http://gitlab-selenium-server:4545/wd/hub',
@@ -39,6 +40,7 @@ def navigation():
 
     driver.close()
 
+# 100 TESTS
 def housing_pages():
     for id in range(1, 101):
         driver = webdriver.Remote(
@@ -47,6 +49,7 @@ def housing_pages():
         driver.get(f'{URL}#/Housing/{id}')
         driver.close()
 
+# 100 TESTS
 def job_pages():
     for id in range(1, 101):
         driver = webdriver.Remote(
@@ -55,6 +58,7 @@ def job_pages():
         driver.get(f'{URL}#/Jobs/{id}')
         driver.close()
 
+# 100 TESTS
 def childcare_pages():
     for id in range(1, 101):
         driver = webdriver.Remote(
@@ -63,6 +67,7 @@ def childcare_pages():
         driver.get(f'{URL}#/Childcare/{id}')
         driver.close()
 
+# 3 TESTS
 def grids():
     for model in MODELS:
         driver = webdriver.Remote(
