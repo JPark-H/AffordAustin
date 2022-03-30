@@ -17,7 +17,7 @@ e905c8d7c8701c4f7696e0f3ca02d6f9ebbdaf25
 
 ## Phase Leaders
 
-Phase 1: Scarlett Shires
+Phase 1: Scarlett Shires\
 Phase 2: Sabeer Shahzad
 
 ## Gitlab Pipelines
