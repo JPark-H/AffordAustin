@@ -61,5 +61,5 @@ deploy_production:
     - pip install awsebcli --upgrade --user
     - git checkout main
   script:
-    - cd back-end
-    - /root/.local/bin/eb deploy test-api-prod
+    - cd backend
+    - /root/.local/bin/eb deploy affordaustin-api

@@ -54,7 +54,7 @@ function GitTotals(props) {
                   className="mt-2"
                   style={{ fontSize: "50px", color: "black" }}
                 />
-                <Card.Subtitle className="m-2 card_names">0</Card.Subtitle>
+                <Card.Subtitle className="m-2 card_names">66</Card.Subtitle>
               </Card.Body>
             </Card>
           </Col>
