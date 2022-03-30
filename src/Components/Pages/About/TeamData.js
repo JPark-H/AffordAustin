@@ -64,7 +64,7 @@ const teamInfo = [
 	{
 		name: "Sabeer Shahzad",
 		picture: Sabeer,
-		role: "Phase X Leader",
+		role: "Phase II Leader",
 		stack: "Back-End",
 		bio:
 			"Hello, I'm a senior CS major at UT Austin. I’m from Flower Mound\
