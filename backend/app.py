@@ -2,7 +2,6 @@ from flask import Flask, abort, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
-from flask_restless import APIManager
 
 import os, sys
 
@@ -18,60 +17,98 @@ marsh = Marshmallow(app)
 
 db.Model.metadata.reflect(db.engine)
 
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return response
+# do we need this :o
+# @app.after_request
+# def add_cors_headers(response):
+#     response.headers["Access-Control-Allow-Origin"] = "*"
+#     response.headers["Access-Control-Allow-Credentials"] = "true"
+#     return response
 
 
 class Housing(db.Model):
-    __table__ = db.Model.metadata.tables["housing"]
+    __table__ = db.Model.metadata.tables['housing']
 
+class HousingSchema(marsh.Schema):
+    class Meta:
+        fields = ('_image', '_map', 'project_name', 'tenure', 'unit_type',
+         'total_units', 'ground_lease', 'zip_code', 'property_management_company',
+          'status', 'property_manager_phone_number', 'address', 'developer',
+           'affordability_expiration_year', 'housing.units_30_mfi', 'housing.units_40_mfi',
+            'housing.units_50_mfi', 'housing.units_60_mfi', 'housing.units_65_mfi',
+             'housing.units_80_mfi', 'housing.units_100_mfi')
 
 class Childcare(db.Model):
-    __table__ = db.Model.metadata.tables["childcare"]
+    __table__ = db.Model.metadata.tables['childcare']
 
-
-#
-# class ChildcareSchema(marsh.Schema):
-#     class Meta:
-#         fields = ('operation_id', 'operation_type', 'operation_number', 'operation_name')
-
-#         '''
-#         all fields: ('operation_id', 'operation_type', 'operation_number', 'operation_name',
-#        'programs_provided', 'location_address', 'mailing_address',
-#        'phone_number', 'county', 'administrator_director_name',
-#        'type_of_issuance', 'issuance_date', 'conditions_on_permit',
-#        'accepts_child_care_subsidies', 'hours_of_operation',
-#        'days_of_operation', 'total_capacity', 'open_foster_homes',
-#        'open_branch_offices', 'licensed_to_serve_ages', 'corrective_action',
-#        'adverse_action', 'temporarily_closed', 'deficiency_high',
-#        'deficiency_medium_high', 'deficiency_medium', 'deficiency_medium_low',
-#        'deficiency_low', 'total_inspections', 'total_assessments',
-#        'total_reports', 'total_self_reports', 'location_address_geo',
-#        'email_address', 'website_address')
-#         '''
+class ChildcareSchema(marsh.Schema):
+    class Meta:
+        fields = ('Location_address', 'county', 'days_of_operation', 'hours_of_operation',
+         'licensed_to_serv_ages', '_image', 'operation_name', '_map', 'mailing_address',
+          'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
+           'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
+            'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
+             'issuance_date', 'type_of_issuance')
 
 
 class Job(db.Model):
-    __table__ = db.Model.metadata.tables["jobs"]
+    __table__ = db.Model.metadata.tables['jobs']
+
+class JobSchema(marsh.Schema):
+    class Meta:
+        fields = ('_map', '_image', 'detected_extensions', 'extensions',
+         'title', 'company_name', 'reviews', 'rating', 'description', 
+         'apply_link', 'via', 'rating_link')
 
 
-manager = APIManager(app, session=db.session)
+house_schema = HousingSchema()
+houses_schema = HousingSchema(many=True)
 
-# search bar doesn't allow for upper-case Housing
-manager.create_api(Housing, primary_key="id", collection_name="housing", page_size=21)
-manager.create_api(
-    Childcare, primary_key="id", collection_name="childcare", page_size=21
-)
-manager.create_api(Job, primary_key="id", collection_name="jobs", page_size=21)
+childcare_schema = ChildcareSchema()
+childcares_schema = ChildcareSchema(many=True)
+
+job_schema = JobSchema()
+jobs_schema = JobSchema(many=True)
+
+
+@app.route("/api/housing")
+def get_housing():
+    housing_pages = Housing.query.all()
+    results = houses_schema.dump(housing_pages)
+    return jsonify(results)
+
+@app.route("/api/housing/<int:id>")
+def get_housing_page(id):
+    single_house = Housing.query.get(id)
+    return house_schema.jsonify(single_house)
+
+
+@app.route("/api/childcare")
+def get_childcare():
+    childcare_pages = Childcare.query.all()
+    results = childcares_schema.dump(childcare_pages)
+    return jsonify(results)
+
+@app.route("/api/childcare/<int:id>")
+def get_childcare_page(id):
+    single_childcare = Childcare.query.get(id)
+    return childcare_schema.jsonify(single_childcare) 
+
+
+@app.route("/api/jobs")
+def get_jobs():
+    jobs_pages = Job.query.all()
+    results = jobs_schema.dump(jobs_pages)
+    return jsonify(results)
+
+@app.route("/api/jobs/<int:id>")
+def get_job_page(id):
+    single_job = Job.query.get(id)
+    return job_schema.jsonify(single_job)
 
 
 @app.route("/")
 def home():
-    return "Sally sells sea shells by the sea shore"
+    return "all my homies hate flask-restless"
 
 
 if __name__ == "__main__":
