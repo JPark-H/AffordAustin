@@ -1,4 +1,5 @@
 from flask import Flask, abort, jsonify, request
+import flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
@@ -70,41 +71,70 @@ job_schema = JobSchema()
 jobs_schema = JobSchema(many=True)
 
 
-@app.route("/api/housing")
-def get_housing():
-    housing_pages = Housing.query.all()
-    results = houses_schema.dump(housing_pages)
-    return jsonify(results)
+@app.route("/api/<string:model>")
+def get_housing(model):
+    args = request.args
+    # print(args['page'])
+    if (model == 'housing'):
+        model_class = Housing
+        model_schema = houses_schema
+    elif (model == 'childcare'):
+        model_class = Childcare
+        model_schema = childcares_schema
+    elif (model == 'jobs'):
+        model_class = Job
+        model_schema = jobs_schema
+    else:
+        print("{}er? I barely know 'er!".format(model))
+        return {}
+
+    if 'page[number]' not in args:
+        print('page number not specified. Fetching all instances of ')
+        model_pages = model_class.query.all()
+        results = model_schema.dump(model_pages)
+        return jsonify(results)
+    else:
+        
+        page_num = int(args['page[number]'].replace('{', '').replace('}', ''))
+        if 'page[size]' in args:
+            page_size = int(args['page[size]'].replace('{', '').replace('}', ''))
+        else:
+            print('page size not specified. Defaulting to 9')
+            page_size = 9
+
+        base_query = db.session.query(model_class)
+        page = base_query.paginate(page=page_num, per_page=page_size)
+        dump = model_schema.dump(page.items)
+
+        metadata = {
+            "page": page.page,
+            "num_responses": len(dump),
+            "pages": page.pages,
+            "total_count": page.total,
+            "prev_page": page.prev_num,
+            "next_page": page.next_num,
+            "has_next": page.has_next,
+            "has_prev": page.has_prev,
+        }
+        
+        return jsonify({'attributes': dump, 'metadata': metadata})
+   
+    
 
 @app.route("/api/housing/<int:id>")
 def get_housing_page(id):
     single_house = Housing.query.get(id)
     return house_schema.jsonify(single_house)
 
-
-@app.route("/api/childcare")
-def get_childcare():
-    childcare_pages = Childcare.query.all()
-    results = childcares_schema.dump(childcare_pages)
-    return jsonify(results)
-
 @app.route("/api/childcare/<int:id>")
 def get_childcare_page(id):
     single_childcare = Childcare.query.get(id)
     return childcare_schema.jsonify(single_childcare) 
 
-
-@app.route("/api/jobs")
-def get_jobs():
-    jobs_pages = Job.query.all()
-    results = jobs_schema.dump(jobs_pages)
-    return jsonify(results)
-
 @app.route("/api/jobs/<int:id>")
 def get_job_page(id):
     single_job = Job.query.get(id)
     return job_schema.jsonify(single_job)
-
 
 @app.route("/")
 def home():
