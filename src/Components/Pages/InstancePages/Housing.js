@@ -15,13 +15,13 @@ const Housing = () => {
 
   const getInstanceData = useCallback (async () => {
     setLoading(true);
-    // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-    // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+    axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+    axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
     let data;
     try {
       // data = await axios.get(`http://localhost:5000/api/housing/${id}`);
       data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
-      setInstanceData(data.data);
+      setInstanceData(data.data.data.attributes);
     } catch (error) {
       setIsValidId(false);
     }
@@ -100,7 +100,7 @@ const HousingData = ({housing}) => {
                   <Row className='side_bar_info'>
                     <h4>Contact Information</h4>
                     <ListGroup>
-                      <ListGroup.Item>Management Company: {housing.property_management_company}</ListGroup.Item>
+                      <ListGroup.Item>Management Company: {housing.units_30_mfi}</ListGroup.Item>
                       <ListGroup.Item>Phone Number: {housing.property_manager_phone_number}</ListGroup.Item>
                     </ListGroup>
                   </Row>

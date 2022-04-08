@@ -3,12 +3,11 @@ import flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS
 
 import os, sys
 
 app = Flask(__name__)
-CORS(app)
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -20,11 +19,11 @@ marsh = Marshmallow(app)
 db.Model.metadata.reflect(db.engine)
 
 # do we need this :o
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    return response
+# @app.after_request
+# def add_cors_headers(response):
+#     response.headers["Access-Control-Allow-Origin"] = "*"
+#     response.headers["Access-Control-Allow-Credentials"] = "true"
+#     return response
 
 
 class Housing(db.Model):
@@ -32,20 +31,20 @@ class Housing(db.Model):
 
 class HousingSchema(marsh.Schema):
     class Meta:
-        fields = ('id', '_image', '_map', 'project_name', 'tenure', 'unit_type',
+        fields = ('_image', '_map', 'project_name', 'tenure', 'unit_type',
          'total_units', 'ground_lease', 'zip_code', 'property_management_company',
           'status', 'property_manager_phone_number', 'address', 'developer',
-           'affordability_expiration_year', 'units_30_mfi', 'units_40_mfi',
-            'units_50_mfi', 'units_60_mfi', 'units_65_mfi',
-             'units_80_mfi', 'units_100_mfi')
+           'affordability_expiration_year', 'housing.units_30_mfi', 'housing.units_40_mfi',
+            'housing.units_50_mfi', 'housing.units_60_mfi', 'housing.units_65_mfi',
+             'housing.units_80_mfi', 'housing.units_100_mfi')
 
 class Childcare(db.Model):
     __table__ = db.Model.metadata.tables['childcare']
 
 class ChildcareSchema(marsh.Schema):
     class Meta:
-        fields = ('id', 'location_address', 'county', 'days_of_operation', 'hours_of_operation',
-         'licensed_to_serve_ages', '_image', 'operation_name', '_map', 'mailing_address',
+        fields = ('Location_address', 'county', 'days_of_operation', 'hours_of_operation',
+         'licensed_to_serv_ages', '_image', 'operation_name', '_map', 'mailing_address',
           'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
            'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
             'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
@@ -57,7 +56,7 @@ class Job(db.Model):
 
 class JobSchema(marsh.Schema):
     class Meta:
-        fields = ('id', '_map', '_image', 'detected_extensions', 'extensions',
+        fields = ('_map', '_image', 'detected_extensions', 'extensions',
          'title', 'company_name', 'reviews', 'rating', 'description', 
          'apply_link', 'via', 'rating_link')
 
@@ -111,14 +110,14 @@ def get_housing(model):
             "page": page.page,
             "num_responses": len(dump),
             "pages": page.pages,
-            "total": page.total,
+            "total_count": page.total,
             "prev_page": page.prev_num,
             "next_page": page.next_num,
             "has_next": page.has_next,
             "has_prev": page.has_prev,
         }
         
-        return jsonify({'data' : {'attributes': dump, 'meta': metadata}})
+        return jsonify({'attributes': dump, 'metadata': metadata})
    
     
 

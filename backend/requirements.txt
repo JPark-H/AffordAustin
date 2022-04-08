@@ -5,4 +5,3 @@ Flask-Marshmallow==0.14.0
 Flask-Restless-NG==2.2.9
 psycopg2==2.9.3
 marshmallow-sqlalchemy==0.27.0
-flask_cors==3.0.10

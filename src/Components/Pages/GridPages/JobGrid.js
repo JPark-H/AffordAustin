@@ -15,13 +15,13 @@ const JobGrid = () => {
 
     const getJobData = useCallback (async (query) => {
         setLoading(true);
-        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         // const endpoint = `http://localhost:5000/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
-        setTotalNumJobs(data.data.data.meta.total);
-        setJobs(data.data.data.attributes);
+        setTotalNumJobs(data.data.meta.total);
+        setJobs(data.data.data);
         setLoading(false);
     }, [currentPage, jobsPerPage]);
 
@@ -45,10 +45,9 @@ const JobGrid = () => {
                 <h1 className="results">Showing {jobs.length} Results Out Of {totalNumJobs}</h1>
                 <Row className="g-3 justify-content-center" xs='auto'>
                     {loading ? <h3 className="results">Loading</h3> : jobs.map(job => {
-
                         return (
                         <Col key={job.id}>
-                            <InstanceCard job={job} id={job.id}/>
+                            <InstanceCard job={job.attributes} id={job.id}/>
                         </Col>);
                     })}
                 </Row>
