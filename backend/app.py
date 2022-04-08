@@ -35,17 +35,17 @@ class HousingSchema(marsh.Schema):
         fields = ('id', '_image', '_map', 'project_name', 'tenure', 'unit_type',
          'total_units', 'ground_lease', 'zip_code', 'property_management_company',
           'status', 'property_manager_phone_number', 'address', 'developer',
-           'affordability_expiration_year', 'housing.units_30_mfi', 'housing.units_40_mfi',
-            'housing.units_50_mfi', 'housing.units_60_mfi', 'housing.units_65_mfi',
-             'housing.units_80_mfi', 'housing.units_100_mfi')
+           'affordability_expiration_year', 'units_30_mfi', 'units_40_mfi',
+            'units_50_mfi', 'units_60_mfi', 'units_65_mfi',
+             'units_80_mfi', 'units_100_mfi')
 
 class Childcare(db.Model):
     __table__ = db.Model.metadata.tables['childcare']
 
 class ChildcareSchema(marsh.Schema):
     class Meta:
-        fields = ('id', 'Location_address', 'county', 'days_of_operation', 'hours_of_operation',
-         'licensed_to_serv_ages', '_image', 'operation_name', '_map', 'mailing_address',
+        fields = ('id', 'location_address', 'county', 'days_of_operation', 'hours_of_operation',
+         'licensed_to_serve_ages', '_image', 'operation_name', '_map', 'mailing_address',
           'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
            'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
             'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
