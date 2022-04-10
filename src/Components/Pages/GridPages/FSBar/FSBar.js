@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from './Pagination';
 import HousingFilterBar from './FilterBar/HousingFilterBar';
 import JobFilterBar from './FilterBar/JobFilterBar';
+import ChildcareFilterBar from './FilterBar/ChildcareFilterBar';
 import HousingSortBar from './SortBar/HousingSortBar';
 import JobSortBar from './SortBar/JobSortBar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -62,7 +63,7 @@ const FilterBar = ({sendQuery, model}) => {
     if (model === "Housing") {
         return <HousingFilterBar sendQuery={sendQuery} />;
     } else if (model === "Childcare") {
-        return <></>;
+        return <ChildcareFilterBar sendQuery={sendQuery} />;
     } else {
         return <JobFilterBar sendQuery={sendQuery} />;
     }
