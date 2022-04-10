@@ -45,7 +45,7 @@ const HousingGrid = () => {
                         <h1 className="grid_header">Housing</h1>
                     </Row>
                     <Row>
-                        <FSBar totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery}/>
+                        <FSBar totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery} model="Housing"/>
                     </Row>
                     <Row className="justify-content-center">
                         {loading ? <Spinner animation='border' role="status"/> : <></>}

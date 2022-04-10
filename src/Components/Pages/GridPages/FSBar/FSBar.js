@@ -3,11 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
 import Paginate from './Pagination';
 import HousingFilterBar from './FilterBar/HousingFilterBar';
+import JobFilterBar from './FilterBar/JobFilterBar';
 import HousingSortBar from './SortBar/HousingSortBar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconSearch } from '@aws-amplify/ui-react';
 
-const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) => {
+const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery, model}) => {
     const [filterQuery, setFilterQuery] = useState('');
     const [sortQuery, setSortQuery] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +23,6 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) =>
             fullQuery += '&';
         }
         fullQuery += searchQuery;
-        console.log(fullQuery);
         sendQuery(fullQuery);
     }, [filterQuery, sortQuery, searchQuery]);
 
@@ -46,8 +46,8 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) =>
     const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit) : (first_result + totalInstances % pageLimit);
     return (
         <Container className='grid_fs_bar'>
-            <Row className='grid_filters'><HousingFilterBar sendQuery={updateFilterQuery}/></Row>
-            <Row className='grid_sorters'><HousingSortBar sendQuery={updateSortQuery}/></Row>
+            <Row className='grid_filters'><FilterBar sendQuery={updateFilterQuery} model={model} /></Row>
+            <Row className='grid_sorters'><SortBar sendQuery={updateSortQuery} model={model} /></Row>
             <Row className='grid_ps_bar' xs='auto'>
                 <Col style={{marginRight:'auto'}}><Paginate totalInstances={totalInstances} pageLimit={pageLimit} paginate={paginate} /></Col>
                 <Col><h3>Showing Results {first_result}-{last_result} of {totalInstances}</h3></Col>
@@ -55,6 +55,26 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) =>
             </Row>
         </Container>
     );
+}
+
+const FilterBar = ({sendQuery, model}) => {
+    if (model === "Housing") {
+        return <HousingFilterBar sendQuery={sendQuery} />;
+    } else if (model === "Childcare") {
+        return <></>;
+    } else {
+        return <JobFilterBar sendQuery={sendQuery} />;
+    }
+}
+
+const SortBar = ({sendQuery, model}) => {
+    if (model === "Housing") {
+        return <HousingSortBar sendQuery={sendQuery} />;
+    } else if (model === "Childcare") {
+        return <></>;
+    } else {
+        return <></>;
+    }
 }
 
 const SearchBar = ({sendQuery}) => {

@@ -2,7 +2,7 @@ import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Card, Row, Col, Spinner } from 'react-bootstrap';
 import React, { useState, useEffect, useCallback } from 'react';
-import Paginate from '../../Pagination/Pagination';
+import FSBar from './FSBar/FSBar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -12,9 +12,11 @@ const JobGrid = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalNumJobs, setTotalNumJobs] = useState(1);
     const [jobsPerPage, setJobsPerPage] = useState(21);
+    const [query, setQuery] = useState('');
 
-    const getJobData = useCallback (async (query) => {
+    const getJobData = useCallback (async () => {
         setLoading(true);
+        console.log(query);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
         const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
@@ -22,15 +24,19 @@ const JobGrid = () => {
         setTotalNumJobs(data.data.meta.total);
         setJobs(data.data.data);
         setLoading(false);
-    }, [currentPage, jobsPerPage]);
+    }, [currentPage, jobsPerPage, query]);
 
     useEffect(() => {
         getJobData('');
-    }, [currentPage, getJobData]);
+    }, [currentPage, query, getJobData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
     }
+
+    const getQuery = (new_query) => {
+        setQuery(new_query);
+    };
 
     return (
         <div className='grid mx-auto'>
@@ -39,11 +45,10 @@ const JobGrid = () => {
                     <h1 className='grid_header'>Jobs</h1>
                 </Row>
                 <Row>
-                     <Paginate totalInstances={totalNumJobs} pageLimit={jobsPerPage} paginate={paginate} />
+                    <FSBar totalInstances={totalNumJobs} pageLimit={jobsPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery} model="Job"/>
                 </Row>
                 <Row className="justify-content-center">
-                    {loading ? <Spinner animation='border' role="status"/> : 
-                        <h1 className="results">Showing {jobs.length} Results Out Of {totalNumJobs}</h1>}
+                    {loading ? <Spinner animation='border' role="status"/> : <></>}
                 </Row>
                 <Row className="g-3 justify-content-center" xs='auto'>
                     {loading ? <></> : jobs.map(job => {
