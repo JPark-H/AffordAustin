@@ -5,6 +5,7 @@ import Paginate from './Pagination';
 import HousingFilterBar from './FilterBar/HousingFilterBar';
 import JobFilterBar from './FilterBar/JobFilterBar';
 import HousingSortBar from './SortBar/HousingSortBar';
+import JobSortBar from './SortBar/JobSortBar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconSearch } from '@aws-amplify/ui-react';
 
@@ -73,7 +74,7 @@ const SortBar = ({sendQuery, model}) => {
     } else if (model === "Childcare") {
         return <></>;
     } else {
-        return <></>;
+        return <JobSortBar sendQuery={sendQuery} />;
     }
 }
 
