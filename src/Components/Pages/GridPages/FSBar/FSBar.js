@@ -7,6 +7,7 @@ import JobFilterBar from './FilterBar/JobFilterBar';
 import ChildcareFilterBar from './FilterBar/ChildcareFilterBar';
 import HousingSortBar from './SortBar/HousingSortBar';
 import JobSortBar from './SortBar/JobSortBar';
+import ChildcareSortBar from './SortBar/ChildcareSortBar';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IconSearch } from '@aws-amplify/ui-react';
 
@@ -73,7 +74,7 @@ const SortBar = ({sendQuery, model}) => {
     if (model === "Housing") {
         return <HousingSortBar sendQuery={sendQuery} />;
     } else if (model === "Childcare") {
-        return <></>;
+        return <ChildcareSortBar sendQuery={sendQuery} />;
     } else {
         return <JobSortBar sendQuery={sendQuery} />;
     }
