@@ -7,6 +7,7 @@ from flask_marshmallow import Marshmallow
 import os, sys
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config[
