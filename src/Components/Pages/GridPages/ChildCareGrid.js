@@ -1,9 +1,9 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Card, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Card, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react';
-import FSBar from './FSBar/FSBar';
+import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
 
 const ChildCareGrid = () => {
@@ -12,30 +12,25 @@ const ChildCareGrid = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalNumPrograms, setTotalNumPrograms] = useState(1);
     const [programsPerPage, setProgramsPerPage] = useState(21);
-    const [query, setQuery] = useState('');
 
-    const getChildCareData = useCallback (async () => {
+    const getChildCareData = useCallback (async (query) => {
         setLoading(true);
-        console.log(query);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        // const endpoint = `http://localhost:5000/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         const endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumPrograms(data.data.meta.total);
         setPrograms(data.data.data);
         setLoading(false);
-    }, [currentPage, programsPerPage, query]);
+    }, [currentPage, programsPerPage]);
 
     useEffect(() => {
         getChildCareData('');
-    }, [currentPage, query, getChildCareData]);
+    }, [currentPage, getChildCareData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
-    };
-
-    const getQuery = (new_query) => {
-        setQuery(new_query);
     };
 
     return (
@@ -46,13 +41,11 @@ const ChildCareGrid = () => {
                         <h1 className='grid_header'>Child Care</h1>
                     </Row>
                     <Row>
-                    <FSBar totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery} model="Childcare"/>
+                        <Paginate totalInstances={totalNumPrograms} pageLimit={programsPerPage} paginate={paginate} />
                     </Row>
-                    <Row className="justify-content-center">
-                        {loading ? <Spinner animation='border' role="status"/> : <></>}
-                    </Row>
+                    <h1 className="results">Showing {programs.length} Results Out Of {totalNumPrograms}</h1>
                     <Row className="g-3 justify-content-center" xs='auto'>
-                        {loading ? <></> : programs.map(program => {
+                        {loading ? <h3 className="results">Loading</h3> : programs.map(program => {
                             return (
                             <Col key={program.id}>
                                 <InstanceCard child_care={program.attributes} id={program.id}/>
