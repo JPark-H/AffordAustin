@@ -138,54 +138,50 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) =>
 
 //Change values to queries
 const FilterBar = ({sendQuery}) => {
-    const [numberOfUnits, setNumberOfUnits] = useState('');
-    const [tenure, setTenure] = useState('');
-    const [unitType, setUnitType] = useState('');
-    const [zipCode, setZipCode] = useState('');
-    const [isGround, setIsGround] = useState('');
+    const [form, setForm] = useState({
+        'NumUnitsFilter': '', 
+        'TenureFilter': '', 
+        'UnitTypeFilter': '', 
+        'ZipcodeFilter': '', 
+        'GroundLeaseFilter': ''
+    });
 
-    const handleChange = (e) => {
-        const attribute = e.target.id;
-        const attribute_value = e.target.value;
-        if (attribute === 'NumUnitsFilter') {
-            setNumberOfUnits(attribute_value);
-        } else if (attribute === 'TenureFilter') {
-            setTenure(attribute_value);
-        } else if (attribute === 'UnitTypeFilter') {
-            setUnitType(attribute_value);
-        } else if (attribute === 'GroundLeaseFilter') {
-            setIsGround(attribute_value);
-        }
-    };
-
-    const handleZipSubmit = (e) => {
-        setZipCode(e.target.value);
-    };
+    const setField = (field, value) => {
+        setForm({
+            ...form,
+            [field]: value
+        })
+    }
 
     useEffect(() => {
-        let isNotEmpty = numberOfUnits !== '';
-        let filterQuery = numberOfUnits;
-        if ( isNotEmpty && tenure !== '') {
+        let isNotEmpty = form['NumUnitsFilter'] !== '';
+        let filterQuery = form['NumUnitsFilter'];
+
+        if ( isNotEmpty && form['TenureFilter'] !== '') {
             filterQuery += '&';
         }
-        filterQuery += tenure;
-        isNotEmpty = isNotEmpty || tenure !== '';
-        if (isNotEmpty && unitType !== '') {
+        filterQuery += form['TenureFilter'];
+        isNotEmpty = isNotEmpty || form['TenureFilter'] !== '';
+
+        if (isNotEmpty && form['UnitTypeFilter'] !== '') {
             filterQuery += '&';
         }
-        filterQuery += unitType;
-        isNotEmpty = isNotEmpty || unitType !== '';
-        if ( isNotEmpty && isGround !== '') {
+        filterQuery += form['UnitTypeFilter'];
+        isNotEmpty = isNotEmpty || form['UnitTypeFilter'] !== '';
+
+        if (isNotEmpty && form['ZipcodeFilter'] !== '') {
             filterQuery += '&';
         }
-        filterQuery += isGround;
-        isNotEmpty = isNotEmpty || isGround !== '';
-        if (isNotEmpty && zipCode !== '') {
+        filterQuery += form['ZipcodeFilter'];
+        isNotEmpty = isNotEmpty || form['ZipcodeFilter'] !== '';
+
+        if ( isNotEmpty && form['GroundLeaseFilter'] !== '') {
             filterQuery += '&';
         }
-        filterQuery += zipCode;
+        filterQuery += form['GroundLeaseFilter'];
+        
         sendQuery(filterQuery);
-    }, [numberOfUnits, tenure, unitType, zipCode, isGround])
+    }, [form])
 
     return (
         <div style={{ textAlign:'center' }}>
@@ -194,10 +190,9 @@ const FilterBar = ({sendQuery}) => {
                 <Row className="g-3 justify-content-center" xs='auto'>
                     <Form.Group controlId='NumUnitsFilter' as={Col}>
                         <Form.Label>Number of Units</Form.Label>
-                        {/* Fix values to be queries */}
                         <Form.Select
                             className='filter_select'
-                            onChange={e => {handleChange(e)}}
+                            onChange={e => setField('NumUnitsFilter', e.target.value)}
                         >
                             <option value=''>Select #Units</option>
                             <option value='5'>&lt;5</option>
@@ -211,7 +206,7 @@ const FilterBar = ({sendQuery}) => {
                         <Form.Label>Tenure</Form.Label>
                         <Form.Select
                             className='filter_select'
-                            onChange={e => {handleChange(e)}}
+                            onChange={e => setField('TenureFilter', e.target.value)}
                         >
                             <option value=''>Select Tenure</option>
                             <option value='Rental'>Rental</option>
@@ -222,7 +217,7 @@ const FilterBar = ({sendQuery}) => {
                         <Form.Label>Unit Type</Form.Label>
                         <Form.Select
                             className='filter_select'
-                            onChange={e => {handleChange(e)}}
+                            onChange={e => setField('UnitTypeFilter', e.target.value)}
                         >
                             <option value=''>Select Type</option>
                             <option value='Single Family'>Single Family</option>
@@ -241,7 +236,7 @@ const FilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                handleZipSubmit(e);
+                                    setField('ZipcodeFilter', e.target.value);
                                 }
                             }}
                         />
@@ -249,8 +244,8 @@ const FilterBar = ({sendQuery}) => {
                     <Form.Group controlId='GroundLeaseFilter' as={Col}>
                         <Form.Label>Ground Lease</Form.Label>
                         <Form.Select 
-                            onChange={e => {handleChange(e)}} 
                             className='filter_select'
+                            onChange={e => setField('GroundLeaseFilter', e.target.value)}
                         >
                             <option value=''>Ground Lease</option>
                             <option value='yes'>Available</option>
