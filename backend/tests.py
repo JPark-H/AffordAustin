@@ -90,7 +90,7 @@ class UnitTests(TestCase):
             "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
         )
         # self.assertEqual(req.status_code, 200)
-        # self.assertFalse(req.json["data"])
+        self.assertFalse(req.json["data"])
 
 
 if __name__ == "__main__":
