@@ -13,8 +13,9 @@ const HousingGrid = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalNumHouses, setTotalNumHouses] = useState(1);
     const [housesPerPage, setHousesPerPage] = useState(21);
+    const [query, setQuery] = useState('');
 
-    const getHousingData = useCallback (async (query) => {
+    const getHousingData = useCallback (async () => {
         setLoading(true);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
@@ -23,14 +24,18 @@ const HousingGrid = () => {
         setTotalNumHouses(data.data.meta.total);
         setHouses(data.data.data);
         setLoading(false);
-    }, [currentPage, housesPerPage]);
+    }, [currentPage, housesPerPage, query]);
 
     useEffect(() => {
-        getHousingData('');
-    }, [currentPage, getHousingData]);
+        getHousingData();
+    }, [currentPage, query, getHousingData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
+    };
+
+    const getQuery = (new_query) => {
+        setQuery(new_query);
     };
 
     return (
@@ -41,7 +46,7 @@ const HousingGrid = () => {
                         <h1 className="grid_header">Housing</h1>
                     </Row>
                     <Row>
-                        <FSBar totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} currentPage={currentPage}/>
+                        <FSBar totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery}/>
                     </Row>
                     <Row className="justify-content-center">
                         {loading ? <Spinner animation='border' role="status"/> : <></>}
@@ -81,30 +86,106 @@ const InstanceCard = ({ housing, housing_id}) => {
     )
 };
 
-const FSBar = ({totalInstances, pageLimit, paginate, currentPage}) => {
+const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery}) => {
+    const [filterQuery, setFilterQuery] = useState('');
+    const [sortQuery, setSortQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const getQuery = useCallback(() => {
+        let fullQuery = filterQuery;
+        if (filterQuery !== '' && sortQuery !== '') {
+            fullQuery += '&';
+        }
+        fullQuery += sortQuery;
+        if ((filterQuery !== '' || sortQuery !== '') && searchQuery !== '') {
+            fullQuery += '&';
+        }
+        fullQuery += searchQuery;
+        console.log(fullQuery);
+        sendQuery(fullQuery);
+    }, [filterQuery, sortQuery, searchQuery]);
+
+    const updateFilterQuery = (query) => {
+        setFilterQuery(query);
+    }
+
+    const updateSortQuery = (query) => {
+        setSortQuery(query);
+    }
+
+    const updateSearchQuery = (query) => {
+        setSearchQuery(query);
+    }
+
+    useEffect(() => {
+        getQuery();
+    }, [filterQuery, sortQuery, searchQuery, getQuery])
+
     const first_result = ((currentPage - 1) * pageLimit) + 1;
     const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit) : (first_result + totalInstances % pageLimit);
     return (
         <Container className='grid_fs_bar' style={{backgroundColor:'white', width:'90%', marginBottom:'15px', outlineStyle:'solid', outlineColor:'lightgray', outlineWidth:'thin', paddingTop:'10px'}}>
-            <Row className='grid_filters' style={{paddingBottom:"20px", marginLeft:'15px', marginRight:'15px'}}><FilterBar /></Row>
-            <Row className='grid_sorters' style={{paddingBottom:'20px', marginLeft:'15px', marginRight:'15px'}}><SortBar /></Row>
+            <Row className='grid_filters' style={{paddingBottom:"20px", marginLeft:'15px', marginRight:'15px'}}><FilterBar sendQuery={updateFilterQuery}/></Row>
+            <Row className='grid_sorters' style={{paddingBottom:'20px', marginLeft:'15px', marginRight:'15px'}}><SortBar sendQuery={updateSortQuery}/></Row>
             <Row className='grid_ps_bar' xs='auto' style={{marginLeft:'15px', marginRight:'15px'}}>
                 <Col style={{marginRight:'auto'}}><Paginate totalInstances={totalInstances} pageLimit={pageLimit} paginate={paginate} /></Col>
                 <Col><h3 className="result">Showing Results {first_result}-{last_result} of {totalInstances}</h3></Col>
-                <Col style={{marginLeft:'auto'}}><SearchBar /></Col>
+                <Col style={{marginLeft:'auto'}}><SearchBar sendQuery={updateSearchQuery}/></Col>
             </Row>
         </Container>
     );
 }
 
-const FilterBar = () => {
+//Change values to queries
+const FilterBar = ({sendQuery}) => {
+    const [numberOfUnits, setNumberOfUnits] = useState('');
+    const [tenure, setTenure] = useState('');
+    const [unitType, setUnitType] = useState('');
+    const [zipCode, setZipCode] = useState('');
+    const [isGround, setIsGround] = useState('');
+
     const handleChange = (e) => {
-        console.log("Submit");
+        const attribute = e.target.id;
+        const attribute_value = e.target.value;
+        if (attribute === 'NumUnitsFilter') {
+            setNumberOfUnits(attribute_value);
+        } else if (attribute === 'TenureFilter') {
+            setTenure(attribute_value);
+        } else if (attribute === 'UnitTypeFilter') {
+            setUnitType(attribute_value);
+        } else if (attribute === 'GroundLeaseFilter') {
+            setIsGround(attribute_value);
+        }
     };
 
     const handleZipSubmit = (e) => {
-        console.log("Zip!");
+        setZipCode(e.target.value);
     };
+
+    useEffect(() => {
+        let isNotEmpty = numberOfUnits !== '';
+        let filterQuery = numberOfUnits;
+        if ( isNotEmpty && tenure !== '') {
+            filterQuery += '&';
+        }
+        filterQuery += tenure;
+        isNotEmpty = isNotEmpty || tenure !== '';
+        if (isNotEmpty && unitType !== '') {
+            filterQuery += '&';
+        }
+        filterQuery += unitType;
+        isNotEmpty = isNotEmpty || unitType !== '';
+        if ( isNotEmpty && isGround !== '') {
+            filterQuery += '&';
+        }
+        filterQuery += isGround;
+        isNotEmpty = isNotEmpty || isGround !== '';
+        if (isNotEmpty && zipCode !== '') {
+            filterQuery += '&';
+        }
+        filterQuery += zipCode;
+        sendQuery(filterQuery);
+    }, [numberOfUnits, tenure, unitType, zipCode, isGround])
 
     return (
         <div style={{ textAlign:'center' }}>
@@ -113,16 +194,17 @@ const FilterBar = () => {
                 <Row className="g-3 justify-content-center" xs='auto'>
                     <Form.Group controlId='NumUnitsFilter' as={Col}>
                         <Form.Label>Number of Units</Form.Label>
+                        {/* Fix values to be queries */}
                         <Form.Select
                             className='filter_select'
                             onChange={e => {handleChange(e)}}
                         >
-                            <option>Select #Units</option>
-                            <option>&lt;5</option>
-                            <option>5-10</option>
-                            <option>10-50</option>
-                            <option>50-100</option>
-                            <option>100+</option>
+                            <option value=''>Select #Units</option>
+                            <option value='5'>&lt;5</option>
+                            <option value='5-10'>5-10</option>
+                            <option value='10-50'>10-50</option>
+                            <option value='50-100'>50-100</option>
+                            <option value='100+'>100+</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='TenureFilter' as={Col}>
@@ -131,9 +213,9 @@ const FilterBar = () => {
                             className='filter_select'
                             onChange={e => {handleChange(e)}}
                         >
-                            <option>Select Tenure</option>
-                            <option>Rental</option>
-                            <option>Ownership</option>
+                            <option value=''>Select Tenure</option>
+                            <option value='Rental'>Rental</option>
+                            <option value='Ownership'>Ownership</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='UnitTypeFilter' as={Col}>
@@ -142,12 +224,12 @@ const FilterBar = () => {
                             className='filter_select'
                             onChange={e => {handleChange(e)}}
                         >
-                            <option>Select Type</option>
-                            <option>Single Family</option>
-                            <option>Multifamily</option>
-                            <option>Duplex</option>
-                            <option>Fourplex</option>
-                            <option>ADU</option>
+                            <option value=''>Select Type</option>
+                            <option value='Single Family'>Single Family</option>
+                            <option value='Multifamily'>Multifamily</option>
+                            <option value='Duplex'>Duplex</option>
+                            <option value='Fourplex'>Fourplex</option>
+                            <option value='ADU'>ADU</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='ZipcodeFilter' as={Col}>
@@ -166,7 +248,14 @@ const FilterBar = () => {
                     </Form.Group>
                     <Form.Group controlId='GroundLeaseFilter' as={Col}>
                         <Form.Label>Ground Lease</Form.Label>
-                        <Form.Check onChange={e => {handleChange(e)}} type='checkbox' className='filter_check' />
+                        <Form.Select 
+                            onChange={e => {handleChange(e)}} 
+                            className='filter_select'
+                        >
+                            <option value=''>Ground Lease</option>
+                            <option value='yes'>Available</option>
+                            <option value='no'>Not Available</option>
+                        </Form.Select>
                     </Form.Group>
                 </Row>
             </Form>
@@ -174,7 +263,8 @@ const FilterBar = () => {
     );
 }
 
-const SortBar = () => {
+//Change values to queries
+const SortBar = ({sendQuery}) => {
     const [isNumUnits, setIsNumUnits] = useState(false);
     const [isUnitType, setIsUnitType] = useState(false);
     const [isZip, setIsZip] = useState(false);
@@ -182,6 +272,7 @@ const SortBar = () => {
     const [numUnitsName, setNumUnitsName] = useState("# Units");
     const [unitTypeName, setUnitTypeName] = useState("Unit Type");
     const [zipName, setZipName] = useState("Zip Code");
+    const [query, setQuery] = useState("");
 
     const handleClick = (e) => {
         const button = e.target.value;
@@ -195,10 +286,13 @@ const SortBar = () => {
                 setIsUnitType(false);
                 setIsZip(false);
                 setIsAscending(true);
+                setQuery("sort ascending by number of units");
             } else if (isAscending){
                 setIsAscending(false);
+                setQuery("sort descending by number of units");
             } else {
                 setIsNumUnits(false);
+                setQuery("");
             }
         } else if (button === 'unit_type') {
             if (!isUnitType) {
@@ -206,10 +300,13 @@ const SortBar = () => {
                 setIsUnitType(true);
                 setIsZip(false);
                 setIsAscending(true);
+                setQuery("sort ascending by unit type");
             } else if (isAscending){
                 setIsAscending(false);
+                setQuery("sort descending by unit type");
             } else {
                 setIsUnitType(false);
+                setQuery("");
             }
         } else if (button === 'zip') {
             if (!isZip) {
@@ -217,10 +314,13 @@ const SortBar = () => {
                 setIsUnitType(false);
                 setIsZip(true);
                 setIsAscending(true);
+                setQuery("sort ascending by zipcode");
             } else if (isAscending){
                 setIsAscending(false);
+                setQuery("sort descending by zipcode");
             } else {
                 setIsZip(false);
+                setQuery("");
             }
         }
     }, [isNumUnits, isUnitType, isZip, isAscending]);
@@ -230,6 +330,7 @@ const SortBar = () => {
         setNumUnitsName(isNumUnits ? (isAscending ? "# Units ^": "# Units v") : "# Units");
         setUnitTypeName(isUnitType ? (isAscending ? "Units Type ^": "Units Type v") : "Units Type");
         setZipName(isZip ? (isAscending ? "Zip Code ^": "Zip Code v") : "Zip Code");
+        sendQuery(query);
     }, [setFilter, isNumUnits, isUnitType, isZip, isAscending]);
 
     return (
@@ -248,10 +349,18 @@ const SortBar = () => {
     );
 }
 
-const SearchBar = () => {
+const SearchBar = ({sendQuery}) => {
+    const [form, setForm] = useState({});
+
+    const setField = (field, value) => {
+        setForm({...form,
+        [field]: value
+        })
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Submit");
+        sendQuery(form['search']);
     }
 
     return (
@@ -260,6 +369,7 @@ const SearchBar = () => {
                 type="search"
                 placeholder="Search Housing"
                 className="search_bar"
+                onChange={ e => setField('search', e.target.value)}
             />
             <Button type='submit' variant="outline-secondary" size='sm'><IconSearch /></Button>
         </Form>
