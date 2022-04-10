@@ -83,7 +83,7 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             className='filter_select'
                             onChange={e => setField('CountyFilter', e.target.value)}
                         >
-                            <option value=''>Select Tenure</option>
+                            <option value=''>Select County</option>
                             <option value='Bastrop'>Bastrop</option>
                             <option value='Caldwell'>Caldwell</option>
                             <option value='Hays'>Hays</option>
