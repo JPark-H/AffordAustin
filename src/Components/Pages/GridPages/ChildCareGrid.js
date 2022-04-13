@@ -17,12 +17,13 @@ const ChildCareGrid = () => {
     const getChildCareData = useCallback (async () => {
         setLoading(true);
         console.log(query);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
-        const endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
+        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
+        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        const endpoint = `http://localhost:5000/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
+        // const endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
-        setTotalNumPrograms(data.data.meta.total);
-        setPrograms(data.data.data);
+        setTotalNumPrograms(data.data.metadata.total_count);
+        setPrograms(data.data.attributes);
         setLoading(false);
     }, [currentPage, programsPerPage, query]);
 
@@ -55,7 +56,7 @@ const ChildCareGrid = () => {
                         {loading ? <></> : programs.map(program => {
                             return (
                             <Col key={program.id}>
-                                <InstanceCard child_care={program.attributes} id={program.id}/>
+                                <InstanceCard child_care={program} id={program.id}/>
                             </Col>);
                         })}
                     </Row>

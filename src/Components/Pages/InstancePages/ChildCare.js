@@ -14,13 +14,14 @@ const ChildCare = () => {
 
     const getInstanceData = useCallback (async () => {
         setLoading(true);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         let data;
         try {
-            // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
-            data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`); 
-            setInstanceData(data.data.data.attributes);
+            data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
+            // data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`);
+            console.log(data.data)
+            setInstanceData(data.data);
         } catch (error) {
             setIsValidId(false);
         }
@@ -110,9 +111,9 @@ const ChildCareData = ({child_care}) => {
                   <Row className="side_bar_info">
                     <h4>Nearby Housing</h4>
                         <Nav>
-                            <Nav.Link as={ Link } to='/Housing/1'>Allandale Condos</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/2'>110 Chicon Street</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/3'>1905 E 9th Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/1'>110 Chicon Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/2'>1905 E Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
                         </Nav>
                   </Row>
                   <Row className="side_bar_info">
