@@ -4,28 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column, or_
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
-
-app = Flask(__name__)
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql+psycopg2://affordaustin:ky7dQwWt4B5ZVhPFnbZ6@affordaustin-db.cj68zosziuyy.us-east-2.rds.amazonaws.com:5432/affordaustin"
-
-db = SQLAlchemy(app)
-marsh = Marshmallow(app)
-
-db.Model.metadata.reflect(db.engine)
-
-class Housing(db.Model):
-    __table__ = db.Model.metadata.tables['housing_new']
-
-class Childcare(db.Model):
-    __table__ = db.Model.metadata.tables['childcare']
-
-class Job(db.Model):
-    __table__ = db.Model.metadata.tables['jobs']
-
+from tables import *
 
 def try_arg(name, arg):
     try:
@@ -176,7 +155,6 @@ def sort_housing(query, sort_param):
 def sort_housing_by(query, sort_param, descending):
     col = None
 
-    print(type(Housing.total_units)) 
     if sort_param == 'total_units':
         col = Housing.total_units
     
