@@ -176,7 +176,7 @@ def sort_housing(query, sort_param):
 def sort_housing_by(query, sort_param, descending):
     col = None
 
-    print(type(Housing.total_units))
+    print(type(Housing.total_units)) 
     if sort_param == 'total_units':
         col = Housing.total_units
     
