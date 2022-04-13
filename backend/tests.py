@@ -84,13 +84,13 @@ class UnitTests(TestCase):
         self.assertIsNone(req.json["data"])
         self.assertEqual(req.status_code, 200)
 
-    # testing pagination of job data fail
-    def test_jobs_pages(self):
-        req = self.client.get(
-            "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
-        )
-        # self.assertEqual(req.status_code, 200)
-        self.assertFalse(req.json["data"])
+    # # testing pagination of job data fail
+    # def test_jobs_pages(self):
+    #     req = self.client.get(
+    #         "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
+    #     )
+    #     # self.assertEqual(req.status_code, 200)
+    #     self.assertFalse(req.json["data"])
 
 
 if __name__ == "__main__":
