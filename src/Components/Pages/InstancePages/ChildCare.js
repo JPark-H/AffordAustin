@@ -19,8 +19,8 @@ const ChildCare = () => {
         let data;
         try {
             // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
-            data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`); 
-            setInstanceData(data.data.data.attributes);
+            data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`);
+            setInstanceData(data.data);
         } catch (error) {
             setIsValidId(false);
         }
@@ -110,9 +110,9 @@ const ChildCareData = ({child_care}) => {
                   <Row className="side_bar_info">
                     <h4>Nearby Housing</h4>
                         <Nav>
-                            <Nav.Link as={ Link } to='/Housing/1'>Allandale Condos</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/2'>110 Chicon Street</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/3'>1905 E 9th Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/1'>110 Chicon Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/2'>1905 E Street</Nav.Link>
+                            <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
                         </Nav>
                   </Row>
                   <Row className="side_bar_info">

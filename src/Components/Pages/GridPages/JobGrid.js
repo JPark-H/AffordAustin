@@ -67,6 +67,7 @@ const JobGrid = () => {
 
 const InstanceCard = ({ job, id }) => {
     const link = `/Jobs/${ id }`;
+
     let extensions = job.detected_extensions.slice(1, (job.detected_extensions.length - 1)).split(", ");
     extensions = extensions.map(x => x.slice(1, x.length - 1).split("': '"));
     let posted_at = (extensions.length > 0 && extensions[0][0] === "posted_at") ? extensions[0][1] : "N/A";

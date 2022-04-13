@@ -17,8 +17,9 @@ const HousingGrid = () => {
     const getHousingData = useCallback (async () => {
         setLoading(true);
         console.log(query);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
+        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        // const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
         const endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
         setTotalNumHouses(data.data.metadata.total_count);
