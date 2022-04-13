@@ -21,6 +21,8 @@ app.config[
 db = SQLAlchemy(app)
 marsh = Marshmallow(app)
 
+db.init_app(app)
+
 db.Model.metadata.reflect(db.engine)
 
 # do we need this :o
