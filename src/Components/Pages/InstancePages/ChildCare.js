@@ -14,8 +14,8 @@ const ChildCare = () => {
 
     const getInstanceData = useCallback (async () => {
         setLoading(true);
-        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
+        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         let data;
         try {
             // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);

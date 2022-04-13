@@ -17,8 +17,8 @@ const JobGrid = () => {
     const getJobData = useCallback (async () => {
         setLoading(true);
         console.log(query);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
+        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
         // const endpoint = `http://localhost:5000/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
