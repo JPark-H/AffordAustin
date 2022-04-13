@@ -1,25 +1,25 @@
 image: node:latest
 
 stages:
-  - unittest
-  - jstest
+  # - unittest
+  # - jstest
   - acceptance
-  - deploy
+  # - deploy
 
-python_unit_tests:
-  image: python:3.6-stretch
-  stage: unittest
-  before_script:
-    - pip install -r backend/requirements.txt
-  script:
-    - cd backend
-    - python3 tests.py
+# python_unit_tests:
+#   image: python:3.6-stretch
+#   stage: unittest
+#   before_script:
+#     - pip install -r backend/requirements.txt
+#   script:
+#     - cd backend
+#     - python3 tests.py
 
-test_jest:
-  stage: jstest
-  script:
-    - npm i
-    - npm test
+# test_jest:
+#   stage: jstest
+#   script:
+#     - npm i
+#     - npm test
 
 e2e:remote:chrome:
   stage: acceptance
@@ -38,28 +38,28 @@ e2e:remote:chrome:
   script:
     - python src/Tests/acceptance.py
 
-deploy_development:
-  image: python:3.6-stretch
-  only:
-    variables:
-      - $CI_COMMIT_BRANCH == "development"
-  stage: deploy
-  before_script:
-    - pip install awsebcli --upgrade --user
-    - git checkout development
-  script:
-    - cd backend
-    - /root/.local/bin/eb deploy affordaustin-api
+# deploy_development:
+#   image: python:3.6-stretch
+#   only:
+#     variables:
+#       - $CI_COMMIT_BRANCH == "development"
+#   stage: deploy
+#   before_script:
+#     - pip install awsebcli --upgrade --user
+#     - git checkout development
+#   script:
+#     - cd backend
+#     - /root/.local/bin/eb deploy affordaustin-api
 
-deploy_production:
-  image: python:3.6-stretch
-  only:
-    variables:
-      - $CI_COMMIT_BRANCH == "main"
-  stage: deploy
-  before_script:
-    - pip install awsebcli --upgrade --user
-    - git checkout main
-  script:
-    - cd backend
-    - /root/.local/bin/eb deploy affordaustin-api
+# deploy_production:
+#   image: python:3.6-stretch
+#   only:
+#     variables:
+#       - $CI_COMMIT_BRANCH == "main"
+#   stage: deploy
+#   before_script:
+#     - pip install awsebcli --upgrade --user
+#     - git checkout main
+#   script:
+#     - cd backend
+#     - /root/.local/bin/eb deploy affordaustin-api

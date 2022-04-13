@@ -89,3 +89,4 @@ if __name__ == '__main__':
     housing_pages()
     job_pages()
     childcare_pages()
+    print('testing')
