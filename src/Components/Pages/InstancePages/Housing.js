@@ -19,8 +19,8 @@ const Housing = () => {
     axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
     let data;
     try {
-      data = await axios.get(`http://localhost:5000/api/housing/${id}`);
-      // data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
+      // data = await axios.get(`http://localhost:5000/api/housing/${id}`);
+      data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
       console.log(data.data)
       setInstanceData(data.data);
     } catch (error) {
