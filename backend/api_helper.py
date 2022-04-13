@@ -1,7 +1,7 @@
 from flask import Flask, abort, jsonify, request
 import flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, column
+from sqlalchemy import Column, column, or_
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
 
@@ -33,7 +33,7 @@ def try_arg(name, arg):
     except KeyError:
         return None
 
-
+## -------------filtering----------------------------------##
 def filter_housing(query, args):
     zip_code = try_arg('zip_code', args)
     tenure = try_arg('tenure', args)
@@ -165,3 +165,180 @@ def filter_by_model(query, args, model):
     else:
         print("{}er? I barely know 'er!".format(model))
         return {}
+
+## -------------sorting----------------------------------##
+def sort_housing(query, sort_param):
+    if len(sort_param) > 1:
+        return sort_housing_by(query, sort_param[1], True)
+    else:
+        return sort_housing_by(query, sort_param[0], False)
+
+def sort_housing_by(query, sort_param, descending):
+    col = None
+
+    print(type(Housing.total_units))
+    if sort_param == 'total_units':
+        col = Housing.total_units
+    
+    elif sort_param == 'unit_type':
+        col = Housing.unit_type
+
+    elif sort_param == 'zip_code':
+        col = Housing.zip_code
+
+    else:
+        print("no matching sortable value found")
+        return query 
+
+    if descending:
+        return query.order_by(col.desc())
+    else:
+        return query.order_by(col)
+
+
+
+def sort_childcare(query, sort_param):
+    if len(sort_param) > 1:
+        return sort_childcare_by(query, sort_param[1], True)
+    else:
+        return sort_childcare_by(query, sort_param[0], False)
+
+def sort_childcare_by(query, sort_param, descending):
+    col = None
+
+    if sort_param == 'hours_of_operation':
+        col = Childcare.hours_of_operation
+    
+    # elif sort_param == 'hours_of_operation': #TODO, start vs end time
+    #     col = Childcare.hours_of_operation
+
+    elif sort_param == 'licensed_to_serve_ages':
+        col = Childcare.licensed_to_serve_ages
+
+    else:
+        print("no matching sortable value found")
+        return query 
+
+    if descending:
+        return query.order_by(col.desc())
+    else:
+        return query.order_by(col)
+
+
+
+def sort_jobs(query, sort_param):
+    if len(sort_param) > 1:
+        return sort_jobs_by(query, sort_param[1], True)
+    else:
+        return sort_jobs_by(query, sort_param[0], False)
+
+def sort_jobs_by(query, sort_param, descending):
+    col = None
+
+    if sort_param == 'rating':
+        col = Job.rating
+    
+    elif sort_param == 'reviews':
+        col = Job.reviews
+
+    elif sort_param == 'zip_code':
+        col = Job.zip_code
+
+    else:
+        print("no matching sortable value found")
+        return query 
+
+    if descending:
+        return query.order_by(col.desc())
+    else:
+        return query.order_by(col)
+
+def sort_by_model(query, args, model):
+    sort_param = try_arg('sort', args)
+
+    if not sort_param:
+        return query
+
+    sort_param = sort_param.split("-")
+
+
+    if (model == 'housing'):
+        return sort_housing(query, sort_param)
+    elif (model == 'childcare'):
+        return sort_childcare(query, sort_param)
+    elif (model == 'jobs'):
+        return sort_jobs(query, sort_param)
+    else:
+        print("{}er? I barely know 'er!".format(model))
+        return {}
+
+
+## -------------searching----------------------------------##
+
+def search_housing(query, search):
+    search_terms = search.strip().split()
+    searches = []
+
+    for term in search_terms:
+        formatting = "%{}%".format(term.lower())
+
+        searches.append(Housing.project_name.ilike(formatting))
+        searches.append(Housing.property_management_company.ilike(formatting))
+        searches.append(Housing.status.ilike(formatting))
+        searches.append(Housing.developer.ilike(formatting))
+        searches.append(Housing.unit_type.ilike(formatting))
+        searches.append(Housing.address.ilike(formatting))
+        searches.append(Housing.tenure.ilike(formatting)) 
+
+    query = query.filter(or_(*tuple(searches)))
+    return query
+
+def search_childcare(query, search):
+    search_terms = search.strip().split()
+    searches = []
+
+    for term in search_terms:
+        formatting = "%{}%".format(term.lower())
+
+        searches.append(Childcare.operation_name.ilike(formatting))
+        searches.append(Childcare.administrator_director_name.ilike(formatting))
+        searches.append(Childcare.operation_type.ilike(formatting)) 
+        searches.append(Childcare.type_of_issuance.ilike(formatting)) 
+        searches.append(Childcare.location_address.ilike(formatting))
+
+
+    query = query.filter(or_(*tuple(searches)))
+    return query
+
+def search_jobs(query, search):
+    search_terms = search.strip().split()
+    searches = []
+
+    for term in search_terms:
+        formatting = "%{}%".format(term.lower())
+
+        searches.append(Job.title.ilike(formatting))
+        searches.append(Job.company_name.ilike(formatting))
+        searches.append(Job.extensions.ilike(formatting)) 
+        searches.append(Job.description.ilike(formatting)) 
+
+    query = query.filter(or_(*tuple(searches)))
+    return query
+
+
+def search_by_model(query, args, model):
+    search = try_arg('search', args)
+    if not search:
+        return query
+    
+    if (model == 'housing'):
+        return search_housing(query, search)
+    elif (model == 'childcare'):
+        return search_childcare(query, search)
+    elif (model == 'jobs'):
+        return search_jobs(query, search)
+    else:
+        print("{}er? I barely know 'er!".format(model))
+        return {}
+
+
