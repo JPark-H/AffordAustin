@@ -20,7 +20,6 @@ const ChildCare = () => {
         try {
             // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
             data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`);
-            console.log(data.data)
             setInstanceData(data.data);
         } catch (error) {
             setIsValidId(false);
