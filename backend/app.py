@@ -4,12 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
+from flask_cors import CORS
 from api_helper import filter_by_model, Housing, Childcare, Job
 
 
 import os, sys
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config[
@@ -30,7 +32,7 @@ db.Model.metadata.reflect(db.engine)
 
 class HousingSchema(marsh.Schema):
     class Meta:
-        fields = ('_image', '_map', 'project_name', 'tenure', 'unit_type',
+        fields = ('id', '_image', '_map', 'project_name', 'tenure', 'unit_type',
          'total_units', 'ground_lease', 'zip_code', 'property_management_company',
           'status', 'property_manager_phone_number', 'address', 'developer',
            'affordability_expiration_year', 'units_30_mfi', 'units_40_mfi',
@@ -41,8 +43,8 @@ class HousingSchema(marsh.Schema):
 
 class ChildcareSchema(marsh.Schema):
     class Meta:
-        fields = ('location_address', 'county', 'days_of_operation', 'hours_of_operation',
-         'licensed_to_serv_ages', '_image', 'operation_name', '_map', 'mailing_address',
+        fields = ('id', 'location_address', 'county', 'days_of_operation', 'hours_of_operation',
+         'licensed_to_serve_ages', '_image', 'operation_name', '_map', 'mailing_address',
           'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
            'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
             'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
@@ -51,7 +53,7 @@ class ChildcareSchema(marsh.Schema):
 
 class JobSchema(marsh.Schema):
     class Meta:
-        fields = ('_map', '_image', 'detected_extensions', 'extensions',
+        fields = ('id', '_map', '_image', 'detected_extensions', 'extensions',
          'title', 'company_name', 'reviews', 'rating', 'description', 
          'apply_link', 'via', 'rating_link')
 

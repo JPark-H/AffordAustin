@@ -19,10 +19,11 @@ const JobGrid = () => {
         console.log(query);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
+        // const endpoint = `http://localhost:5000/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
-        setTotalNumJobs(data.data.meta.total);
-        setJobs(data.data.data);
+        setTotalNumJobs(data.data.metadata.total_count);
+        setJobs(data.data.attributes);
         setLoading(false);
     }, [currentPage, jobsPerPage, query]);
 
@@ -54,7 +55,7 @@ const JobGrid = () => {
                     {loading ? <></> : jobs.map(job => {
                         return (
                         <Col key={job.id}>
-                            <InstanceCard job={job.attributes} id={job.id}/>
+                            <InstanceCard job={job} id={job.id}/>
                         </Col>);
                     })}
                 </Row>
@@ -65,6 +66,7 @@ const JobGrid = () => {
 
 const InstanceCard = ({ job, id }) => {
     const link = `/Jobs/${ id }`;
+
     let extensions = job.detected_extensions.slice(1, (job.detected_extensions.length - 1)).split(", ");
     extensions = extensions.map(x => x.slice(1, x.length - 1).split("': '"));
     let posted_at = (extensions.length > 0 && extensions[0][0] === "posted_at") ? extensions[0][1] : "N/A";
