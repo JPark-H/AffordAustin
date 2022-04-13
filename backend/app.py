@@ -11,7 +11,7 @@ from api_helper import filter_by_model, Housing, Childcare, Job
 import os, sys
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config[
@@ -24,11 +24,11 @@ marsh = Marshmallow(app)
 db.Model.metadata.reflect(db.engine)
 
 # do we need this :o
-# @app.after_request
-# def add_cors_headers(response):
-#     response.headers["Access-Control-Allow-Origin"] = "*"
-#     response.headers["Access-Control-Allow-Credentials"] = "true"
-#     return response
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 
 class HousingSchema(marsh.Schema):
     class Meta:
