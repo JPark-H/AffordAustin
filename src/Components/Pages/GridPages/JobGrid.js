@@ -19,10 +19,12 @@ const JobGrid = () => {
         console.log(query);
         axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
-        const endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
+        let endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
+        endpoint += (query === "") ? "" : "&" + query; 
+        console.log(endpoint);
         const data = await axios.get(endpoint);
-        setTotalNumJobs(data.data.meta.total);
-        setJobs(data.data.data);
+        setTotalNumJobs(data.data.metadata.total_count);
+        setJobs(data.data.attributes);
         setLoading(false);
     }, [currentPage, jobsPerPage, query]);
 
@@ -54,7 +56,7 @@ const JobGrid = () => {
                     {loading ? <></> : jobs.map(job => {
                         return (
                         <Col key={job.id}>
-                            <InstanceCard job={job.attributes} id={job.id}/>
+                            <InstanceCard job={job} id={job.id}/>
                         </Col>);
                     })}
                 </Row>

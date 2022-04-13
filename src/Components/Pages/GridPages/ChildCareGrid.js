@@ -21,8 +21,8 @@ const ChildCareGrid = () => {
         axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
         const endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         const data = await axios.get(endpoint);
-        setTotalNumPrograms(data.data.meta.total);
-        setPrograms(data.data.data);
+        setTotalNumPrograms(data.data.metadata.total_count);
+        setPrograms(data.data.attributes);
         setLoading(false);
     }, [currentPage, programsPerPage, query]);
 
@@ -55,7 +55,7 @@ const ChildCareGrid = () => {
                         {loading ? <></> : programs.map(program => {
                             return (
                             <Col key={program.id}>
-                                <InstanceCard child_care={program.attributes} id={program.id}/>
+                                <InstanceCard child_care={program} id={program.id}/>
                             </Col>);
                         })}
                     </Row>

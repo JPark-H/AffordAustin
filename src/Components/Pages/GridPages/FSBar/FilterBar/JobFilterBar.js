@@ -64,7 +64,7 @@ const JobFilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                    setField('CompanyFilter', e.target.value);
+                                    setField('CompanyFilter', "company_name=" + e.target.value);
                                 }
                             }}
                         >
@@ -90,7 +90,7 @@ const JobFilterBar = ({sendQuery}) => {
                             onChange={e => setField('RatingFilter', e.target.value)}
                         >
                             <option value=''>Select Rating</option>
-                            <option value='<1'>&lt;1</option>
+                            <option value='rating<1'>&lt;1</option>
                             <option value='1-2'>1-2</option>
                             <option value='2-3'>2-3</option>
                             <option value='3-4'>3-4</option>
