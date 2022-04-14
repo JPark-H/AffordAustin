@@ -31,24 +31,37 @@
   width: 95%;
 }
 
-.link b {
-  color: blue;
-}
+
 
 .about_list {
   margin-bottom: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.about_list:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
 }
 
 .tool_about_list {
   margin-bottom: 10px;
   min-width: 280px;
-  max-width: 250px;
-  height: 420px;
+  max-width: 300px;
+  height: 440px;
   background-color: white;
+  
+}
+
+.tool_desc {
+  color: inherit !important;
+  text-decoration: none !important;
+
+}
+
+.tool_about_list:hover {
+  /* transform: scale(1.03); */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
 }
 
 .tool_logo {
-  width: 150px;
-  height:auto;
+  height: 150px;
+  width: auto;
 }
