@@ -91,7 +91,7 @@ const SearchBar = ({sendQuery}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        sendQuery(form['search']);
+        sendQuery("search=" + form['search']);
     }
 
     return (
