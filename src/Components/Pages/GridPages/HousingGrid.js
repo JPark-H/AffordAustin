@@ -2,9 +2,9 @@ import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Container, Card, Row, Col, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import FSBar from './FSBar/FSBar';
+import HousingInstanceCard from './InstanceCards/HousingInstanceCard';
 
 const HousingGrid = () => {
     const [houses, setHouses] = useState([]);
@@ -13,10 +13,10 @@ const HousingGrid = () => {
     const [totalNumHouses, setTotalNumHouses] = useState(1);
     const [housesPerPage, setHousesPerPage] = useState(21);
     const [query, setQuery] = useState('');
+    const [searchKeys, setSearchKeys] = useState([]);
 
     const getHousingData = useCallback (async () => {
         setLoading(true);
-        console.log(query);
         let endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
         endpoint += (query === "") ? "" : "&" + query;
         const data = await axios.get(endpoint);
@@ -27,14 +27,21 @@ const HousingGrid = () => {
 
     useEffect(() => {
         getHousingData();
-    }, [currentPage, query, getHousingData]);
+    }, [currentPage, query, searchKeys, getHousingData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
     };
 
-    const getQuery = (new_query) => {
-        setQuery(new_query);
+    const getQuery = (new_query, new_search_query) => {
+        let full_query = new_query;
+        if (full_query !== "" && new_search_query != ""){
+            full_query += new_search_query;
+        }
+        full_query += new_search_query;
+        setQuery(full_query);
+        let search_query = (new_search_query === "") ? [] : new_search_query.slice(7).split(" ");
+        setSearchKeys(search_query);
     };
 
     return (
@@ -54,7 +61,7 @@ const HousingGrid = () => {
                         {loading ? <></> : houses.map(house => {
                             return (
                             <Col key={house.id}>
-                                <InstanceCard housing={house} housing_id={house.id}/>
+                                <HousingInstanceCard housing={house} housing_id={house.id} search_keys={searchKeys} />
                             </Col>);
                         })}
                     </Row>
@@ -62,26 +69,6 @@ const HousingGrid = () => {
             </div>
         </div>
         
-    )
-};
-
-const InstanceCard = ({ housing, housing_id}) => {
-    const link = `/Housing/${ housing_id }`;
-
-    return (
-        <Link to={ link }>
-            <Card className='inst_card'>
-                <Card.Img variant='top' src={housing._image} />
-                <Card.Body>
-                    <Card.Title className="text-truncate">{ housing.project_name }</Card.Title>
-                    <Card.Text><b>Tenure :</b> { housing.tenure }</Card.Text>
-                    <Card.Text><b>Unit-Type:</b> { housing.unit_type }</Card.Text>
-                    <Card.Text><b>Num of Affordable Units:</b> { housing.total_affordable_units }</Card.Text>
-                    <Card.Text><b>Ground Lease:</b> { housing.ground_lease }</Card.Text>
-                    <Card.Text><b>Zip-Code:</b> { housing.zip_code }</Card.Text>
-                </Card.Body>
-            </Card>
-        </Link>
     )
 };
 

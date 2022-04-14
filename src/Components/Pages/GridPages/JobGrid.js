@@ -1,10 +1,10 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Card, Row, Col, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import React, { useState, useEffect, useCallback } from 'react';
 import FSBar from './FSBar/FSBar';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import JobInstanceCard from './InstanceCards/JobInstanceCard';
 
 const JobGrid = () => {
     const [jobs, setJobs] = useState([]);
@@ -13,10 +13,10 @@ const JobGrid = () => {
     const [totalNumJobs, setTotalNumJobs] = useState(1);
     const [jobsPerPage, setJobsPerPage] = useState(21);
     const [query, setQuery] = useState('');
+    const [searchKeys, setSearchKeys] = useState([]);
 
     const getJobData = useCallback (async () => {
         setLoading(true);
-        console.log(query);
         let endpoint = `https://api.affordaustin.me/api/jobs?page[size]=${jobsPerPage}&page[number]=${currentPage}`;
         endpoint += (query === "") ? "" : "&" + query;
         const data = await axios.get(endpoint);
@@ -27,14 +27,21 @@ const JobGrid = () => {
 
     useEffect(() => {
         getJobData('');
-    }, [currentPage, query, getJobData]);
+    }, [currentPage, query, searchKeys, getJobData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
     }
 
-    const getQuery = (new_query) => {
-        setQuery(new_query);
+    const getQuery = (new_query, new_search_query) => {
+        let full_query = new_query;
+        if (full_query !== "" && new_search_query != ""){
+            full_query += new_search_query;
+        }
+        full_query += new_search_query;
+        setQuery(full_query);
+        let search_query = (new_search_query === "") ? [] : new_search_query.slice(7).split(" ");
+        setSearchKeys(search_query);
     };
 
     return (
@@ -53,32 +60,12 @@ const JobGrid = () => {
                     {loading ? <></> : jobs.map(job => {
                         return (
                         <Col key={job.id}>
-                            <InstanceCard job={job} id={job.id}/>
+                            <JobInstanceCard job={job} id={job.id}search_keys={searchKeys} />
                         </Col>);
                     })}
                 </Row>
             </Container>
         </div>
-    )
-};
-
-const InstanceCard = ({ job, id }) => {
-    const link = `/Jobs/${ id }`;
-    let schedule_type = (job.detected_extensions.length > 0) ? job.detected_extensions[0] : "N/A";
-    return (
-        <Link to={ link }>
-            <Card className='inst_card'>
-                <Card.Img variant='top' src={job._image}/>
-                <Card.Body>
-                    <Card.Title className="text-truncate">{ job.title }</Card.Title>
-                    <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
-                    <Card.Text><b>Zip Code:</b> { job.zip_code }</Card.Text>
-                    <Card.Text><b>Schedule:</b> { schedule_type }</Card.Text>
-                    <Card.Text><b>Rating:</b> {job.rating === -1 ? "N/A" : job.rating }</Card.Text>
-                    <Card.Text><b>Reviews:</b> {job.reviews === "-1" ? "0" : job.reviews }</Card.Text>
-                </Card.Body>
-            </Card>
-        </Link>
     )
 };
 
