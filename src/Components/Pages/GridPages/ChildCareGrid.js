@@ -16,9 +16,9 @@ const ChildCareGrid = () => {
 
     const getChildCareData = useCallback (async () => {
         setLoading(true);
-        console.log(query);
         let endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         endpoint += (query === "") ? "" : "&" + query;
+        console.log(endpoint);
         const data = await axios.get(endpoint);
         setTotalNumPrograms(data.data.metadata.total_count);
         setPrograms(data.data.attributes);
@@ -66,7 +66,10 @@ const ChildCareGrid = () => {
 
 const InstanceCard = ({ child_care, id }) => {
     const link = `/ChildCare/${ id }`;
-    let ages = child_care.licensed_to_serve_ages.replaceAll(",", ", ");
+    let ages = child_care.licensed_to_serve_ages.toString();
+    ages = ages.replaceAll(',', ", ");
+    let days = child_care.days_of_operation.toString();
+    days = (days === "Mon,Tue,Wed,Thu,Fri") ? "Monday-Friday" : days.replaceAll(",", ", ");
     return (
         <Link to={ link }>
             <Card className='c_inst_card'>
@@ -75,7 +78,7 @@ const InstanceCard = ({ child_care, id }) => {
                     <Card.Title className="text-truncate">{ child_care.operation_name }</Card.Title>
                     <Card.Text><b>Address:</b> { child_care.location_address }</Card.Text>
                     <Card.Text><b>County:</b> { child_care.county }</Card.Text>
-                    <Card.Text><b>Days of Operation:</b> { child_care.days_of_operation }</Card.Text>
+                    <Card.Text><b>Days of Operation:</b> { days }</Card.Text>
                     <Card.Text><b>Hours of Operation:</b> { child_care.hours_of_operation }</Card.Text>
                     <Card.Text><b>Ages Served:</b> { ages }</Card.Text>
                 </Card.Body>

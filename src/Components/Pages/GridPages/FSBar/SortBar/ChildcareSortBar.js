@@ -26,10 +26,10 @@ const ChildcareSortBar = ({sendQuery}) => {
                 setIsEndTime(false);
                 setIsAge(false);
                 setIsAscending(true);
-                setQuery("sort ascending by start time");
+                setQuery("sort=start_hours_val");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by start time");
+                setQuery("sort=-start_hours_val");
             } else {
                 setIsStartTime(false);
                 setQuery("");
@@ -40,10 +40,10 @@ const ChildcareSortBar = ({sendQuery}) => {
                 setIsEndTime(true);
                 setIsAge(false);
                 setIsAscending(true);
-                setQuery("sort ascending by end time");
+                setQuery("sort=end_hours_val");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by end time");
+                setQuery("sort=-end_hours_val");
             } else {
                 setIsEndTime(false);
                 setQuery("");
@@ -54,10 +54,10 @@ const ChildcareSortBar = ({sendQuery}) => {
                 setIsEndTime(false);
                 setIsAge(true);
                 setIsAscending(true);
-                setQuery("sort ascending by age");
+                setQuery("sort=licensed_to_serve_ages");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by age");
+                setQuery("sort=-licensed_to_serve_ages");
             } else {
                 setIsAge(false);
                 setQuery("");

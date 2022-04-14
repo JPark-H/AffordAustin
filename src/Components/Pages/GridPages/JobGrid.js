@@ -64,11 +64,7 @@ const JobGrid = () => {
 
 const InstanceCard = ({ job, id }) => {
     const link = `/Jobs/${ id }`;
-
-    let extensions = job.detected_extensions.slice(1, (job.detected_extensions.length - 1)).split(", ");
-    extensions = extensions.map(x => x.slice(1, x.length - 1).split("': '"));
-    let posted_at = (extensions.length > 0 && extensions[0][0] === "posted_at") ? extensions[0][1] : "N/A";
-    let schedule_type = (extensions.length > 1 && extensions[1][0] === "schedule_type") ? extensions[1][1] : "N/A";
+    let schedule_type = (job.detected_extensions.length > 0) ? job.detected_extensions[0] : "N/A";
     return (
         <Link to={ link }>
             <Card className='inst_card'>
@@ -76,9 +72,9 @@ const InstanceCard = ({ job, id }) => {
                 <Card.Body>
                     <Card.Title className="text-truncate">{ job.title }</Card.Title>
                     <Card.Text><b>Company:</b> { job.company_name }</Card.Text>
-                    <Card.Text><b>Posted:</b> { posted_at }</Card.Text>
+                    <Card.Text><b>Zip Code:</b> { job.zip_code }</Card.Text>
                     <Card.Text><b>Schedule:</b> { schedule_type }</Card.Text>
-                    <Card.Text><b>Rating:</b> {job.reviews === "-1" ? "N/A" : job.rating }</Card.Text>
+                    <Card.Text><b>Rating:</b> {job.rating === -1 ? "N/A" : job.rating }</Card.Text>
                     <Card.Text><b>Reviews:</b> {job.reviews === "-1" ? "0" : job.reviews }</Card.Text>
                 </Card.Body>
             </Card>

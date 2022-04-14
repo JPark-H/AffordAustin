@@ -77,11 +77,11 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             onChange={e => setField('CountyFilter', e.target.value)}
                         >
                             <option value=''>Select County</option>
-                            <option value='county=BASTROP'>Bastrop</option>
-                            <option value='county=CALDWELL'>Caldwell</option>
-                            <option value='county=HAYS'>Hays</option>
-                            <option value='county=TRAVIS'>Travis</option>
-                            <option value='county=WILLIAMSON'>Williamson</option>
+                            <option value='county=Bastrop'>Bastrop</option>
+                            <option value='county=Caldwell'>Caldwell</option>
+                            <option value='county=Hays'>Hays</option>
+                            <option value='county=Travis'>Travis</option>
+                            <option value='county=Williamson'>Williamson</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='HoursFilter' as={Col}>
@@ -123,10 +123,10 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             onChange={e => setField('AgesFilter', e.target.value)}
                         >
                             <option value=''>Select Age Group</option>
-                            <option value='licensed_to_serve=Infant'>Infant</option>
-                            <option value='licensed_to_serve=Todler'>Todler</option>
-                            <option value='licensed_to_serve=Pre-Kindergarten'>Pre-Kindergarten</option>
-                            <option value='licensed_to_serve=School'>School</option>
+                            <option value='licensed_to_serve_ages=Infant'>Infant</option>
+                            <option value='licensed_to_serve_ages=Todler'>Todler</option>
+                            <option value='licensed_to_serve_ages=Pre-Kindergarten'>Pre-Kindergarten</option>
+                            <option value='licensed_to_serve_ages=School'>School</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>
