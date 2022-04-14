@@ -6,9 +6,8 @@ import { Row, Col, Form } from 'react-bootstrap';
 //Change values to queries
 const ChildcareFilterBar = ({sendQuery}) => {
     const [form, setForm] = useState({
-        'AddressFilter': '', 
-        'CountyFilter': '', 
-        'DaysFilter': '', 
+        'ZipcodeFilter': '', 
+        'CountyFilter': '',
         'HoursFilterStarting': '',
         'HoursFilterEnding': '', 
         'AgesFilter': ''
@@ -22,20 +21,14 @@ const ChildcareFilterBar = ({sendQuery}) => {
     }
 
     useEffect(() => {
-        let isNotEmpty = form['AddressFilter'] !== '';
-        let filterQuery = form['AddressFilter'];
+        let isNotEmpty = form['ZipcodeFilter'] !== '';
+        let filterQuery = form['ZipcodeFilter'];
 
         if ( isNotEmpty && form['CountyFilter'] !== '') {
             filterQuery += '&';
         }
         filterQuery += form['CountyFilter'];
         isNotEmpty = isNotEmpty || form['CountyFilter'] !== '';
-
-        if (isNotEmpty && form['DaysFilter'] !== '') {
-            filterQuery += '&';
-        }
-        filterQuery += form['DaysFilter'];
-        isNotEmpty = isNotEmpty || form['DaysFilter'] !== '';
 
         if (isNotEmpty && form['HoursFilterStarting'] !== '') {
             filterQuery += '&';
@@ -62,8 +55,8 @@ const ChildcareFilterBar = ({sendQuery}) => {
             <h3>Filters:</h3>
             <Form>
                 <Row className="g-3 justify-content-center" xs='auto'>
-                    <Form.Group controlId='AddressFilter' as={Col}>
-                        <Form.Label>Address</Form.Label>
+                    <Form.Group controlId='ZipcodeFilter' as={Col}>
+                        <Form.Label>Zip Code</Form.Label>
                         <Form.Control
                             type='text'
                             placeholder='Find center near'
@@ -71,7 +64,7 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                    setField('AddressFilter', e.target.value);
+                                    setField('ZipcodeFilter', (e.target.value == "") ? "" : "zip_code=" + e.target.value);
                                 }
                             }}
                         >
@@ -84,52 +77,42 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             onChange={e => setField('CountyFilter', e.target.value)}
                         >
                             <option value=''>Select County</option>
-                            <option value='Bastrop'>Bastrop</option>
-                            <option value='Caldwell'>Caldwell</option>
-                            <option value='Hays'>Hays</option>
-                            <option value='Travis'>Travis</option>
-                            <option value='Williamson'>Williamson</option>
-                        </Form.Select>
-                    </Form.Group>
-                    <Form.Group controlId='DaysFilter' as={Col}>
-                        <Form.Label>Days of Operation</Form.Label>
-                        <Form.Select
-                            className='filter_select'
-                            onChange={e => setField('DaysFilter', e.target.value)}
-                        >
-                            <option value=''>Select Days</option>
-                            <option value='Weekdays Only'>Weekdays Only</option>
-                            <option value='Full Week'>Full Week</option>
+                            <option value='county=BASTROP'>Bastrop</option>
+                            <option value='county=CALDWELL'>Caldwell</option>
+                            <option value='county=HAYS'>Hays</option>
+                            <option value='county=TRAVIS'>Travis</option>
+                            <option value='county=WILLIAMSON'>Williamson</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='HoursFilter' as={Col}>
                         <Form.Label>Hours of Operation</Form.Label>
                         <Row>
                             <Col>
-                                <Form.Control 
-                                    type='text'
-                                    placeholder='Starting'
-                                    className='filter_text'
-                                    // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
-                                    onKeyPress={e => {
-                                        if (e.key === "Enter") {
-                                            setField('HoursFilterStarting', e.target.value);
-                                        }
-                                    }}
-                                />
+                                <Form.Select
+                                    className='filter_select'
+                                    onChange={e => setField('HoursFilterStarting', e.target.value)}
+                                >
+                                    <option value=''></option>
+                                    <option value='start_hours_val=6'>6 am</option>
+                                    <option value='start_hours_val=7'>7 am</option>
+                                    <option value='start_hours_val=8'>8 am</option>
+                                    <option value='start_hours_val=9'>9 am</option>
+                                    <option value='start_hours_val=14'>2 pm</option>
+                                </Form.Select>
                             </Col>
                             <Col>
-                                <Form.Control 
-                                    type='text'
-                                    placeholder='Ending'
-                                    className='filter_text'
-                                    // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
-                                    onKeyPress={e => {
-                                        if (e.key === "Enter") {
-                                            setField('HoursFilterEnding', e.target.value);
-                                        }
-                                    }}
-                                />
+                                <Form.Select
+                                    className='filter_select'
+                                    onChange={e => setField('HoursFilterEnding', e.target.value)}
+                                >
+                                    <option value=''></option>
+                                    <option value='end_hours_val=13'>1 pm</option>
+                                    <option value='end_hours_val=14'>2 pm</option>
+                                    <option value='end_hours_val=15'>3 pm</option>
+                                    <option value='end_hours_val=16'>4 pm</option>
+                                    <option value='end_hours_val=17'>5 pm</option>
+                                    <option value='end_hours_val=18'>6 pm</option>
+                                </Form.Select>
                             </Col>
                         </Row>
                     </Form.Group>
@@ -140,10 +123,10 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             onChange={e => setField('AgesFilter', e.target.value)}
                         >
                             <option value=''>Select Age Group</option>
-                            <option value='Infant'>Infant</option>
-                            <option value='Todler'>Todler</option>
-                            <option value='Pre-Kindergarten'>Pre-Kindergarten</option>
-                            <option value='School'>School</option>
+                            <option value='licensed_to_serve=Infant'>Infant</option>
+                            <option value='licensed_to_serve=Todler'>Todler</option>
+                            <option value='licensed_to_serve=Pre-Kindergarten'>Pre-Kindergarten</option>
+                            <option value='licensed_to_serve=School'>School</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>

@@ -62,11 +62,11 @@ const HousingFilterBar = ({sendQuery}) => {
                             onChange={e => setField('NumUnitsFilter', e.target.value)}
                         >
                             <option value=''>Select #Units</option>
-                            <option value='5'>&lt;5</option>
-                            <option value='5-10'>5-10</option>
-                            <option value='10-50'>10-50</option>
-                            <option value='50-100'>50-100</option>
-                            <option value='100+'>100+</option>
+                            <option value='total_affordable_units=0-5'>&lt;5</option>
+                            <option value='total_affordable_units=5-10'>5-10</option>
+                            <option value='total_affordable_units=10-50'>10-50</option>
+                            <option value='total_affordable_units=50-100'>50-100</option>
+                            <option value='total_affordable_units=100'>100+</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='TenureFilter' as={Col}>
@@ -76,8 +76,8 @@ const HousingFilterBar = ({sendQuery}) => {
                             onChange={e => setField('TenureFilter', e.target.value)}
                         >
                             <option value=''>Select Tenure</option>
-                            <option value='Rental'>Rental</option>
-                            <option value='Ownership'>Ownership</option>
+                            <option value='tenure=Rental'>Rental</option>
+                            <option value='tenure=Ownership'>Ownership</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='UnitTypeFilter' as={Col}>
@@ -87,11 +87,11 @@ const HousingFilterBar = ({sendQuery}) => {
                             onChange={e => setField('UnitTypeFilter', e.target.value)}
                         >
                             <option value=''>Select Type</option>
-                            <option value='Single Family'>Single Family</option>
-                            <option value='Multifamily'>Multifamily</option>
-                            <option value='Duplex'>Duplex</option>
-                            <option value='Fourplex'>Fourplex</option>
-                            <option value='ADU'>ADU</option>
+                            <option value='unit_type=Single Family'>Single Family</option>
+                            <option value='unit_type=Multifamily'>Multifamily</option>
+                            <option value='unit_type=Duplex'>Duplex</option>
+                            <option value='unit_type=Fourplex'>Fourplex</option>
+                            <option value='unit_type=ADU'>ADU</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='ZipcodeFilter' as={Col}>
@@ -103,7 +103,7 @@ const HousingFilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                    setField('ZipcodeFilter', e.target.value);
+                                    setField('ZipcodeFilter', (e.target.value == "") ? "" : "zip_code=" + e.target.value);
                                 }
                             }}
                         />
@@ -115,8 +115,8 @@ const HousingFilterBar = ({sendQuery}) => {
                             onChange={e => setField('GroundLeaseFilter', e.target.value)}
                         >
                             <option value=''>Ground Lease</option>
-                            <option value='yes'>Available</option>
-                            <option value='no'>Not Available</option>
+                            <option value='ground_lease=Yes'>Available</option>
+                            <option value='ground_lease=No'>Not Available</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>
