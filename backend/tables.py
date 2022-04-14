@@ -3,9 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
 
-
-import os, sys
-
 app = Flask(__name__)
 # CORS(app)
 
@@ -23,10 +20,10 @@ class Housing(db.Model):
     __table__ = db.Model.metadata.tables['housing_new']
 
 class Childcare(db.Model):
-    __table__ = db.Model.metadata.tables['childcare']
+    __table__ = db.Model.metadata.tables['childcare_new']
 
 class Job(db.Model):
-    __table__ = db.Model.metadata.tables['jobs']
+    __table__ = db.Model.metadata.tables['jobs_new']
 
 class HousingSchema(marsh.Schema):
     class Meta:
@@ -44,13 +41,13 @@ class ChildcareSchema(marsh.Schema):
           'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
            'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
             'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
-             'issuance_date', 'type_of_issuance')
+             'issuance_date', 'type_of_issuance', 'start_hours_val', 'end_hours_val')
 
 class JobSchema(marsh.Schema):
     class Meta:
         fields = ('id', '_map', '_image', 'detected_extensions', 'extensions',
-         'title', 'company_name', 'reviews', 'rating', 'description', 
-         'apply_link', 'via', 'rating_link')
+         'title', 'company_name', 'reviews', 'description', 
+         'apply_link', 'via', 'rating_link', 'rating')
 
 house_schema = HousingSchema()
 houses_schema = HousingSchema(many=True)
