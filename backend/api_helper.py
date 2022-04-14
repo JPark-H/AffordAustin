@@ -40,7 +40,7 @@ def filter_housing(query, args):
 
 def filter_housing_by(query, filter_type, value):
     if filter_type == "zip_code":
-        query = query.filter(Housing.zip_code == value)
+        query = query.filter(Housing.zip_code == int(value))
 
     elif filter_type == "tenure":
         query = query.filter(Housing.tenure == value)
