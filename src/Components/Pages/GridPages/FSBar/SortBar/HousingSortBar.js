@@ -26,10 +26,10 @@ const HousingSortBar = ({sendQuery}) => {
                 setIsUnitType(false);
                 setIsZip(false);
                 setIsAscending(true);
-                setQuery("sort ascending by number of units");
+                setQuery("sort=total_affordable_units");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by number of units");
+                setQuery("sort=-total_affordable_units");
             } else {
                 setIsNumUnits(false);
                 setQuery("");
@@ -40,10 +40,10 @@ const HousingSortBar = ({sendQuery}) => {
                 setIsUnitType(true);
                 setIsZip(false);
                 setIsAscending(true);
-                setQuery("sort ascending by unit type");
+                setQuery("sort=unit_type");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by unit type");
+                setQuery("sort=-unit_type");
             } else {
                 setIsUnitType(false);
                 setQuery("");
@@ -54,10 +54,10 @@ const HousingSortBar = ({sendQuery}) => {
                 setIsUnitType(false);
                 setIsZip(true);
                 setIsAscending(true);
-                setQuery("sort ascending by zipcode");
+                setQuery("sort=zip_code");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by zipcode");
+                setQuery("sort=-zip_code");
             } else {
                 setIsZip(false);
                 setQuery("");
