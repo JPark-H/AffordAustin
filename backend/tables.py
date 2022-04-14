@@ -41,7 +41,7 @@ class ChildcareSchema(marsh.Schema):
           'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
            'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
             'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
-             'issuance_date', 'type_of_issuance', 'start_hours_val', 'end_hours_val')
+             'issuance_date', 'type_of_issuance', 'start_hours_val', 'end_hours_val', 'zip_code')
 
 class JobSchema(marsh.Schema):
     class Meta:
