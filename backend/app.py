@@ -5,73 +5,23 @@ from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
 from flask_cors import CORS
-from api_helper import filter_by_model, Housing, Childcare, Job
+from api_helper import filter_by_model, Housing, Childcare, Job, try_arg, sort_by_model, search_by_model
+from tables import *
 
-
-import os, sys
-
-app = Flask(__name__)
-# CORS(app)
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql+psycopg2://affordaustin:ky7dQwWt4B5ZVhPFnbZ6@affordaustin-db.cj68zosziuyy.us-east-2.rds.amazonaws.com:5432/affordaustin"
-
-db = SQLAlchemy(app)
-marsh = Marshmallow(app)
-
-db.Model.metadata.reflect(db.engine)
-
-# do we need this :o
 @app.after_request
 def add_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Credentials"] = "true"
     return response
 
-class HousingSchema(marsh.Schema):
-    class Meta:
-        fields = ('id', '_image', '_map', 'project_name', 'tenure', 'unit_type',
-         'total_units', 'ground_lease', 'zip_code', 'property_management_company',
-          'status', 'property_manager_phone_number', 'address', 'developer',
-           'affordability_expiration_year', 'units_30_mfi', 'units_40_mfi',
-            'units_50_mfi', 'units_60_mfi', 'units_65_mfi',
-             'units_80_mfi', 'units_100_mfi')
-
-
-
-class ChildcareSchema(marsh.Schema):
-    class Meta:
-        fields = ('id', 'location_address', 'county', 'days_of_operation', 'hours_of_operation',
-         'licensed_to_serve_ages', '_image', 'operation_name', '_map', 'mailing_address',
-          'accepts_child_care_subsidies', 'programs_provided', 'phone_number', 'email_address',
-           'website_address', 'operation_type', 'administrator_director_name', 'total_capacity',
-            'total_inspections', 'total_reports', 'total_self_reports', 'total_assessments',
-             'issuance_date', 'type_of_issuance')
-
-
-class JobSchema(marsh.Schema):
-    class Meta:
-        fields = ('id', '_map', '_image', 'detected_extensions', 'extensions',
-         'title', 'company_name', 'reviews', 'rating', 'description', 
-         'apply_link', 'via', 'rating_link')
-
-
-house_schema = HousingSchema()
-houses_schema = HousingSchema(many=True)
-
-childcare_schema = ChildcareSchema()
-childcares_schema = ChildcareSchema(many=True)
-
-job_schema = JobSchema()
-jobs_schema = JobSchema(many=True)
-
+@app.teardown_request
+def session_clear(exception=None):
+    db.session.remove()
+    if exception and db.session.is_active:
+        db.session.rollback()
 
 @app.route("/api/<string:model>")
 def get_housing(model):
-    args = request.args.to_dict()
-    # print(args)
     if (model == 'housing'):
         model_class = Housing
         model_schema = houses_schema
@@ -84,7 +34,7 @@ def get_housing(model):
     else:
         print("{}er? I barely know 'er!".format(model))
         return {}
-
+    args = request.args.to_dict()
     if 'page[number]' not in args:
         print('page number not specified. Fetching all instances of ')
         model_pages = model_class.query.all()
@@ -102,6 +52,12 @@ def get_housing(model):
 
         #filter
         base_query = filter_by_model(base_query, args, model)
+
+        #sort TODO ensure properly sorted 7 > 65
+        base_query = sort_by_model(base_query, args, model)
+
+        #search
+        base_query = search_by_model(base_query, args, model)
 
         page = base_query.paginate(page=page_num, per_page=page_size)
         dump = model_schema.dump(page.items)
