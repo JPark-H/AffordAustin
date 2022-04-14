@@ -67,8 +67,8 @@ def filter_childcare(query, args):
     county = try_arg('county', args)
     start_hours_val = try_arg('start_hours_val', args) 
     end_hours_val = try_arg('end_hours_val', args) 
-
     licensed_to_serve_ages = try_arg('licensed_to_serve_ages', args) #TODO not in db
+    zip_code = try_arg('zip_code', args)
 
     if county:
         query = filter_childcare_by(query, "county", county)
@@ -81,6 +81,9 @@ def filter_childcare(query, args):
 
     if licensed_to_serve_ages:
         query = filter_childcare_by(query, "licensed_to_serve_ages", licensed_to_serve_ages)
+
+    if zip_code:
+        query = filter_childcare_by(query, "zip_code", zip_code)
 
     return query
 
@@ -96,6 +99,9 @@ def filter_childcare_by(query, filter_type, value):
 
     elif filter_type == "licensed_to_serve_ages": 
         query = query.filter(Childcare.licensed_to_serve_ages.overlap([value.capitalize()]))
+
+    elif filter_type == "zip_code":
+        query = query.filter(Childcare.zip_code == value)
 
     return query
 
@@ -128,7 +134,7 @@ def filter_jobs_by(query, filter_type, value):
         query = query.filter(Job.company_name == value)
 
     elif filter_type == "schedule_type":
-        query = query.filter(Job.detected_extensions.ilike("%{}%".format(value)))
+        query = query.filter(Job.detected_extensions.overlap([value.capitalize()]))
 
     elif filter_type == "rating":
         query = query.filter(Job.rating != -1)
@@ -318,7 +324,7 @@ def search_jobs(query, search):
 
         searches.append(Job.title.ilike(formatting))
         searches.append(Job.company_name.ilike(formatting))
-        searches.append(Job.extensions.ilike(formatting)) 
+        searches.append(Job.extensions.overlap([formatting])) 
         searches.append(Job.description.ilike(formatting)) 
 
     query = query.filter(or_(*tuple(searches)))
