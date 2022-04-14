@@ -274,7 +274,7 @@ function About() {
           </h2>
         </li>
         <li>
-          <h2 classNmae="temp_interesting">
+          <h2 className="temp_interesting">
             The most daycare instances are located in Harris County.
           </h2>
         </li>
