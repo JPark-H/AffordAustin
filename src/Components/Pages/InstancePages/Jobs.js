@@ -42,10 +42,6 @@ const Jobs = () => {
 };
 
 const JobData = ({job}) => {
-    let features = job.extensions.slice(1, (job.extensions.length - 1)).split(", ").slice(1);
-    features = features.map(x => x.slice(1, (x.length - 1)));
-    let map1 = job._map.split("\n")[1].trim();
-    map1 = map1.slice(5, map1.length -1);
     return (
         <div>
             <Container className="inst_page">
@@ -61,7 +57,7 @@ const JobData = ({job}) => {
                     <Col className="inst_side_bar">
                         <Row className='side_bar_info'>
                             <h4>Location:</h4>
-                            <iframe src={map1}></iframe>
+                            <iframe src={job._map}></iframe>
                         </Row>
                         <Row className='side_bar_info'>
                             <h4>Company</h4>
@@ -74,14 +70,14 @@ const JobData = ({job}) => {
                         <Row className="side_bar_info">
                             <h4>Features</h4>
                             <ListGroup>
-                                {features.map(feature => (
+                                {job.extensions.map(feature => (
                                     <ListGroup.Item key={feature}>{feature}</ListGroup.Item>
                                 ))}
                             </ListGroup>
                         </Row>
                         <Row className="side_bar_info">
                             <h4>Rating</h4>
-                            {job.reviews === "-1" ? <div><p>No Reviews</p></div> : 
+                            {job.rating === -1 ? <div><p>No Reviews</p></div> : 
                             <p><b>{ job.rating }</b> / 5 | <a href={job.rating_link} style={{color:"blue"}}>{ job.reviews } Reviews</a></p>}
                         </Row>
                         <Row className="side_bar_info">

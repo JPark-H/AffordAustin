@@ -46,7 +46,7 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery, mod
     }, [filterQuery, sortQuery, searchQuery, getQuery])
 
     const first_result = ((currentPage - 1) * pageLimit) + 1;
-    const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit) : (first_result + totalInstances % pageLimit);
+    const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit - 1) : (first_result - 1 + totalInstances % pageLimit);
     return (
         <Container className='grid_fs_bar'>
             <Row className='grid_filters'><FilterBar sendQuery={updateFilterQuery} model={model} /></Row>

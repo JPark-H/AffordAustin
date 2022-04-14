@@ -42,8 +42,12 @@ const ChildCare = () => {
 };
 
 const ChildCareData = ({child_care}) => {
-  let map = child_care._map.split("\n")[1].trim();
-  map = map.slice(5, map.length -1);
+  let days = child_care.days_of_operation.toString();
+  days = (days === "Mon,Tue,Wed,Thu,Fri") ? "Monday-Friday" : days.replaceAll(",", ", ");
+  let ages = child_care.licensed_to_serve_ages;
+  ages = (ages.length > 1) ? ages.toString().replaceAll(",", ", ") : ages;
+  let programs = child_care.programs_provided.replaceAll(" ,", ", ").replaceAll(",", ", ");
+  let admin_name = (child_care.administrator_director_name === "nan") ? "N/A" : child_care.administrator_director_name;
     return (
       <div>
         <Container className="inst_page">
@@ -54,12 +58,12 @@ const ChildCareData = ({child_care}) => {
                   <Row className="info_section">
                     <h4>Data</h4>
                     <p><b>Operation Type:</b> {child_care.operation_type}</p>
-                    <p><b>Programs Provided:</b> {child_care.programs_provided}</p>
-                    <p><b>Administrator's Name:</b> {child_care.administrator_director_name}</p>
+                    <p><b>Programs Provided:</b> {programs}</p>
+                    <p><b>Administrator's Name:</b> {admin_name}</p>
                     <p><b>Accepts Child Care Subsidies:</b> {child_care.accepts_child_care_subsidies}</p>
-                    <p><b>Days of Operation:</b> {child_care.days_of_operation}</p>
+                    <p><b>Days of Operation:</b> {days}</p>
                     <p><b>Hours of Operations:</b> {child_care.hours_of_operation}</p>
-                    <p><b>Licensed to Serve Ages:</b> {child_care.licensed_to_serve_ages}</p>
+                    <p><b>Licensed to Serve Ages:</b> {ages}</p>
                   </Row>
                   {/* Use inspections/reports to fill table */}
                   {/* <Row className="info_section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
@@ -94,7 +98,7 @@ const ChildCareData = ({child_care}) => {
               <Col className="inst_side_bar">
                   <Row className='side_bar_info'>
                       <h4>Location:</h4>
-                      <iframe className="inst_map" src={map}></iframe>
+                      <iframe className="inst_map" src={child_care._map}></iframe>
                   </Row>
                   <Row className='side_bar_info'>
                     <h4>Contact Information</h4>

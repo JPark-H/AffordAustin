@@ -17,10 +17,8 @@ const HousingGrid = () => {
     const getHousingData = useCallback (async () => {
         setLoading(true);
         console.log(query);
-        // axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json';
-        // axios.defaults.headers.common['Accept'] = 'application/vnd.api+json';
-        // const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
-        const endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        let endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        endpoint += (query === "") ? "" : "&" + query;
         const data = await axios.get(endpoint);
         setTotalNumHouses(data.data.metadata.total_count);
         setHouses(data.data.attributes);
@@ -78,7 +76,7 @@ const InstanceCard = ({ housing, housing_id}) => {
                     <Card.Title className="text-truncate">{ housing.project_name }</Card.Title>
                     <Card.Text><b>Tenure :</b> { housing.tenure }</Card.Text>
                     <Card.Text><b>Unit-Type:</b> { housing.unit_type }</Card.Text>
-                    <Card.Text><b>Num of Units:</b> { housing.total_units }</Card.Text>
+                    <Card.Text><b>Num of Affordable Units:</b> { housing.total_affordable_units }</Card.Text>
                     <Card.Text><b>Ground Lease:</b> { housing.ground_lease }</Card.Text>
                     <Card.Text><b>Zip-Code:</b> { housing.zip_code }</Card.Text>
                 </Card.Body>
