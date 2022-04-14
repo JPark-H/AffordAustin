@@ -205,11 +205,11 @@ def sort_childcare(query, sort_param):
 def sort_childcare_by(query, sort_param, descending):
     col = None
 
-    if sort_param == 'hours_of_operation':
-        col = Childcare.hours_of_operation
+    if sort_param == 'start_hours_val':
+        col = Childcare.start_hours_val
     
-    # elif sort_param == 'hours_of_operation': #TODO, start vs end time
-    #     col = Childcare.hours_of_operation
+    elif sort_param == 'end_hours_val':
+        col = Childcare.end_hours_val
 
     elif sort_param == 'licensed_to_serve_ages':
         col = Childcare.licensed_to_serve_ages
