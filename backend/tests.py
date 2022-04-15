@@ -33,13 +33,11 @@ class UnitTests(TestCase):
         )
         self.assertEqual(req.status_code, 200)
 
-    # testing pagination of housing data fail
-    def test_jobs_pages(self):
+    def test_housing_pages_fail(self):
         req = self.client.get(
             "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
         )
-        self.assertEqual(req.status_code, 200)
-        self.assertFalse(req.json["data"])
+        self.assertEqual(req.status_code, 404)
 
     # testing all childcare data
     def test_childcare(self):
@@ -59,21 +57,20 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
 
     # testing pagination of childcare data fail
-    def test_jobs_pages(self):
+    def test_childcare_pages_fail(self):
         req = self.client.get(
             "/api/childcare?page[size]=3&page[number]=123123", headers=self.headers
         )
-        self.assertEqual(req.status_code, 200)
-        self.assertFalse(req.json["data"])
+        self.assertEqual(req.status_code, 404)
 
-    # testing singular job data
+    # testing all job data
     def test_jobs(self):
         req = self.client.get("/api/jobs")
         self.assertEqual(req.status_code, 200)
 
-    # testing all childcare data
+    # testing singular job data
     def test_jobs_single(self):
-        req = self.client.get("/api/jobs/1", headers=self.headers)
+        req = self.client.get("/api/jobs/1")
         self.assertEqual(req.status_code, 200)
 
     # testing pagination of job data
@@ -81,16 +78,15 @@ class UnitTests(TestCase):
         req = self.client.get(
             "/api/jobs?page[size]=3&page[number]=2", headers=self.headers
         )
-        self.assertIsNone(req.json["data"])
         self.assertEqual(req.status_code, 200)
 
     # testing pagination of job data fail
-    def test_jobs_pages(self):
+    def test_jobs_pages_fail(self):
         req = self.client.get(
             "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
         )
-        self.assertEqual(req.status_code, 200)
-        self.assertFalse(req.json["data"])
+        self.assertEqual(req.status_code, 404)
+    
 
 
 if __name__ == "__main__":

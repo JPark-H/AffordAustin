@@ -11,8 +11,10 @@ selenium = "*"
 chromedriver-py = "*"
 webdriver-manager = "*"
 validators = "*"
+sqlalchemy = "*"
 
 [dev-packages]
+ipykernel = "*"
 
 [requires]
 python_version = "3.9"

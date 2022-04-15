@@ -21,7 +21,7 @@ const teamInfo = [
 	{
 		name: "Dinesh Balakrishnan",
 		picture: Dinesh,
-		role: "Phase X Leader",
+		role: "Phase III Leader",
 		stack: "Full-Stack",
 		bio:
 			"A student in his final semester at UT Austin. Loves exploring \

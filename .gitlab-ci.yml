@@ -2,6 +2,7 @@ image: node:latest
 
 stages:
   - unittest
+  - postmantest
   - jstest
   - acceptance
   - deploy
@@ -15,6 +16,15 @@ python_unit_tests:
     - cd backend
     - python3 tests.py
 
+postman_unit_tests:
+  stage: postmantest
+  image:
+    name: postman/newman:alpine
+    entrypoint: [""]
+  script:
+    - cd backend
+    - newman run Postman.json
+
 test_jest:
   stage: jstest
   script:
@@ -24,10 +34,6 @@ test_jest:
 e2e:remote:chrome:
   stage: acceptance
   image: python:latest
-  artifacts:
-    when: always
-    paths:
-      - selenium/
   variables:
     SELENIUM_REMOTE_URL: http://gitlab-selenium-server:4545/wd/hub
   services:

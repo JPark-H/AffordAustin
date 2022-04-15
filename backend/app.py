@@ -1,23 +1,12 @@
 from flask import Flask, abort, jsonify, request
+import flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
-from flask_restless import APIManager
-
-import os, sys
-
-app = Flask(__name__)
-
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql+psycopg2://affordaustin:ky7dQwWt4B5ZVhPFnbZ6@affordaustin-db.cj68zosziuyy.us-east-2.rds.amazonaws.com:5432/affordaustin"
-
-db = SQLAlchemy(app)
-marsh = Marshmallow(app)
-
-db.Model.metadata.reflect(db.engine)
-
+from marshmallow import fields
+from flask_cors import CORS
+from api_helper import filter_by_model, Housing, Childcare, Job, try_arg, sort_by_model, search_by_model
+from tables import *
 
 @app.after_request
 def add_cors_headers(response):
@@ -25,53 +14,87 @@ def add_cors_headers(response):
     response.headers["Access-Control-Allow-Credentials"] = "true"
     return response
 
+@app.teardown_request
+def session_clear(exception=None):
+    db.session.remove()
+    if exception and db.session.is_active:
+        db.session.rollback()
 
-class Housing(db.Model):
-    __table__ = db.Model.metadata.tables["housing"]
+@app.route("/api/<string:model>")
+def get_housing(model):
+    if (model == 'housing'):
+        model_class = Housing
+        model_schema = houses_schema
+    elif (model == 'childcare'):
+        model_class = Childcare
+        model_schema = childcares_schema
+    elif (model == 'jobs'):
+        model_class = Job
+        model_schema = jobs_schema
+    else:
+        print("{}er? I barely know 'er!".format(model))
+        return {}
+    args = request.args.to_dict()
+    if 'page[number]' not in args:
+        print('page number not specified. Fetching all instances of ')
+        model_pages = model_class.query.all()
+        results = model_schema.dump(model_pages)
+        return jsonify(results)
+    else:
+        page_num = int(args['page[number]'].replace('{', '').replace('}', ''))
+        if 'page[size]' in args:
+            page_size = int(args['page[size]'].replace('{', '').replace('}', ''))
+        else:
+            print('page size not specified. Defaulting to 9')
+            page_size = 9
 
+        base_query = db.session.query(model_class)
 
-class Childcare(db.Model):
-    __table__ = db.Model.metadata.tables["childcare"]
+        #filter
+        base_query = filter_by_model(base_query, args, model)
 
+        #sort TODO ensure properly sorted 7 > 65
+        base_query = sort_by_model(base_query, args, model)
 
-#
-# class ChildcareSchema(marsh.Schema):
-#     class Meta:
-#         fields = ('operation_id', 'operation_type', 'operation_number', 'operation_name')
+        #search
+        base_query = search_by_model(base_query, args, model)
 
-#         '''
-#         all fields: ('operation_id', 'operation_type', 'operation_number', 'operation_name',
-#        'programs_provided', 'location_address', 'mailing_address',
-#        'phone_number', 'county', 'administrator_director_name',
-#        'type_of_issuance', 'issuance_date', 'conditions_on_permit',
-#        'accepts_child_care_subsidies', 'hours_of_operation',
-#        'days_of_operation', 'total_capacity', 'open_foster_homes',
-#        'open_branch_offices', 'licensed_to_serve_ages', 'corrective_action',
-#        'adverse_action', 'temporarily_closed', 'deficiency_high',
-#        'deficiency_medium_high', 'deficiency_medium', 'deficiency_medium_low',
-#        'deficiency_low', 'total_inspections', 'total_assessments',
-#        'total_reports', 'total_self_reports', 'location_address_geo',
-#        'email_address', 'website_address')
-#         '''
+        page = base_query.paginate(page=page_num, per_page=page_size)
+        dump = model_schema.dump(page.items)
 
+        metadata = {
+            "page": page.page,
+            "num_responses": len(dump),
+            "pages": page.pages,
+            "total_count": page.total,
+            "prev_page": page.prev_num,
+            "next_page": page.next_num,
+            "has_next": page.has_next,
+            "has_prev": page.has_prev,
+        }
+        
+        return jsonify({'attributes': dump, 'metadata': metadata})
+   
+    
 
-class Job(db.Model):
-    __table__ = db.Model.metadata.tables["jobs"]
+@app.route("/api/housing/<int:id>")
+def get_housing_page(id):
+    single_house = Housing.query.get(id)
+    return house_schema.jsonify(single_house)
 
+@app.route("/api/childcare/<int:id>")
+def get_childcare_page(id):
+    single_childcare = Childcare.query.get(id)
+    return childcare_schema.jsonify(single_childcare) 
 
-manager = APIManager(app, session=db.session)
-
-# search bar doesn't allow for upper-case Housing
-manager.create_api(Housing, primary_key="id", collection_name="housing", page_size=21)
-manager.create_api(
-    Childcare, primary_key="id", collection_name="childcare", page_size=21
-)
-manager.create_api(Job, primary_key="id", collection_name="jobs", page_size=21)
-
+@app.route("/api/jobs/<int:id>")
+def get_job_page(id):
+    single_job = Job.query.get(id)
+    return job_schema.jsonify(single_job)
 
 @app.route("/")
 def home():
-    return "Sally sells sea shells by the sea shore"
+    return "all my homies hate flask-restless"
 
 
 if __name__ == "__main__":

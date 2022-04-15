@@ -1,10 +1,10 @@
 import './Grid.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
-import Paginate from '../../Pagination/Pagination';
 import axios from 'axios';
-import { Container, Card, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
+import FSBar from './FSBar/FSBar';
+import HousingInstanceCard from './InstanceCards/HousingInstanceCard';
 
 const HousingGrid = () => {
     const [houses, setHouses] = useState([]);
@@ -12,25 +12,36 @@ const HousingGrid = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalNumHouses, setTotalNumHouses] = useState(1);
     const [housesPerPage, setHousesPerPage] = useState(21);
+    const [query, setQuery] = useState('');
+    const [searchKeys, setSearchKeys] = useState([]);
 
-    const getHousingData = useCallback (async (query) => {
+    const getHousingData = useCallback (async () => {
         setLoading(true);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
-        // const endpoint = `http://localhost:5000/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
-        const endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        let endpoint = `https://api.affordaustin.me/api/housing?page[size]=${housesPerPage}&page[number]=${currentPage}`;
+        endpoint += (query === "") ? "" : "&" + query;
         const data = await axios.get(endpoint);
-        setTotalNumHouses(data.data.meta.total);
-        setHouses(data.data.data);
+        setTotalNumHouses(data.data.metadata.total_count);
+        setHouses(data.data.attributes);
         setLoading(false);
-    }, [currentPage, housesPerPage]);
+    }, [currentPage, housesPerPage, query]);
 
     useEffect(() => {
-        getHousingData('');
-    }, [currentPage, getHousingData]);
+        getHousingData();
+    }, [currentPage, query, searchKeys, getHousingData]);
 
     const paginate = (pageNum) => {
         setCurrentPage(pageNum);
+    };
+
+    const getQuery = (new_query, new_search_query) => {
+        let full_query = new_query;
+        if (full_query !== "" && new_search_query != ""){
+            full_query += new_search_query;
+        }
+        full_query += new_search_query;
+        setQuery(full_query);
+        let search_query = (new_search_query === "") ? [] : new_search_query.slice(7).split(" ");
+        setSearchKeys(search_query);
     };
 
     return (
@@ -41,14 +52,16 @@ const HousingGrid = () => {
                         <h1 className="grid_header">Housing</h1>
                     </Row>
                     <Row>
-                        <Paginate totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} />
+                        <FSBar totalInstances={totalNumHouses} pageLimit={housesPerPage} paginate={paginate} currentPage={currentPage} sendQuery={getQuery} model="Housing"/>
                     </Row>
-                        <h1 className="results">Showing {houses.length} Results Out Of {totalNumHouses}</h1>
+                    <Row className="justify-content-center">
+                        {loading ? <Spinner animation='border' role="status"/> : <></>}
+                    </Row>
                     <Row className="g-3 justify-content-center" xs='auto'>
-                        {loading ? <h3 className="results">Loading</h3> : houses.map(house => {
+                        {loading ? <></> : houses.map(house => {
                             return (
                             <Col key={house.id}>
-                                <InstanceCard housing={house.attributes} housing_id={house.id}/>
+                                <HousingInstanceCard housing={house} housing_id={house.id} search_keys={searchKeys} />
                             </Col>);
                         })}
                     </Row>
@@ -56,26 +69,6 @@ const HousingGrid = () => {
             </div>
         </div>
         
-    )
-};
-
-const InstanceCard = ({ housing, housing_id}) => {
-    const link = `/Housing/${ housing_id }`;
-
-    return (
-        <Link to={ link }>
-            <Card className='inst_card'>
-                <Card.Img variant='top' src={housing._image} />
-                <Card.Body>
-                    <Card.Title className="text-truncate">{ housing.project_name }</Card.Title>
-                    <Card.Text><b>Tenure :</b> { housing.tenure }</Card.Text>
-                    <Card.Text><b>Unit-Type:</b> { housing.unit_type }</Card.Text>
-                    <Card.Text><b>Num of Units:</b> { housing.total_units }</Card.Text>
-                    <Card.Text><b>Ground Lease:</b> { housing.ground_lease }</Card.Text>
-                    <Card.Text><b>Zip-Code:</b> { housing.zip_code }</Card.Text>
-                </Card.Body>
-            </Card>
-        </Link>
     )
 };
 
