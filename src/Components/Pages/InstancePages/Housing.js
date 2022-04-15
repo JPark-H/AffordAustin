@@ -21,7 +21,6 @@ const Housing = () => {
     try {
       // data = await axios.get(`http://localhost:5000/api/housing/${id}`);
       data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
-      console.log(data.data)
       setInstanceData(data.data);
     } catch (error) {
       setIsValidId(false);
@@ -44,10 +43,6 @@ const Housing = () => {
 }
 
 const HousingData = ({housing}) => {
-  let map = housing._map.split("\n")[0].trim();
-  // let map = housing._map.split("\n")[1].trim(); ummm idk what this is doing but it is 
-  // map = map.slice(5, map.length -1);            undefined when i run locally so
-  
   return (
     <div>
       <Container className="inst_page">
@@ -98,7 +93,7 @@ const HousingData = ({housing}) => {
               <Col className="inst_side_bar">
                   <Row className='side_bar_info'>
                       <h4>Location:</h4>
-                      <iframe className="inst_map" src={map}></iframe>
+                      <iframe className="inst_map" src={housing._map}></iframe>
                   </Row>
                   <Row className='side_bar_info'>
                     <h4>Contact Information</h4>

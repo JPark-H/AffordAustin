@@ -12,6 +12,7 @@ import Job from "./Components/Pages/InstancePages/Jobs"
 import JobGrid from "./Components/Pages/GridPages/JobGrid"
 import About from "./Components/Pages/About/About";
 import PageNotFound from "./Components/PageNotFound";
+import SearchPage from "./Components/Pages/Search/SearchPage"
 
 function App() {
   return (
@@ -32,9 +33,9 @@ function App() {
           <Route path="/ChildCare" element={<ChildCareGrid />} />
           <Route path="/ChildCare/:id" element={<ChildCare />} />
 
-          <Route path="*" element={<PageNotFound />} />
+          <Route path="/Search" element={<SearchPage />} />
 
-          {/* <Route path="/Search" element={<Search />} /> */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
     </div>

@@ -22,11 +22,7 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery, mod
             fullQuery += '&';
         }
         fullQuery += sortQuery;
-        if ((filterQuery !== '' || sortQuery !== '') && searchQuery !== '') {
-            fullQuery += '&';
-        }
-        fullQuery += searchQuery;
-        sendQuery(fullQuery);
+        sendQuery(fullQuery, searchQuery);
     }, [filterQuery, sortQuery, searchQuery]);
 
     const updateFilterQuery = (query) => {
@@ -46,7 +42,7 @@ const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery, mod
     }, [filterQuery, sortQuery, searchQuery, getQuery])
 
     const first_result = ((currentPage - 1) * pageLimit) + 1;
-    const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit) : (first_result + totalInstances % pageLimit);
+    const last_result = (totalInstances / pageLimit > currentPage) ? (first_result + pageLimit - 1) : (first_result - 1 + totalInstances % pageLimit);
     return (
         <Container className='grid_fs_bar'>
             <Row className='grid_filters'><FilterBar sendQuery={updateFilterQuery} model={model} /></Row>
@@ -80,6 +76,7 @@ const SortBar = ({sendQuery, model}) => {
     }
 }
 
+//Split to own file
 const SearchBar = ({sendQuery}) => {
     const [form, setForm] = useState({});
 
@@ -91,14 +88,15 @@ const SearchBar = ({sendQuery}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        sendQuery(form['search']);
+        const query = (form['search'] === "") ? "" : "search=" + form['search'];
+        sendQuery(query);
     }
 
     return (
         <Form onSubmit={e => {handleSubmit(e)}} className="d-flex">
             <Form.Control
                 type="search"
-                placeholder="Search Housing"
+                placeholder="Search"
                 className="search_bar"
                 onChange={ e => setField('search', e.target.value)}
             />

@@ -26,10 +26,10 @@ const JobSortBar = ({sendQuery}) => {
                 setIsNumReviews(false);
                 setIsZip(false);
                 setIsAscending(true);
-                setQuery("sort ascending by rating");
+                setQuery("sort=rating");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by rating");
+                setQuery("sort=-rating");
             } else {
                 setIsRating(false);
                 setQuery("");
@@ -40,10 +40,10 @@ const JobSortBar = ({sendQuery}) => {
                 setIsNumReviews(true);
                 setIsZip(false);
                 setIsAscending(true);
-                setQuery("sort ascending by number of reviews");
+                setQuery("sort=reviews");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by number of reviews");
+                setQuery("sort=-reviews");
             } else {
                 setIsNumReviews(false);
                 setQuery("");
@@ -54,10 +54,10 @@ const JobSortBar = ({sendQuery}) => {
                 setIsNumReviews(false);
                 setIsZip(true);
                 setIsAscending(true);
-                setQuery("sort ascending by zipcode");
+                setQuery("sort=zip_code");
             } else if (isAscending){
                 setIsAscending(false);
-                setQuery("sort descending by zipcode");
+                setQuery("sort=-zipcode");
             } else {
                 setIsZip(false);
                 setQuery("");

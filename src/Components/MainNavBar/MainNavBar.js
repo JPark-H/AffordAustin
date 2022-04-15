@@ -15,11 +15,11 @@ function MainNavBar() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{marginRight:10, fontSize:"60%"}}></Navbar.Toggle>
         <Navbar.Collapse id="responsive-navbar-nav" style={{color:"white"}}>
           <Nav className="me-auto nav_bar_options">
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/Housing">Housing</Nav.Link>
             <Nav.Link as={Link} to="/Childcare">Childcare</Nav.Link>
             <Nav.Link as={Link} to="/Jobs">Jobs</Nav.Link>
             <Nav.Link as={Link} to="/About">About</Nav.Link>
+            <Nav.Link as={Link} to="/Search">Search</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

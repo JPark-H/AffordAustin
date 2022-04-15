@@ -51,6 +51,7 @@ const JobFilterBar = ({sendQuery}) => {
     }, [form])
 
     return (
+        // Need query format for ScheduleTypeFilter
         <div style={{ textAlign:'center' }}>
             <h3>Filters:</h3>
             <Form>
@@ -64,7 +65,7 @@ const JobFilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                    setField('CompanyFilter', e.target.value);
+                                    setField('CompanyFilter', (e.target.value == "") ? "" : "company_name=" + e.target.value);
                                 }
                             }}
                         >
@@ -77,10 +78,10 @@ const JobFilterBar = ({sendQuery}) => {
                             onChange={e => setField('ScheduleTypeFilter', e.target.value)}
                         >
                             <option value=''>Pick Type</option>
-                            <option value='Full-time'>Full-time</option>
-                            <option value='Part-time'>Part-time</option>
-                            <option value='Contractor'>Contractor</option>
-                            <option value='Internship'>Internship</option>
+                            <option value='schedule_type=Full-time'>Full-time</option>
+                            <option value='schedule_type=Part-time'>Part-time</option>
+                            <option value='schedule_type=Contractor'>Contractor</option>
+                            <option value='schedule_type=Internship'>Internship</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='RatingFilter' as={Col}>
@@ -90,12 +91,12 @@ const JobFilterBar = ({sendQuery}) => {
                             onChange={e => setField('RatingFilter', e.target.value)}
                         >
                             <option value=''>Select Rating</option>
-                            <option value='<1'>&lt;1</option>
-                            <option value='1-2'>1-2</option>
-                            <option value='2-3'>2-3</option>
-                            <option value='3-4'>3-4</option>
-                            <option value='4-5'>4-5</option>
-                            <option value='5'>5</option>
+                            <option value='rating=0-1'>&lt;1</option>
+                            <option value='rating=1-2'>1-2</option>
+                            <option value='rating=2-3'>2-3</option>
+                            <option value='rating=3-4'>3-4</option>
+                            <option value='rating=4-5'>4-5</option>
+                            <option value='rating=5'>5</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='NumReviewsFilter' as={Col}>
@@ -105,10 +106,10 @@ const JobFilterBar = ({sendQuery}) => {
                             onChange={e => setField('NumReviewsFilter', e.target.value)}
                         >
                             <option value=''># Reviews</option>
-                            <option value='<10>'>&lt;10</option>
-                            <option value='10-50'>10-50</option>
-                            <option value='50-100'>50-100</option>
-                            <option value='100+'>100+</option>
+                            <option value='reviews=0-10'>&lt;10</option>
+                            <option value='reviews=10-50'>10-50</option>
+                            <option value='reviews=50-100'>50-100</option>
+                            <option value='reviews=100'>100+</option>
                         </Form.Select>
                     </Form.Group>
                     <Form.Group controlId='ZipcodeFilter' as={Col}>
@@ -120,7 +121,7 @@ const JobFilterBar = ({sendQuery}) => {
                             // From https://stackoverflow.com/questions/34223558/enter-key-event-handler-on-react-bootstrap-input-component
                             onKeyPress={e => {
                                 if (e.key === "Enter") {
-                                    setField('ZipcodeFilter', e.target.value);
+                                    setField('ZipcodeFilter', (e.target.value == "") ? "" : "zip_code=" + e.target.value);
                                 }
                             }}
                         />

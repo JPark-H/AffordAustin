@@ -16,9 +16,8 @@ function Home() {
           </Row>
         </Container>
       </div>
-      <div className="rightHalf">
-        <h1>Explore</h1>
-        <div className="cardBox">
+      <div className="rightHalf h-100">
+        <div className="cardBox flex-grow-1">
           <Link to="/Housing">
             <Card className="housingCard">
               <Card.Body>
@@ -26,6 +25,8 @@ function Home() {
               </Card.Body>
             </Card>
           </Link>
+        </div>
+        <div className="cardBox flex-grow-1">
           <Link to="/Childcare">
             <Card className="childcareCard">
               <Card.Body>
@@ -33,6 +34,8 @@ function Home() {
               </Card.Body>
             </Card>
           </Link>
+        </div>
+        <div className="cardBox flex-grow-1">
           <Link to="/Jobs">
             <Card className="jobsCard">
               <Card.Body>
