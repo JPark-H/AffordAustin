@@ -630,6 +630,7 @@
 									"     pm.expect(responseJson.attributes[0].total_inspections).to.be.a('number');",
 									"     pm.expect(responseJson.attributes[0].total_reports).to.be.a('number');",
 									"     pm.expect(responseJson.attributes[0].total_self_reports).to.be.a('number');",
+									"     pm.expect(responseJson.attributes[0].zip_code).to.be.a('number');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -739,6 +740,8 @@
 									"     pm.expect(responseJson.total_inspections).to.be.a('number');",
 									"     pm.expect(responseJson.total_reports).to.be.a('number');",
 									"     pm.expect(responseJson.total_self_reports).to.be.a('number');",
+									"     pm.expect(responseJson.zip_code).to.be.a('number');",
+									"",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1127,6 +1130,7 @@
 									"     pm.expect(responseJson.attributes[0].via).to.be.a('string');",
 									"     pm.expect(responseJson.attributes[0].rating).to.be.a('number');",
 									"     pm.expect(responseJson.attributes[0].reviews).to.be.a('number');",
+									"     pm.expect(responseJson.attributes[0].zip_code).to.be.a('number');",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1219,6 +1223,7 @@
 									"     pm.expect(responseJson.via).to.be.a('string');",
 									"     pm.expect(responseJson.rating).to.be.a('number');",
 									"     pm.expect(responseJson.reviews).to.be.a('number');",
+									"     pm.expect(responseJson.zip_code).to.be.a('number');",
 									"});"
 								],
 								"type": "text/javascript"
