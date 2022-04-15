@@ -49,6 +49,16 @@ def housing_pages():
         driver.get(f'{URL}#/Housing/{id}')
         driver.close()
 
+#1 Test
+def test_search():
+    driver = webdriver.Remote(
+            command_executor='http://gitlab-selenium-server:4545/wd/hub',
+            options=options)
+    driver.get(f'{URL}#/Search')
+    driver.close()
+
+
+
 # 10 TESTS
 def job_pages():
     for id in range(1, 11):
@@ -93,5 +103,7 @@ if __name__ == '__main__':
     print('Job Tests Passed')
     childcare_pages()
     print('Childcare Tests Passed')
+    test_search()
+    print('Search Test Passed')
     print('----------------------')
     print('ALL TESTS PASSED')
