@@ -114,7 +114,32 @@ def searching():
 
 # 3 TESTS
 def sorting():
-    pass
+    driver = webdriver.Remote(
+            command_executor="http://gitlab-selenium-server:4545/wd/hub",
+            options=options,
+    )
+    driver.get(f"{URL}#/Housing/")
+    searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
+    print(len(searching))
+    driver.close()
+
+    driver = webdriver.Remote(
+            command_executor="http://gitlab-selenium-server:4545/wd/hub",
+            options=options,
+    )
+    driver.get(f"{URL}#/Childcare/")
+    searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
+    print(len(searching))
+    driver.close()
+
+    driver = webdriver.Remote(
+            command_executor="http://gitlab-selenium-server:4545/wd/hub",
+            options=options,
+    )
+    driver.get(f"{URL}#/Jobs/")
+    searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
+    print(len(searching))
+    driver.close()
 
 
 # 3 TESTS
