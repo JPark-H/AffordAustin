@@ -1,4 +1,3 @@
-
 # AffordAustin
 
 ## Members
@@ -13,12 +12,13 @@ Scarlett Shires      | svs758  | @scarlettshires
 
 ## Git SHA
 
-3ce05ff01a67814aee643179506086c9e3a1fca5
+442b53a6ff5429ce87fe931bad923ba3d9a737fb
 
 ## Phase Leaders
 
-Phase 1: Scarlett Shires\
+Phase 1: Scarlett Shires
 Phase 2: Sabeer Shahzad
+Phase 3: Dinesh Balakrishnan
 
 ## Gitlab Pipelines
 
@@ -54,7 +54,17 @@ Jay Park             | 20        | 18
 Sabeer Shahzad       | 20        | 18    
 Scarlett Shires      | 15        | 20
 
+### Phase 3
+
+Name                 | Estimated | Actual             
+---------------------|-----------| -------
+Dinesh Balakrishnan  | 20        | 25
+Presley Heikkila     | 15        | 20  
+Jay Park             | 15        | 15       
+Sabeer Shahzad       | 15        | 15    
+Scarlett Shires      | 15        | 25
+
 ### Comments
 
-N/A
-
+https://gitlab.com/shamirakabir/liveatx/-/tree/main used as a reference for 
+filtering/searching/sorting
