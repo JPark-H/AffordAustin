@@ -86,6 +86,12 @@ def grids():
 
 if __name__ == '__main__':
     navigation()
+    print('Navigation Tests Passed')
     housing_pages()
+    print('Housing Tests Passed')
     job_pages()
+    print('Job Tests Passed')
     childcare_pages()
+    print('Childcare Tests Passed')
+    print('----------------------')
+    print('ALL TESTS PASSED')
