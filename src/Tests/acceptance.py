@@ -84,6 +84,7 @@ def childcare_pages():
         driver.close()
 
 
+
 # 3 TESTS
 def grids():
     for model in MODELS:
@@ -113,6 +114,7 @@ if __name__ == "__main__":
     childcare_pages()
     print("Childcare Tests Passed")
     test_search()
+    grids()
     print("Search Test Passed")
     print("----------------------")
     print("ALL TESTS PASSED")
