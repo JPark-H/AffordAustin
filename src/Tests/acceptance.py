@@ -93,5 +93,6 @@ if __name__ == '__main__':
     print('Job Tests Passed')
     childcare_pages()
     print('Childcare Tests Passed')
+    grids()
     print('----------------------')
     print('ALL TESTS PASSED')
