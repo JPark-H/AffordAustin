@@ -15,3 +15,21 @@ exports[`Render components 8. ChildCareGrid matches snapshot 1`] = `ShallowWrapp
 exports[`Render components 9. HousingGrid matches snapshot 1`] = `ShallowWrapper {}`;
 
 exports[`Render components 10. JobGrid matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 11. Searching page matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 12. ChildcareFilterBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 13. HousingFilterBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 14. JobFilterBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 15. ChildcareSortBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 16. HousingSortBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 17. JobSortBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 18. FSBar matches snapshot 1`] = `ShallowWrapper {}`;
+
+exports[`Render components 19. Pagination matches snapshot 1`] = `ShallowWrapper {}`;

@@ -15,6 +15,19 @@ import ChildCareGrid from "../Components/Pages/GridPages/ChildCareGrid";
 import HousingGrid from "../Components/Pages/GridPages/HousingGrid";
 import JobGrid from "../Components/Pages/GridPages/JobGrid";
 
+import SearchPage from "../Components/Pages/Search/SearchPage";
+
+import ChildcareFilterBar from "../Components/Pages/GridPages/FSBar/FilterBar/ChildcareFilterBar";
+import HousingFilterBar from "../Components/Pages/GridPages/FSBar/FilterBar/HousingFilterBar";
+import JobFilterBar from "../Components/Pages/GridPages/FSBar/FilterBar/JobFilterBar";
+
+import ChildcareSortBar from "../Components/Pages/GridPages/FSBar/SortBar/ChildcareSortBar";
+import HousingSortBar from "../Components/Pages/GridPages/FSBar/SortBar/HousingSortBar";
+import JobSortBar from "../Components/Pages/GridPages/FSBar/SortBar/JobSortBar";
+
+import FSBar from "../Components/Pages/GridPages/FSBar/FSBar";
+import Pagination from "../Components/Pages/GridPages/FSBar/Pagination";
+
 configure({ adapter: new Adapter() });
 
 describe("Render components", () => {
@@ -66,5 +79,50 @@ describe("Render components", () => {
   it("10. JobGrid matches snapshot", () => {
     const ccgrid = shallow(<JobGrid />);
     expect(ccgrid).toMatchSnapshot();
+  });
+
+  it("11. Searching page matches snapshot", () => {
+    const searchpage = shallow(<SearchPage />);
+    expect(searchpage).toMatchSnapshot();
+  });
+
+  it("12. ChildcareFilterBar matches snapshot", () => {
+    const ccfilterbar = shallow(<ChildcareFilterBar />);
+    expect(ccfilterbar).toMatchSnapshot();
+  });
+
+  it("13. HousingFilterBar matches snapshot", () => {
+    const hbar = shallow(<HousingFilterBar />);
+    expect(hbar).toMatchSnapshot();
+  });
+
+  it("14. JobFilterBar matches snapshot", () => {
+    const jbar = shallow(<JobFilterBar />);
+    expect(jbar).toMatchSnapshot();
+  });
+
+  it("15. ChildcareSortBar matches snapshot", () => {
+    const ccfilterbar = shallow(<ChildcareSortBar />);
+    expect(ccfilterbar).toMatchSnapshot();
+  });
+
+  it("16. HousingSortBar matches snapshot", () => {
+    const hbar = shallow(<HousingSortBar />);
+    expect(hbar).toMatchSnapshot();
+  });
+
+  it("17. JobSortBar matches snapshot", () => {
+    const jbar = shallow(<JobSortBar />);
+    expect(jbar).toMatchSnapshot();
+  });
+
+  it("18. FSBar matches snapshot", () => {
+    const fsbar = shallow(<FSBar />);
+    expect(fsbar).toMatchSnapshot();
+  });
+
+  it("19. Pagination matches snapshot", () => {
+    const pag = shallow(<Pagination />);
+    expect(pag).toMatchSnapshot();
   });
 });
