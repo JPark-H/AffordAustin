@@ -7,14 +7,14 @@ stages:
   - acceptance
   - deploy
 
-# python_unit_tests:
-#   image: python:3.6-stretch
-#   stage: unittest
-#   before_script:
-#     - pip install -r backend/requirements.txt
-#   script:
-#     - cd backend
-#     - python3 tests.py
+python_unit_tests:
+  image: python:3.6-stretch
+  stage: unittest
+  before_script:
+    - pip install -r backend/requirements.txt
+  script:
+    - cd backend
+    - python3 tests.py
 
 # postman_unit_tests:
 #   stage: postmantest
@@ -31,18 +31,18 @@ stages:
 #     - npm i
 #     - npm test
 
-e2e:remote:chrome:
-  stage: acceptance
-  image: python:latest
-  variables:
-    SELENIUM_REMOTE_URL: http://gitlab-selenium-server:4545/wd/hub
-  services:
-    - name: registry.gitlab.com/gitlab-org/gitlab-selenium-server:latest
-      alias: gitlab-selenium-server
-  before_script:
-    - pip install selenium
-  script:
-    - python src/Tests/acceptance.py
+# e2e:remote:chrome:
+#   stage: acceptance
+#   image: python:latest
+#   variables:
+#     SELENIUM_REMOTE_URL: http://gitlab-selenium-server:4545/wd/hub
+#   services:
+#     - name: registry.gitlab.com/gitlab-org/gitlab-selenium-server:latest
+#       alias: gitlab-selenium-server
+#   before_script:
+#     - pip install selenium
+#   script:
+#     - python src/Tests/acceptance.py
 
 # deploy_development:
 #   image: python:3.6-stretch
@@ -57,15 +57,15 @@ e2e:remote:chrome:
 #     - cd backend
 #     - /root/.local/bin/eb deploy affordaustin-api
 
-# deploy_production:
-#   image: python:3.6-stretch
-#   only:
-#     variables:
-#       - $CI_COMMIT_BRANCH == "main"
-#   stage: deploy
-#   before_script:
-#     - pip install awsebcli --upgrade --user
-#     - git checkout main
-#   script:
-#     - cd backend
-#     - /root/.local/bin/eb deploy affordaustin-api
+deploy_production:
+  image: python:3.6-stretch
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "main"
+  stage: deploy
+  before_script:
+    - pip install awsebcli --upgrade --user
+    - git checkout main
+  script:
+    - cd backend
+    - /root/.local/bin/eb deploy affordaustin-api
