@@ -1,7 +1,7 @@
 image: node:latest
 
 stages:
-  - unittest
+  - unitest
   - postmantest
   - jstest
   - acceptance
@@ -9,7 +9,7 @@ stages:
 
 python_unit_tests:
   image: python:3.6-stretch
-  stage: unittest
+  stage: unitest
   before_script:
     - pip install -r backend/requirements.txt
   script:
