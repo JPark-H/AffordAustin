@@ -67,8 +67,8 @@ const ChildcareSortBar = ({sendQuery}) => {
 
     useEffect(() => {
         setFilter('');
-        setStartTimeName(isStartTime ? (isAscending ? "Start Time ^": "Start Time v") : "Start Time");
-        setEndTimeName(isEndTime ? (isAscending ? "End Time ^": "End Time v") : "End Time");
+        setStartTimeName(isStartTime ? (isAscending ? "Start Hour ^": "Start Hour v") : "Start Hour");
+        setEndTimeName(isEndTime ? (isAscending ? "End Hour ^": "End Hour v") : "End Hour");
         setAgeName(isAge ? (isAscending ? "Age Group ^": "Age Group v") : "Age Group");
         sendQuery(query);
     }, [setFilter, isStartTime, isEndTime, isAge, isAscending]);

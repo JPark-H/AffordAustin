@@ -23,9 +23,9 @@ const SearchPage = (starting_query) => {
     const getSearchData = useCallback (async () => {
         setLoading(true);
         if (query !== "search=") {
-            const endpoint1 = `https://api.affordaustin.me/api/childcare?page[size]=9&page[number]=1&` + query;
-            const endpoint2 = `https://api.affordaustin.me/api/housing?page[size]=9&page[number]=1&` + query;
-            const endpoint3 = `https://api.affordaustin.me/api/jobs?page[size]=9&page[number]=1&` + query;
+            const endpoint1 = `https://api.affordaustin.me/api/childcare?page[size]=100&page[number]=1&` + query;
+            const endpoint2 = `https://api.affordaustin.me/api/housing?page[size]=100&page[number]=1&` + query;
+            const endpoint3 = `https://api.affordaustin.me/api/jobs?page[size]=100&page[number]=1&` + query;
             let data = await axios.get(endpoint1);
             setMoreC(data.data.metadata.has_next);
             setCPrograms(data.data.attributes);
