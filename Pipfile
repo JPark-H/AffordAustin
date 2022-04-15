@@ -12,6 +12,7 @@ chromedriver-py = "*"
 webdriver-manager = "*"
 validators = "*"
 sqlalchemy = "*"
+black = "*"
 
 [dev-packages]
 ipykernel = "*"
