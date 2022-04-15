@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+import time
+
 options = Options()
 options.page_load_strategy = "normal"
 options = webdriver.ChromeOptions()
@@ -90,6 +92,7 @@ def searching():
             options=options,
     )
     driver.get(f"{URL}#/Housing/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="form-selector")
     print(len(searching))
     driver.close()
@@ -99,6 +102,7 @@ def searching():
             options=options,
     )
     driver.get(f"{URL}#/Childcare/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="form-selector")
     print(len(searching))
     driver.close()
@@ -108,6 +112,7 @@ def searching():
             options=options,
     )
     driver.get(f"{URL}#/Jobs/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="form-selector")
     print(len(searching))
     driver.close()
@@ -119,6 +124,7 @@ def sorting():
             options=options,
     )
     driver.get(f"{URL}#/Housing/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
     print(len(searching))
     driver.close()
@@ -128,6 +134,7 @@ def sorting():
             options=options,
     )
     driver.get(f"{URL}#/Childcare/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
     print(len(searching))
     driver.close()
@@ -137,6 +144,7 @@ def sorting():
             options=options,
     )
     driver.get(f"{URL}#/Jobs/")
+    time.sleep(5)
     searching = driver.find_elements(By.CSS_SELECTOR, value="btn-primary")
     print(len(searching))
     driver.close()
