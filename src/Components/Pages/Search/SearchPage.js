@@ -89,7 +89,7 @@ const SearchPage = (starting_query) => {
                                 houses.map(house => {
                                     return (
                                     <Col key={house.id}>
-                                        <HousingInstanceCard housing={house} id={house.id} search_keys={searchKeys} />
+                                        <HousingInstanceCard housing={house} housing_id={house.id} search_keys={searchKeys} />
                                     </Col>);
                                 }))}
                         </Row>
