@@ -90,7 +90,7 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["attributes"][0]["county"] == "Caldwell")
 
-    # testing filtering of housing data
+    # testing filtering of childcare data
     def test_childcare_filter(self):
         req = self.client.get(
             "/api/childcare?page[number]=1&county=Travis", headers=self.headers
@@ -98,7 +98,7 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
         self.assertTrue(x["county"] == "Travis" for x in req.json["attributes"])
         
-    
+    # testing sorting of childcare data
     def test_childcare_sort(self):
         req = self.client.get(
             "/api/childcare?page[number]=1&sort=start_hours_val", headers=self.headers
@@ -130,7 +130,7 @@ class UnitTests(TestCase):
         )
         self.assertEqual(req.status_code, 200)
 
-    # testing searching of childcare data
+    # testing searching of job data
     def test_jobs_search(self):
         req = self.client.get(
             "/api/jobs?page[size]=1&page[number]=1&search=FLASH", headers=self.headers
@@ -138,7 +138,7 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["attributes"][0]["company_name"] == "FLASH")
 
-    # testing filtering of housing data
+    # testing filtering of job data
     def test_jobs_filter(self):
         req = self.client.get(
             "/api/jobs?page[number]=1&company_name=Texas%20Water%20Development%20Board", headers=self.headers
@@ -146,7 +146,7 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
         self.assertTrue(x["company_name"] == "Texas Water Development Board" for x in req.json["attributes"])
         
-    
+    # testing sorting of job data
     def test_jobs_sort(self):
         req = self.client.get(
             "/api/jobs?page[number]=1&sort=rating", headers=self.headers
