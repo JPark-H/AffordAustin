@@ -11,16 +11,19 @@ const Jobs = () => {
     const [loading, setLoading] = useState(true);
     const [instanceData, setInstanceData] = useState([]);
     const [isValidId, setIsValidId] = useState(true);
+    const [closeChildCare, setCloseChildCare] = useState([]);
+    const [closeHouses, setCloseHouses] = useState([]);
 
     const getInstanceData = useCallback (async () => {
         setLoading(true);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         let data;
         try {
-            // data = await axios.get(`http://localhost:5000/api/jobs/${id}`);
             data = await axios.get(`https://api.affordaustin.me/api/jobs/${id}`);
-            setInstanceData(data.data);  
+            setInstanceData(data.data);
+            let links = await axios.get(`https://api.affordaustin.me/api/childcare?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+            setCloseChildCare(links.data.attributes);
+            links = await axios.get(`https://api.affordaustin.me/api/housing?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+            setCloseHouses(links.data.attributes);
         } catch (error) {
             setIsValidId(false);
         }
@@ -35,12 +38,18 @@ const Jobs = () => {
         <div style={{ backgroundColor: "#f0f2f5" }}>
             {!isValidId ? <PageNotFound /> :
                 (loading ? <div></div> : 
-                    <JobData job={instanceData}/>)}
+                    <JobData job={instanceData} child_care={closeChildCare} housing={closeHouses}/>)}
         </div>
     );
 };
 
-const JobData = ({job}) => {
+const JobData = ({job, child_care, housing}) => {
+    const clink1 = (child_care.length < 1) ? "" : ("/ChildCare/" + child_care[0].id);
+    const clink2 = (child_care.length < 2) ? "" : ("/ChildCare/" + child_care[1].id);
+    const clink3 = (child_care.length < 3) ? "" : ("/ChildCare/" + child_care[2].id);
+    const hlink1 = (housing.length < 1) ? "" : ("/Housing/" + housing[0].id);
+    const hlink2 = (housing.length < 2) ? "" : ("/Housing/" + housing[1].id);
+    const hlink3 = (housing.length < 3) ? "" : ("/Housing/" + housing[2].id);
     return (
         <div>
             <Container className="inst_page">
@@ -82,17 +91,23 @@ const JobData = ({job}) => {
                         <Row className="side_bar_info">
                             <h4>Nearby Housing</h4>
                             <Nav>
-                                <Nav.Link as={ Link } to='/Housing/1'>110 Chicon Street</Nav.Link>
-                                <Nav.Link as={ Link } to='/Housing/2'>1905 E Street</Nav.Link>
-                                <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
+                            {(hlink1 === "") ? <p>No close housing</p> :
+                                <Nav.Link as={ Link } to={hlink1}>{housing[0].project_name}</Nav.Link>}
+                            {(hlink2 === "") ? <></> :
+                                <Nav.Link as={ Link } to={hlink2}>{housing[1].project_name}</Nav.Link>}
+                            {(hlink3 === "") ? <></> : 
+                                <Nav.Link as={ Link } to={hlink3}>{housing[2].project_name}</Nav.Link>}
                             </Nav>
                         </Row>
                         <Row className="side_bar_info">
                             <h4>Nearby Childcare Services</h4>
                             <Nav>
-                                <Nav.Link as={ Link } to='/Childcare/1'>Lil Lions Learning Center</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Del Alma</Nav.Link>
-                                <Nav.Link as={ Link } to='/Childcare/4'>Perez EAC YMCA</Nav.Link>
+                            {(clink1 === "") ? <p>No close child care</p> :
+                                <Nav.Link as={ Link } to={clink1}>{child_care[0].operation_name}</Nav.Link>}
+                            {(clink2 === "") ? <></> :
+                                <Nav.Link as={ Link } to={clink2}>{child_care[1].operation_name}</Nav.Link>}
+                            {(clink3 === "") ? <></> : 
+                                <Nav.Link as={ Link } to={clink3}>{child_care[2].operation_name}</Nav.Link>}
                             </Nav>
                         </Row>
                     </Col>
