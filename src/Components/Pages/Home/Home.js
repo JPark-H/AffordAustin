@@ -20,17 +20,20 @@ function Home() {
         <div className="cardBox flex-grow-1">
           <Link to="/Housing">
             <Card className="housingCard">
+              <Card.Title className= "mt-4 mx-auto model_name">Housing</Card.Title>
               <Card.Body>
-                <Card.Text>Housing</Card.Text>
+                <Card.Text className= "model_text">Explore Current and Upcoming Housing Options in Austin</Card.Text>
               </Card.Body>
             </Card>
           </Link>
         </div>
         <div className="cardBox flex-grow-1">
           <Link to="/Childcare">
-            <Card className="childcareCard">
-              <Card.Body>
-                <Card.Text>Childcare</Card.Text>
+            <Card className="childcareCard" >
+            <Card.Title className= "mt-4 mx-auto model_name">Childcare</Card.Title>
+              <Card.Body className="model_text">
+                <Card.Text className= "model_text">Explore Local and Professional Childcare
+                Options across Austin</Card.Text>
               </Card.Body>
             </Card>
           </Link>
@@ -38,8 +41,9 @@ function Home() {
         <div className="cardBox flex-grow-1">
           <Link to="/Jobs">
             <Card className="jobsCard">
-              <Card.Body>
-                <Card.Text>Jobs</Card.Text>
+            <Card.Title className= "mt-4 mx-auto model_name">Jobs</Card.Title>
+              <Card.Body className= "model_text">
+                <Card.Text>Explore a Wide Range of Jobs Available Across Austin</Card.Text>
               </Card.Body>
             </Card>
           </Link>
