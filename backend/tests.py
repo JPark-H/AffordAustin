@@ -32,14 +32,17 @@ class UnitTests(TestCase):
             "/api/housing?page[size]=3&page[number]=2", headers=self.headers
         )
         self.assertEqual(req.status_code, 200)
-    
+
     # testing searching of housing data
     def test_housing_search(self):
         req = self.client.get(
-            "/api/housing?page[size]=1&page[number]=1&search=Chicon%20Street", headers=self.headers
+            "/api/housing?page[size]=1&page[number]=1&search=Chicon%20Street",
+            headers=self.headers,
         )
         self.assertEqual(req.status_code, 200)
-        self.assertTrue(req.json["attributes"][0]["project_name"] == "110 Chicon Street")
+        self.assertTrue(
+            req.json["attributes"][0]["project_name"] == "110 Chicon Street"
+        )
 
     # testing filtering of housing data
     def test_housing_filter(self):
@@ -49,16 +52,15 @@ class UnitTests(TestCase):
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["metadata"]["num_responses"] == 9)
         self.assertTrue(x["ground_lease"] == "Yes" for x in req.json["attributes"])
-        
-    
+
     def test_housing_sort(self):
         req = self.client.get(
-            "/api/housing?page[number]=1&sort=total_affordable_units", headers=self.headers
+            "/api/housing?page[number]=1&sort=total_affordable_units",
+            headers=self.headers,
         )
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["attributes"][0]["total_affordable_units"] == 0)
-       
-       
+
     def test_housing_pages_fail(self):
         req = self.client.get(
             "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
@@ -85,7 +87,8 @@ class UnitTests(TestCase):
     # testing searching of childcare data
     def test_childcare_search(self):
         req = self.client.get(
-            "/api/childcare?page[size]=1&page[number]=1&search=Cemetary%20St", headers=self.headers
+            "/api/childcare?page[size]=1&page[number]=1&search=Cemetary%20St",
+            headers=self.headers,
         )
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["attributes"][0]["county"] == "Caldwell")
@@ -97,7 +100,7 @@ class UnitTests(TestCase):
         )
         self.assertEqual(req.status_code, 200)
         self.assertTrue(x["county"] == "Travis" for x in req.json["attributes"])
-        
+
     # testing sorting of childcare data
     def test_childcare_sort(self):
         req = self.client.get(
@@ -105,7 +108,7 @@ class UnitTests(TestCase):
         )
         self.assertEqual(req.status_code, 200)
         self.assertTrue(req.json["attributes"][0]["start_hours_val"] == 2)
-       
+
     # testing pagination of childcare data fail
     def test_childcare_pages_fail(self):
         req = self.client.get(
@@ -141,18 +144,22 @@ class UnitTests(TestCase):
     # testing filtering of job data
     def test_jobs_filter(self):
         req = self.client.get(
-            "/api/jobs?page[number]=1&company_name=Texas%20Water%20Development%20Board", headers=self.headers
+            "/api/jobs?page[number]=1&company_name=Texas%20Water%20Development%20Board",
+            headers=self.headers,
         )
         self.assertEqual(req.status_code, 200)
-        self.assertTrue(x["company_name"] == "Texas Water Development Board" for x in req.json["attributes"])
-        
+        self.assertTrue(
+            x["company_name"] == "Texas Water Development Board"
+            for x in req.json["attributes"]
+        )
+
     # testing sorting of job data
     def test_jobs_sort(self):
         req = self.client.get(
             "/api/jobs?page[number]=1&sort=rating", headers=self.headers
         )
         self.assertEqual(req.status_code, 200)
-        self.assertTrue(req.json["attributes"][0]["rating"] == -1.0)       
+        self.assertTrue(req.json["attributes"][0]["rating"] == -1.0)
 
     # testing pagination of job data fail
     def test_jobs_pages_fail(self):
@@ -160,7 +167,6 @@ class UnitTests(TestCase):
             "/api/jobs?page[size]=3&page[number]=123123", headers=self.headers
         )
         self.assertEqual(req.status_code, 404)
-    
 
 
 if __name__ == "__main__":
