@@ -47,7 +47,7 @@ class JobSchema(marsh.Schema):
     class Meta:
         fields = ('id', '_map', '_image', 'detected_extensions', 'extensions',
          'title', 'company_name', 'reviews', 'description', 
-         'apply_link', 'via', 'rating_link', 'rating')
+         'apply_link', 'via', 'rating_link', 'rating', 'zip_code')
 
 house_schema = HousingSchema()
 houses_schema = HousingSchema(many=True)
