@@ -12,16 +12,19 @@ const Housing = () => {
   const [loading, setLoading] = useState(true);
   const [instanceData, setInstanceData] = useState([]);
   const [isValidId, setIsValidId] = useState(true);
+  const [closeChildCare, setCloseChildCare] = useState([]);
+  const [closeJobs, setCloseJobs] = useState([]);
 
   const getInstanceData = useCallback (async () => {
     setLoading(true);
-    axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-    axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
     let data;
     try {
-      // data = await axios.get(`http://localhost:5000/api/housing/${id}`);
       data = await axios.get(`https://api.affordaustin.me/api/housing/${id}`);
       setInstanceData(data.data);
+      let links = await axios.get(`https://api.affordaustin.me/api/childcare?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+      setCloseChildCare(links.data.attributes);
+      links = await axios.get(`https://api.affordaustin.me/api/jobs?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+      setCloseJobs(links.data.attributes);
     } catch (error) {
       setIsValidId(false);
     }
@@ -36,13 +39,19 @@ const Housing = () => {
     <div style={{ backgroundColor: "#f0f2f5" }}>
       {!isValidId ? <PageNotFound /> :
         (loading ? <div></div> :
-          <HousingData housing={instanceData}/>)}
+          <HousingData housing={instanceData} child_care={closeChildCare} jobs={closeJobs} />)}
     </div>
 
   );
 }
 
-const HousingData = ({housing}) => {
+const HousingData = ({housing, child_care, jobs}) => {
+  const clink1 = (child_care.length < 1) ? "" : ("/ChildCare/" + child_care[0].id);
+  const clink2 = (child_care.length < 2) ? "" : ("/ChildCare/" + child_care[1].id);
+  const clink3 = (child_care.length < 3) ? "" : ("/ChildCare/" + child_care[2].id);
+  const jlink1 = (jobs.length < 1) ? "" : ("/jobs/" + jobs[0].id);
+  const jlink2 = (jobs.length < 2) ? "" : ("/jobs/" + jobs[1].id);
+  const jlink3 = (jobs.length < 3) ? "" : ("/jobs/" + jobs[2].id);
   return (
     <div>
       <Container className="inst_page">
@@ -105,17 +114,23 @@ const HousingData = ({housing}) => {
                   <Row className="side_bar_info">
                     <h4>Nearby Jobs</h4>
                       <Nav>
-                        <Nav.Link as={ Link } to='/Jobs/1'>Flood Reporting Coordinator</Nav.Link>
-                        <Nav.Link as={ Link } to='/Jobs/42'>Front Office Medical Receptionist</Nav.Link>
-                        <Nav.Link as={ Link } to='/Jobs/181'>Human Resources (HR) Assistant</Nav.Link>
+                        {(clink1 === "") ? <p>No close child care</p> :
+                          <Nav.Link as={ Link } to={clink1}>{child_care[0].operation_name}</Nav.Link>}
+                        {(clink2 === "") ? <></> :
+                          <Nav.Link as={ Link } to={clink2}>{child_care[1].operation_name}</Nav.Link>}
+                        {(clink3 === "") ? <></> : 
+                          <Nav.Link as={ Link } to={clink3}>{child_care[2].operation_name}</Nav.Link>}
                       </Nav>
                   </Row>
                   <Row className="side_bar_info">
                       <h4>Nearby Childcare Services</h4>
                       <Nav>
-                        <Nav.Link as={ Link } to='/Childcare/1'>Lil Lions Learning Center</Nav.Link>
-                        <Nav.Link as={ Link } to='/Childcare/2'>Escuelita Del Alma</Nav.Link>
-                        <Nav.Link as={ Link } to='/Childcare/4'>Perez EAC YMCA</Nav.Link>
+                        {(jlink1 === "") ? <p>No close jobs</p> :
+                          <Nav.Link as={ Link } to={jlink1}>{jobs[0].title}</Nav.Link>}
+                        {(jlink2 === "") ? <></> :
+                          <Nav.Link as={ Link } to={jlink2}>{jobs[1].title}</Nav.Link>}
+                        {(jlink3 === "") ? <></> : 
+                          <Nav.Link as={ Link } to={jlink3}>{jobs[2].title}</Nav.Link>}
                       </Nav>
                   </Row>
               </Col>

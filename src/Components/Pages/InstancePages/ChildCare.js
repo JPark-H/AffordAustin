@@ -11,16 +11,19 @@ const ChildCare = () => {
     const [loading, setLoading] = useState(true);
     const [instanceData, setInstanceData] = useState([]);
     const [isValidId, setIsValidId] = useState(true);
+    const [closeJobs, setCloseJobs] = useState([]);
+    const [closeHouses, setCloseHouses] = useState([]);
 
     const getInstanceData = useCallback (async () => {
         setLoading(true);
-        axios.defaults.headers.common['Content-Type'] = 'application/vnd.api+json'
-        axios.defaults.headers.common['Accept'] = 'application/vnd.api+json'
         let data;
         try {
-            // data = await axios.get(`http://localhost:5000/api/childcare/${id}`);
             data = await axios.get(`https://api.affordaustin.me/api/childcare/${id}`);
             setInstanceData(data.data);
+            let links = await axios.get(`https://api.affordaustin.me/api/housing?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+            setCloseHouses(links.data.attributes);
+            links = await axios.get(`https://api.affordaustin.me/api/jobs?page[size]=3&page[number]=1&zip_code=${data.data.zip_code}`);
+            setCloseJobs(links.data.attributes);
         } catch (error) {
             setIsValidId(false);
         }
@@ -35,19 +38,25 @@ const ChildCare = () => {
         <div style={{ backgroundColor: "#f0f2f5" }}>
             {!isValidId ? <PageNotFound /> : 
                 (loading ? <div></div> : 
-                    <ChildCareData child_care={instanceData}/>)}
+                    <ChildCareData child_care={instanceData} housing={closeHouses} jobs={closeJobs}/>)}
             
         </div>
     );
 };
 
-const ChildCareData = ({child_care}) => {
+const ChildCareData = ({child_care, housing, jobs}) => {
   let days = child_care.days_of_operation.toString();
   days = (days === "Mon,Tue,Wed,Thu,Fri") ? "Monday-Friday" : days.replaceAll(",", ", ");
   let ages = child_care.licensed_to_serve_ages;
   ages = (ages.length > 1) ? ages.toString().replaceAll(",", ", ") : ages;
   let programs = child_care.programs_provided.replaceAll(" ,", ", ").replaceAll(",", ", ");
   let admin_name = (child_care.administrator_director_name === "nan") ? "N/A" : child_care.administrator_director_name;
+  const hlink1 = (housing.length < 1) ? "" : ("/Housing/" + housing[0].id);
+  const hlink2 = (housing.length < 2) ? "" : ("/Housing/" + housing[1].id);
+  const hlink3 = (housing.length < 3) ? "" : ("/Housing/" + housing[2].id);
+  const jlink1 = (jobs.length < 1) ? "" : ("/jobs/" + jobs[0].id);
+  const jlink2 = (jobs.length < 2) ? "" : ("/jobs/" + jobs[1].id);
+  const jlink3 = (jobs.length < 3) ? "" : ("/jobs/" + jobs[2].id);
     return (
       <div>
         <Container className="inst_page">
@@ -114,17 +123,23 @@ const ChildCareData = ({child_care}) => {
                   <Row className="side_bar_info">
                     <h4>Nearby Housing</h4>
                         <Nav>
-                            <Nav.Link as={ Link } to='/Housing/1'>110 Chicon Street</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/2'>1905 E Street</Nav.Link>
-                            <Nav.Link as={ Link } to='/Housing/3'>2009 Salina Street</Nav.Link>
+                          {(hlink1 === "") ? <p>No close housing</p> :
+                            <Nav.Link as={ Link } to={hlink1}>{housing[0].project_name}</Nav.Link>}
+                          {(hlink2 === "") ? <></> :
+                            <Nav.Link as={ Link } to={hlink2}>{housing[1].project_name}</Nav.Link>}
+                          {(hlink3 === "") ? <></> : 
+                            <Nav.Link as={ Link } to={hlink3}>{housing[2].project_name}</Nav.Link>}
                         </Nav>
                   </Row>
                   <Row className="side_bar_info">
                       <h4>Nearby Jobs</h4>
                       <Nav>
-                          <Nav.Link as={ Link } to='/Jobs/1'>Flood Reporting Coordinator (Data Analyst I-III)</Nav.Link>
-                          <Nav.Link as={ Link } to='/Jobs/42'>Front Office Medical Receptionist</Nav.Link>
-                          <Nav.Link as={ Link } to='/Jobs/181'>Human Resources (HR) Assistant</Nav.Link>
+                          {(jlink1 === "") ? <p>No close jobs</p> :
+                            <Nav.Link as={ Link } to={jlink1}>{jobs[0].title}</Nav.Link>}
+                          {(jlink2 === "") ? <></> :
+                            <Nav.Link as={ Link } to={jlink2}>{jobs[1].title}</Nav.Link>}
+                          {(jlink3 === "") ? <></> : 
+                            <Nav.Link as={ Link } to={jlink3}>{jobs[2].title}</Nav.Link>}
                       </Nav>
                   </Row>
               </Col>
