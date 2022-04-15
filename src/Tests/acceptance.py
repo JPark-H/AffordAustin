@@ -83,6 +83,14 @@ def childcare_pages():
         driver.get(f"{URL}#/Childcare/{id}")
         driver.close()
 
+def searching():
+    driver = webdriver.Remote(
+            command_executor="http://gitlab-selenium-server:4545/wd/hub",
+            options=options,
+    )
+    driver.get(f"{URL}#/Housing/")
+    searching = driver.find_elements(By.CSS_SELECTOR, value="form-selector")
+    assert len(searching) == 5
 
 
 # 3 TESTS
@@ -114,7 +122,10 @@ if __name__ == "__main__":
     childcare_pages()
     print("Childcare Tests Passed")
     test_search()
+    print("Search Page Test Passed")
     grids()
-    print("Search Test Passed")
+    print("Grid Pages Tests Passed")
+    searching()
+    print("Searching Tests Passed")
     print("----------------------")
     print("ALL TESTS PASSED")
