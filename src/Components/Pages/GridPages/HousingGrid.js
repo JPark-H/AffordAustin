@@ -1,5 +1,5 @@
-import './Grid.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import './Grid.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';

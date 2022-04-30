@@ -13,6 +13,7 @@ import JobGrid from "./Components/Pages/GridPages/JobGrid"
 import About from "./Components/Pages/About/About";
 import PageNotFound from "./Components/PageNotFound";
 import SearchPage from "./Components/Pages/Search/SearchPage"
+import ProviderVisualization from "./Components/Pages/Visualization/ProviderVisualization";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/ChildCare/:id" element={<ChildCare />} />
 
           <Route path="/Search" element={<SearchPage />} />
+          <Route path="/PV" element={<ProviderVisualization />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>
