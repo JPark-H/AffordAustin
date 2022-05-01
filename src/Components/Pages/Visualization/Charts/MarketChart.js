@@ -1,9 +1,9 @@
-// import './MarketChart.css'
+import './Chart.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import { BarChart, XAxis, YAxis, ZAxis, Legend, Tooltip, Bar, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { BarChart, XAxis, YAxis, Tooltip, Bar, CartesianGrid, ResponsiveContainer, Label } from 'recharts';
   
 
 const MarketChart = () => {
@@ -48,22 +48,28 @@ const MarketChart = () => {
     }, [getMarketData]);
 
     return (   
-        <>
-            <h1>Market Locations</h1>
-            <div>
+        <div className="chart_div mx-auto">
+            <h3 className="chart_title">Market Locations</h3>
                 {!loading ? (
                     <ResponsiveContainer width="100%" height={400}>
-                        <BarChart /*width={700} height={600}*/ data={data} /*margin={{top: 10, right: 50, left: 50, bottom: 50}}*/>
+                        <BarChart 
+                            data={data} 
+                            className="chart"
+                            margin={{left: 15, bottom: 25}}
+                        >
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" label="State"/>
-                            <YAxis dataKey="count" label="Number of Markets" ticks={[5, 10, 15, 20, 25, 30, 35, 40]}/>
+                            <XAxis dataKey="name">
+                                <Label value="State" position='bottom' className="chart_label"/>
+                            </XAxis>
+                            <YAxis dataKey="count" ticks={[5, 10, 15, 20, 25, 30, 35, 40]}>
+                                <Label value="Number of Markets" position='left' angle={-90} className="chart_label"/>
+                            </YAxis>
                             <Tooltip />
-                            <Bar dataKey="count" fill="#8884d8" />
+                            <Bar dataKey="count" fill='#FAC898' />
                         </BarChart>
                     </ResponsiveContainer>
                 ) : <Spinner animation='border' role="status"/>}
-            </div>
-        </>
+        </div>
     );
     
 };

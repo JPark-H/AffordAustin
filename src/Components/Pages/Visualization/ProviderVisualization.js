@@ -10,8 +10,8 @@ const ProviderVisualization = () => {
     return (
         <div style={{ backgroundColor: "#f0f2f5" }}>
             <RecipeChart />
-            <ProduceChart />
             <MarketChart />
+            <ProduceChart />
         </div>
     );
 };

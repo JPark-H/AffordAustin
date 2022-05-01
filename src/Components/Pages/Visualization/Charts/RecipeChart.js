@@ -1,4 +1,4 @@
-// import './RecipeChart.css'
+import './Chart.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
 import { Form, Spinner } from 'react-bootstrap';
@@ -42,30 +42,34 @@ const RecipeChart = () => {
     }, [getRecipeData]);
 
     return (   
-        <>
-            <h1>Recipe Types</h1>
-            <div>
+        <div className="chart_div mx-auto">
+            <h3 className="chart_title">Recipe Types</h3>
                 {!loading ? (
                     <ResponsiveContainer width="100%" height={400}>
-                        <PieChart>
+                        <PieChart className="chart">
                             <Pie
-                            data={data}
-                            innerRadius={60}
-                            outerRadius={140}
-                            paddingAngle={1}
-                            dataKey="value"
+                                data={data}
+                                align="left"
+                                wrapperStyle={{paddingLeft: "20%"}}
+                                innerRadius={60}
+                                outerRadius={140}
+                                paddingAngle={1}
+                                dataKey="value"
                             >
-                            {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} name={entry.label} fill={COLORS[index]} />
-                            ))}
+                                {data.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} name={entry.label} fill={COLORS[index]} />
+                                ))}
                             </Pie>
-                            <Legend />
+                            <Legend 
+                                align="right" 
+                                verticalAlign="middle" 
+                                layout="vertical"
+                                wrapperStyle={{paddingRight: "30%"}} />
                             <Tooltip />
                         </PieChart>
                     </ResponsiveContainer>
                 ) : <Spinner animation='border' role="status"/>}
-            </div>
-        </>
+        </div>
     );
     
 };

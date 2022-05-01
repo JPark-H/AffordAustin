@@ -1,9 +1,9 @@
-// import './RecipeChart.css'
+import './Chart.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState, useEffect, useCallback } from 'react';
-import { Form, Spinner } from 'react-bootstrap';
+import { Form, Spinner, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { ScatterChart, XAxis, YAxis, ZAxis, Legend, Tooltip, Scatter, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { ScatterChart, XAxis, YAxis, ZAxis, Tooltip, Scatter, CartesianGrid, ResponsiveContainer, Label } from 'recharts';
   
 
 const ProduceChart = () => {
@@ -25,11 +25,11 @@ const ProduceChart = () => {
     }, [firstNutrientType, secondNutrientType, getProduceData]);
 
     return (   
-        <>
-            <h1>Produce Macronutrients</h1>
-            <div>
-                <Form>
-                    <Form.Group controlId="FirstNutrientSelect">
+        <div className="chart_div mx-auto">
+            <h3 className="chart_title">Produce Macronutrients</h3>
+            <Form>
+                <Row className="g-3 justify-content-center" xs='auto'>
+                    <Form.Group controlId="FirstNutrientSelect" as={Col} className="chart_select">
                         <Form.Label>
                             Select Nutrient Type
                         </Form.Label>
@@ -39,7 +39,7 @@ const ProduceChart = () => {
                             <option value="produce_fat">Fat</option>
                         </Form.Select>
                     </Form.Group>
-                    <Form.Group controlId="SecondNutrientSelect">
+                    <Form.Group controlId="SecondNutrientSelect" as={Col} className="chart_select">
                         <Form.Label>
                             Select Nutrient Type
                         </Form.Label>
@@ -49,12 +49,14 @@ const ProduceChart = () => {
                             <option value="produce_fat">Fat</option>
                         </Form.Select>
                     </Form.Group>
-                </Form>
-    
+                </Row>
+            </Form>
             {!loading ? (
                 <ResponsiveContainer width="100%" height={400}>
                     <ScatterChart
                         data={data}
+                        className="chart"
+                        margin={{left: 15, bottom: 25}}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis
@@ -62,17 +64,20 @@ const ProduceChart = () => {
                             name={firstNutrientType.slice(8)}
                             unit="g"
                             type="number"
-                            label={firstNutrientType.slice(8)}
-                        />
+                        >
+                            <Label value={firstNutrientType.slice(8)} position='bottom' className="chart_label"/>
+                        </XAxis>
                         <YAxis
                             dataKey={secondNutrientType}
                             unit="g"
                             name={secondNutrientType.slice(8)}
                             type="number"
-                            label={secondNutrientType.slice(8)}
-                        />
+                        >
+                            <Label value={secondNutrientType.slice(8)} angle={-90} position='left' className="chart_label"/>
+                        </YAxis>
+                        
                         <ZAxis dataKey="produce_name" name="Produce Name"/>
-                        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                        <Tooltip cursor={{ strokeDasharray: '3 3' }}/>
                         <Scatter
                             name="Produce"
                             fill={(firstNutrientType === 'produce_carbs') ? '#8884d8' : ((firstNutrientType === 'produce_protein') ? '#82ca9d' : "#4287f5")}
@@ -80,8 +85,7 @@ const ProduceChart = () => {
                     </ScatterChart>
                 </ResponsiveContainer>
             ) : <Spinner animation='border' role="status"/>}
-            </div>
-        </>
+        </div>
     );
     
 };
