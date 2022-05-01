@@ -72,6 +72,7 @@ def get_housing(model):
         dump = model_schema.dump(page.items)
 
         metadata = {
+            "num_responses": len(dump),
             "total_count": page.total,
         }
 
