@@ -6,7 +6,7 @@ import axios from 'axios';
 import ChildCareInstanceCard from '../GridPages/InstanceCards/ChildCareInstanceCard';
 import JobInstanceCard from '../GridPages/InstanceCards/JobInstanceCard';
 import HousingInstanceCard from '../GridPages/InstanceCards/HousingInstanceCard';
-import SearchBar from '../GridPages/FSBar/SearchBar';
+import SearchBar from './../GridPages/FSBar/SearchBar';
 
 const SearchPage = () => {
     const [cPrograms, setCPrograms] = useState([]);

@@ -1,7 +1,8 @@
+import './../Charts/Chart.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Radar, RadarChart, PolarGrid,
-	PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+	PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts';
 
 const HousingChart = () => {
     const [data, set_data] = useState(null);
@@ -29,13 +30,19 @@ const HousingChart = () => {
     });
 
     return (
-        <RadarChart height={500} width={500} outerRadius="80%" data={data}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="name" />
-            <PolarRadiusAxis />
-            <Radar dataKey="x" stroke="red"
-                fill="red" fillOpacity={0.6} />
-        </RadarChart>
+        <div className="chart_div mx-auto">
+            <h3 className="chart_title">Units Restricted to % of Median Family Income</h3>
+            <ResponsiveContainer width="100%" height={400} className="mx-auto">
+                <RadarChart height={500} width={500} outerRadius="80%" data={data}>
+                    <PolarGrid />
+                    <PolarAngleAxis dataKey="name" />
+                    <PolarRadiusAxis />
+                    <Radar dataKey="x" stroke="red"
+                        fill="red" fillOpacity={0.6} />
+                    <Tooltip />
+                </RadarChart>
+            </ResponsiveContainer>
+        </div>
     );
 };
 
