@@ -1,6 +1,7 @@
+import './../Charts/Chart.css'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FunnelChart, Tooltip, Funnel, LabelList } from 'recharts';
+import { FunnelChart, Tooltip, Funnel, LabelList, ResponsiveContainer } from 'recharts';
 
 const ChildcareChart = () => {
     const [data, set_data] = useState(null);
@@ -34,17 +35,22 @@ const ChildcareChart = () => {
     });
 
     return (
-        <FunnelChart width={730} height={250}>
-            <Tooltip />
-            <Funnel
-                dataKey="value"
-                data={data}
-                isAnimationActive
-            >
-                <LabelList position="right" fill="#000" stroke="none" dataKey="name" />
-            </Funnel>
-        </FunnelChart>
+        <div className="chart_div mx-auto">
+            <h3 className="chart_title">Ages Served</h3>
+            <ResponsiveContainer width="75%" height={400} className="mx-auto">
+                <FunnelChart width={730} height={250} className="chart">
+                    <Tooltip />
+                    <Funnel
+                        dataKey="value"
+                        data={data}
+                        isAnimationActive
+                    >
+                        <LabelList position="right" fill="#000" stroke="none" dataKey="name" />
+                    </Funnel>
+                </FunnelChart>
+            </ResponsiveContainer>
+        </div>
     );
 };
 
-export default ChildCare;
+export default ChildcareChart;

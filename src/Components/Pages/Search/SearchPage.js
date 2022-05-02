@@ -1,25 +1,20 @@
 import './SearchPage.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, Spinner, Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import ChildCareInstanceCard from '../GridPages/InstanceCards/ChildCareInstanceCard';
 import JobInstanceCard from '../GridPages/InstanceCards/JobInstanceCard';
 import HousingInstanceCard from '../GridPages/InstanceCards/HousingInstanceCard';
-import { IconSearch } from '@aws-amplify/ui-react';
+import SearchBar from './../GridPages/FSBar/SearchBar';
 
-const SearchPage = (starting_query) => {
+const SearchPage = () => {
     const [cPrograms, setCPrograms] = useState([]);
     const [houses, setHouses] = useState([]);
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [query, setQuery] = useState("search=");
     const [searchKeys, setSearchKeys] = useState([]);
-    const [moreC, setMoreC] = useState(false);
-    const [moreH, setMoreH] = useState(false);
-    const [moreJ, setMoreJ] = useState(false);
-
     const getSearchData = useCallback (async () => {
         setLoading(true);
         if (query !== "search=") {
@@ -27,13 +22,10 @@ const SearchPage = (starting_query) => {
             const endpoint2 = `https://api.affordaustin.me/api/housing?page[size]=100&page[number]=1&` + query;
             const endpoint3 = `https://api.affordaustin.me/api/jobs?page[size]=100&page[number]=1&` + query;
             let data = await axios.get(endpoint1);
-            setMoreC(data.data.metadata.has_next);
             setCPrograms(data.data.attributes);
             data = await axios.get(endpoint2);
-            setMoreH(data.data.metadata.has_next);
             setHouses(data.data.attributes);
             data = await axios.get(endpoint3);
-            setMoreJ(data.data.metadata.has_next);
             setJobs(data.data.attributes);
             setSearchKeys(query.slice(7).split(" "));
         } else {
@@ -73,10 +65,6 @@ const SearchPage = (starting_query) => {
                                     </Col>);
                                 }))}
                         </Row>
-                        <Row className="search_section_link">
-                            {!moreC ? <></> : 
-                                <Link to="/ChildCare"><p>Click to see all childcare results</p></Link>}
-                        </Row>
                     </Container>
                 </div>
                 <div className='search_grid mx-auto'>
@@ -92,10 +80,6 @@ const SearchPage = (starting_query) => {
                                         <HousingInstanceCard housing={house} housing_id={house.id} search_keys={searchKeys} />
                                     </Col>);
                                 }))}
-                        </Row>
-                        <Row className="search_section_link">
-                            {!moreH ? <></> : 
-                                <Link to="/ChildCare"><p>Click to see all housing results</p></Link>}
                         </Row>
                     </Container>
                 </div>
@@ -113,44 +97,11 @@ const SearchPage = (starting_query) => {
                                     </Col>);
                                 }))}
                         </Row>
-                        <Row className="search_section_link">
-                            {!moreJ ? <></> : 
-                                <Link to="/ChildCare"><p>Click to see all job results</p></Link>}
-                        </Row>
                     </Container>
                 </div>
             </div>
         </div>
     );
 };
-
-//Split to own file
-const SearchBar = ({sendQuery}) => {
-    const [form, setForm] = useState({});
-
-    const setField = (field, value) => {
-        setForm({...form,
-        [field]: value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const query = (form['search'] === "") ? "" : "search=" + form['search'];
-        sendQuery(query);
-    }
-
-    return (
-        <Form onSubmit={e => {handleSubmit(e)}} className="d-flex">
-            <Form.Control
-                type="search"
-                placeholder="Search"
-                className="search_bar"
-                onChange={ e => setField('search', e.target.value)}
-            />
-            <Button type='submit' variant="outline-secondary" size='sm'><IconSearch /></Button>
-        </Form>
-    );
-}
 
 export default SearchPage

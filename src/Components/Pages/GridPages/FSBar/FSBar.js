@@ -8,8 +8,8 @@ import ChildcareFilterBar from './FilterBar/ChildcareFilterBar';
 import HousingSortBar from './SortBar/HousingSortBar';
 import JobSortBar from './SortBar/JobSortBar';
 import ChildcareSortBar from './SortBar/ChildcareSortBar';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { IconSearch } from '@aws-amplify/ui-react';
+import SearchBar from './SearchBar';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const FSBar = ({totalInstances, pageLimit, paginate, currentPage, sendQuery, model}) => {
     const [filterQuery, setFilterQuery] = useState('');
@@ -74,35 +74,6 @@ const SortBar = ({sendQuery, model}) => {
     } else {
         return <JobSortBar sendQuery={sendQuery} />;
     }
-}
-
-//Split to own file
-const SearchBar = ({sendQuery}) => {
-    const [form, setForm] = useState({});
-
-    const setField = (field, value) => {
-        setForm({...form,
-        [field]: value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const query = (form['search'] === "") ? "" : "search=" + form['search'];
-        sendQuery(query);
-    }
-
-    return (
-        <Form onSubmit={e => {handleSubmit(e)}} className="d-flex">
-            <Form.Control
-                type="search"
-                placeholder="Search"
-                className="search_bar"
-                onChange={ e => setField('search', e.target.value)}
-            />
-            <Button type='submit' variant="outline-secondary" size='sm'><IconSearch /></Button>
-        </Form>
-    );
-}
+};
 
 export default FSBar;
