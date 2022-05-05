@@ -95,7 +95,7 @@ def filter_childcare_by(query, filter_type, value):
 
     elif filter_type == "licensed_to_serve_ages":
         query = query.filter(
-            Childcare.licensed_to_serve_ages.overlap([value.capitalize()])
+            Childcare.licensed_to_serve_ages.overlap([value])
         )
 
     elif filter_type == "zip_code":
