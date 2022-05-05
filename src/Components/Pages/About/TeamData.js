@@ -35,7 +35,7 @@ const teamInfo = [
 	{
 		name: "Jay Park",
 		picture: Jay,
-		role: "Phase X Leader",
+		role: "Phase IV Leader",
 		stack: "Front-End",
 		bio:
 			"I'm a third year CS major at UT Austin. I grew up in Frisco, \
@@ -44,7 +44,7 @@ const teamInfo = [
 			FFXIV, and Risk of Rain 2",
 		commits: 0,
 		issues: 0,
-		tests: 13,
+		tests: 18,
 		user: "Jay-Logic"
 	},
 	{
@@ -58,7 +58,7 @@ const teamInfo = [
 			love making music and playing video games with my friends.",
 		commits: 0,
 		issues: 0,
-		tests: 10,
+		tests: 20,
 		user: "presleyh"
 	},
 	{
@@ -73,7 +73,7 @@ const teamInfo = [
 			time playing video games and watching shows.",
 		commits: 0,
 		issues: 0,
-		tests: 8,
+		tests: 16,
 		user: "shahzadsb31"
 	}
 ]
