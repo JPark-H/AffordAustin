@@ -20,6 +20,7 @@ const ChildCareGrid = () => {
         let endpoint = `https://api.affordaustin.me/api/childcare?page[size]=${programsPerPage}&page[number]=${currentPage}`;
         endpoint += (query === "") ? "" : "&" + query;
         const data = await axios.get(endpoint);
+        console.log(data);
         setTotalNumPrograms(data.data.metadata.total_count);
         setPrograms(data.data.attributes);
         setLoading(false);

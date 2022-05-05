@@ -1,19 +1,13 @@
-from flask import Flask, abort, jsonify, request
+from flask import jsonify, request
 import flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, column
 from flask_marshmallow import Marshmallow
 from marshmallow import fields
 from flask_cors import CORS
-from api_helper import (
-    filter_by_model,
-    Housing,
-    Childcare,
-    Job,
-    try_arg,
-    sort_by_model,
-    search_by_model,
-)
+from filter import filter_by_model
+from search import search_by_model
+from sort import sort_by_model
+
 from tables import *
 
 
@@ -46,13 +40,17 @@ def get_housing(model):
         print("{}er? I barely know 'er!".format(model))
         return {}
     args = request.args.to_dict()
-    if "page[number]" not in args:
-        print("page number not specified. Fetching all instances of ")
+    if not args:
+        print("No args specified. Fetching all instances of ")
         model_pages = model_class.query.all()
         results = model_schema.dump(model_pages)
         return jsonify(results)
     else:
-        page_num = int(args["page[number]"].replace("{", "").replace("}", ""))
+        if "page[number]" in args:
+            page_num = int(args["page[number]"].replace("{", "").replace("}", ""))
+        else:
+            print("page number not specified. Defaulting to 1")
+            page_num = 1
         if "page[size]" in args:
             page_size = int(args["page[size]"].replace("{", "").replace("}", ""))
         else:
@@ -64,7 +62,7 @@ def get_housing(model):
         # filter
         base_query = filter_by_model(base_query, args, model)
 
-        # sort TODO ensure properly sorted 7 > 65
+        # sort 
         base_query = sort_by_model(base_query, args, model)
 
         # search
@@ -74,14 +72,8 @@ def get_housing(model):
         dump = model_schema.dump(page.items)
 
         metadata = {
-            "page": page.page,
             "num_responses": len(dump),
-            "pages": page.pages,
             "total_count": page.total,
-            "prev_page": page.prev_num,
-            "next_page": page.next_num,
-            "has_next": page.has_next,
-            "has_prev": page.has_prev,
         }
 
         return jsonify({"attributes": dump, "metadata": metadata})
