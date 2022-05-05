@@ -124,7 +124,7 @@ const ChildcareFilterBar = ({sendQuery}) => {
                         >
                             <option value=''>Select Age Group</option>
                             <option value='licensed_to_serve_ages=Infant'>Infant</option>
-                            <option value='licensed_to_serve_ages=Todler'>Todler</option>
+                            <option value='licensed_to_serve_ages=Toddler'>Toddler</option>
                             <option value='licensed_to_serve_ages=Pre-Kindergarten'>Pre-Kindergarten</option>
                             <option value='licensed_to_serve_ages=School'>School</option>
                         </Form.Select>
