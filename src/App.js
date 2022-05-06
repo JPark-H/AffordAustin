@@ -14,6 +14,7 @@ import About from "./Components/Pages/About/About";
 import PageNotFound from "./Components/PageNotFound";
 import SearchPage from "./Components/Pages/Search/SearchPage"
 import Visualization from "./Components/Pages/Visualization/Visualization";
+import ProviderVisualization from "./Components/Pages/Visualization/ProviderVisualizations"
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
 
           <Route path="/Search" element={<SearchPage />} />
           <Route path="/Visualizations" element={<Visualization />} />
+          <Route path="/ProviderVisualizations" element={<ProviderVisualization />} />
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

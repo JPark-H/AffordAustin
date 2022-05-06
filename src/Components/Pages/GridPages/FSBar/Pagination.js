@@ -1,19 +1,24 @@
 import { Pagination } from 'react-bootstrap'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Pagination.css'
 
 // Looked at code from adoptapet group
-const Paginate = ({totalInstances, pageLimit, paginate}) => {
+const Paginate = ({totalInstances, pageLimit, paginate, page}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const totalPages = Math.ceil(totalInstances / pageLimit);
-
+    
     const changePage = (newPage) => {
         if (newPage <= totalPages && newPage > 0) {
             setCurrentPage(newPage);
             paginate(newPage);
         }    
     }
+
+    useEffect(() => {
+        page = parseInt(page);
+        setCurrentPage(page);
+    }, [page]);
 
     return (
         <div className="pagination">

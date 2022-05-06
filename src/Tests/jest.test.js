@@ -66,21 +66,6 @@ describe("Render components", () => {
     expect(navbar).toMatchSnapshot();
   });
 
-  it("8. ChildCareGrid matches snapshot", () => {
-    const ccgrid = shallow(<ChildCareGrid />);
-    expect(ccgrid).toMatchSnapshot();
-  });
-
-  it("9. HousingGrid matches snapshot", () => {
-    const ccgrid = shallow(<HousingGrid />);
-    expect(ccgrid).toMatchSnapshot();
-  });
-
-  it("10. JobGrid matches snapshot", () => {
-    const ccgrid = shallow(<JobGrid />);
-    expect(ccgrid).toMatchSnapshot();
-  });
-
   it("11. Searching page matches snapshot", () => {
     const searchpage = shallow(<SearchPage />);
     expect(searchpage).toMatchSnapshot();

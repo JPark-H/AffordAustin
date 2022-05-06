@@ -4,15 +4,17 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Form } from 'react-bootstrap';
 
 //Change values to queries
-const ChildcareFilterBar = ({sendQuery}) => {
-    const [form, setForm] = useState({
-        'ZipcodeFilter': '', 
-        'CountyFilter': '',
-        'HoursFilterStarting': '',
-        'HoursFilterEnding': '', 
-        'AgesFilter': ''
-    });
+const ChildcareFilterBar = ({sendQuery, initialQuery}) => {
+    const x = {
+            'ZipcodeFilter': '', 
+            'CountyFilter': '',
+            'HoursFilterStarting': '',
+            'HoursFilterEnding': '', 
+            'AgesFilter': ''
+        };
 
+    const [form, setForm] = useState(x);
+    
     const setField = (field, value) => {
         setForm({
             ...form,
@@ -72,9 +74,11 @@ const ChildcareFilterBar = ({sendQuery}) => {
                     </Form.Group>
                     <Form.Group controlId='CountyFilter' as={Col}>
                         <Form.Label>County</Form.Label>
-                        <Form.Select
+                        <Form.Control
+                            as="select"
                             className='filter_select'
                             onChange={e => setField('CountyFilter', e.target.value)}
+                            defaultValue={form['CountyFilter']}
                         >
                             <option value=''>Select County</option>
                             <option value='county=Bastrop'>Bastrop</option>
@@ -82,7 +86,7 @@ const ChildcareFilterBar = ({sendQuery}) => {
                             <option value='county=Hays'>Hays</option>
                             <option value='county=Travis'>Travis</option>
                             <option value='county=Williamson'>Williamson</option>
-                        </Form.Select>
+                        </Form.Control>
                     </Form.Group>
                     <Form.Group controlId='HoursFilter' as={Col}>
                         <Form.Label>Hours of Operation</Form.Label>
