@@ -12,7 +12,7 @@ Scarlett Shires      | svs758  | @scarlettshires
 
 ## Git SHA
 
-442b53a6ff5429ce87fe931bad923ba3d9a737fb
+13fc985f2c44f3d1cb04fcfef28e2c9b4208de4b
 
 ## Phase Leaders
 
@@ -63,6 +63,16 @@ Presley Heikkila     | 15        | 20
 Jay Park             | 15        | 15       
 Sabeer Shahzad       | 15        | 15    
 Scarlett Shires      | 15        | 25
+
+### Phase 4
+
+Name                 | Estimated | Actual             
+---------------------|-----------| -------
+Dinesh Balakrishnan  | 5         | 10
+Presley Heikkila     | 5         | 4  
+Jay Park             | 8         | 3      
+Sabeer Shahzad       | 5         | 8    
+Scarlett Shires      | 10        | 12
 
 ### Comments
 
