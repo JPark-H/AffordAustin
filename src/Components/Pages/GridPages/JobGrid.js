@@ -5,11 +5,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import FSBar from './FSBar/FSBar';
 import axios from 'axios';
 import JobInstanceCard from './InstanceCards/JobInstanceCard';
+import { useSearchParams } from "react-router-dom";
 
 const JobGrid = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [jobs, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(searchParams.get('page') ?? 1);
     const [totalNumJobs, setTotalNumJobs] = useState(1);
     const [jobsPerPage, setJobsPerPage] = useState(21);
     const [query, setQuery] = useState('');
@@ -27,21 +29,26 @@ const JobGrid = () => {
 
     useEffect(() => {
         getJobData('');
-    }, [currentPage, query, searchKeys, getJobData]);
+    }, [searchParams, currentPage, query, searchKeys, getJobData]);
 
     const paginate = (pageNum) => {
+        setSearchParams({page: pageNum});
         setCurrentPage(pageNum);
     }
 
     const getQuery = (new_query, new_search_query) => {
         let full_query = new_query;
         if (full_query !== "" && new_search_query != ""){
-            full_query += new_search_query;
+            full_query += "&";
         }
         full_query += new_search_query;
         setQuery(full_query);
         let search_query = (new_search_query === "") ? [] : new_search_query.slice(7).split(" ");
         setSearchKeys(search_query);
+        setSearchParams({page: 1});
+        if (full_query !== query) {
+            setCurrentPage(1);
+        }
     };
 
     return (
