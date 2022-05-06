@@ -74,35 +74,6 @@ const ChildCareData = ({child_care, housing, jobs}) => {
                     <p><b>Hours of Operations:</b> {child_care.hours_of_operation}</p>
                     <p><b>Licensed to Serve Ages:</b> {ages}</p>
                   </Row>
-                  {/* Use inspections/reports to fill table */}
-                  {/* <Row className="info_section" style={{paddingLeft:"15px", paddingRight:"15px"}}>
-                    <h4>Price Points</h4>
-                    <Table striped bordered style={{textAlign:"center"}}>
-                      <thead>
-                        <tr><th colSpan={7}>% Family Income</th></tr>
-                      </thead>
-                        <tbody>
-                        <tr>
-                          <td>30%</td>
-                          <td>40%</td>
-                          <td>50%</td>
-                          <td>60%</td>
-                          <td>65%</td>
-                          <td>80%</td>
-                          <td>100%</td>
-                          </tr>
-                        <tr>
-                          <td>{housing.units_30_mfi}</td>
-                          <td>{housing.units_40_mfi}</td>
-                          <td>{housing.units_50_mfi}</td>
-                          <td>{housing.units_60_mfi}</td>
-                          <td>{housing.units_65_mfi}</td>
-                          <td>{housing.units_80_mfi}</td>
-                          <td>{housing.units_100_mfi}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  </Row> */}
               </Col>
               <Col className="inst_side_bar">
                   <Row className='side_bar_info'>

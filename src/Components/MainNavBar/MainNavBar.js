@@ -18,6 +18,8 @@ function MainNavBar() {
             <Nav.Link as={Link} to="/Housing">Housing</Nav.Link>
             <Nav.Link as={Link} to="/Childcare">Childcare</Nav.Link>
             <Nav.Link as={Link} to="/Jobs">Jobs</Nav.Link>
+            <Nav.Link as={Link} to="/Visualizations">Visualizations</Nav.Link>
+            <Nav.Link as={Link} to="/ProviderVisualizations">Provider Visualizations</Nav.Link>
             <Nav.Link as={Link} to="/About">About</Nav.Link>
             <Nav.Link as={Link} to="/Search">Search</Nav.Link>
           </Nav>

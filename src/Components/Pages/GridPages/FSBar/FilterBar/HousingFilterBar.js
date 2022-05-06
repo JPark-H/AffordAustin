@@ -90,7 +90,7 @@ const HousingFilterBar = ({sendQuery}) => {
                             <option value='unit_type=Single Family'>Single Family</option>
                             <option value='unit_type=Multifamily'>Multifamily</option>
                             <option value='unit_type=Duplex'>Duplex</option>
-                            <option value='unit_type=Fourplex'>Fourplex</option>
+                            <option value='unit_type=FourPlex'>Fourplex</option>
                             <option value='unit_type=ADU'>ADU</option>
                         </Form.Select>
                     </Form.Group>
