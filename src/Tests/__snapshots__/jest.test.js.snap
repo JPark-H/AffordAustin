@@ -10,12 +10,6 @@ exports[`Render components 6. Jobs matches snapshot 1`] = `ShallowWrapper {}`;
 
 exports[`Render components 7. Navbar matches snapshot 1`] = `ShallowWrapper {}`;
 
-exports[`Render components 8. ChildCareGrid matches snapshot 1`] = `ShallowWrapper {}`;
-
-exports[`Render components 9. HousingGrid matches snapshot 1`] = `ShallowWrapper {}`;
-
-exports[`Render components 10. JobGrid matches snapshot 1`] = `ShallowWrapper {}`;
-
 exports[`Render components 11. Searching page matches snapshot 1`] = `ShallowWrapper {}`;
 
 exports[`Render components 12. ChildcareFilterBar matches snapshot 1`] = `ShallowWrapper {}`;
